@@ -10,7 +10,7 @@ public class ConvertOutTextToLatex implements Runnable {
     @Override
     public void run() {
         createLatexCopy();
-        convertTheTextFileToLatex();
+        //convertTheTextFileToLatex();
     }
 
 
@@ -20,8 +20,8 @@ public class ConvertOutTextToLatex implements Runnable {
       */
     private void createLatexCopy()
     {
-        Path copied = Paths.get(System.getProperty("user.dir")+"/static/out.tex");
-        Path originalPath = Paths.get(System.getProperty("user.dir")+"/static/out.txt");
+        Path copied = Paths.get(System.getProperty("user.dir")+"/static/out/out.tex");
+        Path originalPath = Paths.get(System.getProperty("user.dir")+"/static/out/out.txt");
         try {
             Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
             System.out.println("successfully created copy of out");
@@ -36,7 +36,7 @@ public class ConvertOutTextToLatex implements Runnable {
         //source: https://stackoverflow.com/questions/30622160/running-a-shell-script-from-java-code
         //accessed: 24/03/2021
         try {
-            String target = new String(System.getProperty("user.dir")+"/convert2texAndCompile.sh");
+            String target = new String(System.getProperty("user.dir")+"/zsh convert2texAndCompile.sh");
 // String target = new String("mkdir stackOver");
             Runtime rt = Runtime.getRuntime();
             Process proc = rt.exec(target);

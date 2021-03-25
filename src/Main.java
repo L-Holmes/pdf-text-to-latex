@@ -2,6 +2,7 @@ import util.WriteTextToFileHandle;
 /*
 TODO:
 -add ignores/removes for certain things. i.e. the scc20.. for this document.
+-change the bullet points to actual latex bullet points
  */
 class Main
 {
