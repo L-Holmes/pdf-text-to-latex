@@ -1,9 +1,15 @@
+import util.WriteTextToFileHandle;
+/*
+TODO:
+-add ignores/removes for certain things. i.e. the scc20.. for this document.
+ */
 class Main
 {
     public static void main(String[] args)
     {
         System.out.println("\n...starting main...");
-        String pdfLocation = "static/in.pdf";
-        ParsePdf pdfParser = new ParsePdf(pdfLocation);
+        RunProgram runner = new RunProgram();
     }
+
+
 }
