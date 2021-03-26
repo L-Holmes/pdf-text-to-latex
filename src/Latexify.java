@@ -5,6 +5,7 @@ import java.util.Stack;
  */
 public class Latexify {
     private static Stack<String> nestedBulletPointStyleStack = new Stack<String>();
+    private static String[] charactersToBackslash = {"<",">","_"};  //charcters which are interpreted as special/modifier characters in latex, and so must be prepended by a backslash when converted
 
     public static String convertTextToLatex(String textToConvert, String newPageSeperator)
     {
@@ -51,6 +52,7 @@ public class Latexify {
         String previousBulletStyle = "";
 
         for (String line : textToAdd.split("\n")){
+
             if(line.contains(newPageSeperator)){
                 line = line.replace(newPageSeperator, "\\newpage\n");
                 prevLineWasPageBreak = true;
@@ -59,7 +61,12 @@ public class Latexify {
                     previousBulletStyle = "";
                 }
             }
-
+            //prepend a backslash to any special characters so that they are literally interpreted in the latex code
+            for (String specialChar : charactersToBackslash){
+                if (line.contains(specialChar)){
+                    line = line.replace(specialChar, "\\".concat(specialChar));
+                }
+            }
             RegularDocLineOut regLineOutput = addDocLine(prevLineWasPageBreak, line, textBuilder, previousBulletStyle);
             prevLineWasPageBreak = regLineOutput.previousLineWasPageBreak();
             textBuilder = regLineOutput.textBuilder();
@@ -75,11 +82,18 @@ public class Latexify {
         String previousBulletStyle = "";
 
         for (String line : textToAdd.split("\n")){
+
             //perform paragraph related checks
             ParagraphSearchOut paragraphData = performParagraphChecks(line, paragraphBuffer, textBuilder, patternToRemoveSentence, patternToRemoveLine);
             line = paragraphData.firstLineOfNextParagraph();
             paragraphBuffer = paragraphData.paragraph();
             textBuilder = paragraphData.constructedOutText();
+            //prepend a backslash to any special characters so that they are literally interpreted in the latex code
+            for (String specialChar : charactersToBackslash){
+                if (line.contains(specialChar)){
+                    line = line.replace(specialChar, "\\".concat(specialChar));
+                }
+            }
 
            if(!lineContainsPattern(line, patternToRemoveLine)) {
                if(line.contains(newPageSeperator)){
@@ -107,6 +121,7 @@ public class Latexify {
         String previousBulletStyle = "";
 
         for (String line : textToAdd.split("\n")){
+
             if(line.contains(newPageSeperator)){
                 line = line.replace(newPageSeperator, "\\newpage\n");
                 prevLineWasPageBreak = true;
@@ -119,6 +134,12 @@ public class Latexify {
                     previousBulletStyle = "";
                 }
                 nestedBulletPointStyleStack.clear();
+            }
+            //prepend a backslash to any special characters so that they are literally interpreted in the latex code
+            for (String specialChar : charactersToBackslash){
+                if (line.contains(specialChar)){
+                    line = line.replace(specialChar, "\\".concat(specialChar));
+                }
             }
             if (linesToRemoveCount >0){
                 if (linesToRemoveCount == numStartLinesToRemove){
@@ -150,6 +171,7 @@ public class Latexify {
      */
     private static RegularDocLineOut addDocLine(boolean prevLineWasPageBreak, String line, StringBuilder textBuilder, String previousBulletStyle)
     {
+        boolean addNewline = true;
         //adding the title to a page
         if(prevLineWasPageBreak && !line.contains("\\newpage") && !line.isBlank()){
             textBuilder.append("\\section{");
@@ -163,12 +185,14 @@ public class Latexify {
                 BulletPointOperationOut bulletOperationOut = handleBulletPointOperation(line, "• ", previousBulletStyle);
                 line = bulletOperationOut.modifiedLine();
                 previousBulletStyle = bulletOperationOut.previousBulletStyle();
+                addNewline = false;
             }
             else if(line.length() > 2){
                 if (line.substring(0, 2).contains("– ")){
                     BulletPointOperationOut bulletOperationOut = handleBulletPointOperation(line, "– ", previousBulletStyle);
                     line = bulletOperationOut.modifiedLine();
                     previousBulletStyle = bulletOperationOut.previousBulletStyle();
+                    addNewline = false;
                 }
             }
             else{
@@ -179,7 +203,10 @@ public class Latexify {
             }
             //adding a regular line to a page
             textBuilder.append(line);
-            textBuilder.append("\\\\ \n");
+            if(addNewline){
+                textBuilder.append("\\\\");
+            }
+            textBuilder.append("\n");
         }
         return new RegularDocLineOut(textBuilder, prevLineWasPageBreak, previousBulletStyle);
     }
@@ -194,27 +221,21 @@ public class Latexify {
      */
     private static BulletPointOperationOut handleBulletPointOperation(String line, String bulletPointStyle, String previousBulletStyle)
     {
-        System.out.println("\n---encountered bullet points on line: "+ line);
-        System.out.println("current prev bullet style:"+previousBulletStyle+":");
         line = "  \\item ".concat(line.replace(bulletPointStyle, ""));
         if (!previousBulletStyle.equals(bulletPointStyle)){
-            System.out.println("this bullet point style"+ bulletPointStyle+ " is not the same as the previous:"+ previousBulletStyle);
             //start a new set of bullet points
-            line = "\\begin{itemize}\n".concat(line);
             if (nestedBulletPointStyleStack.isEmpty() || !nestedBulletPointStyleStack.contains(bulletPointStyle)){
+                line = "\\begin{itemize}\n".concat(line);
                 //if starting a new bullet point, and we are indenting into this new style, add to bullet point style stack
                 nestedBulletPointStyleStack.push(bulletPointStyle);
-                System.out.println("indenting...:");
             }
             else{
                 //only end the bullet points, if unindenting the bullet points
                 line = "\\end{itemize}\n".concat(line);
                 nestedBulletPointStyleStack.pop();
-                System.out.println("unindenting...");
             }
         }
         previousBulletStyle = bulletPointStyle;
-        System.out.println("updating the bullet style to:"+bulletPointStyle+":");
         return new BulletPointOperationOut(line, previousBulletStyle);
     }
 

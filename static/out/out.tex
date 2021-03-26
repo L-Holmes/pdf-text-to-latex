@@ -1,391 +1,386 @@
 \documentclass[12pt]{article}
 
 \begin{document}
-19.1\\ 
-SC\\ 
-C\\ 
- 2\\ 
-0\\ 
-1\\ 
- \\ 
-Unit 19: Advanced SQL and \\ 
-Access Control\\ 
-SCC201 Databases\\ 
-Based of slides from\\ 
-John Mariani\\ 
+19.1\\
+SC\\
+C\\
+ 2\\
+0\\
+1\\
+ \\
+Unit 19: Advanced SQL and \\
+Access Control\\
+SCC201 Databases\\
+Based of slides from\\
+John Mariani\\
 \newpage
 19.2\\ 
- \\ 
+ \\
 \section{In this Unit …}
 \newpage
 19.3\\ 
- \\ 
+ \\
 \section{ADVANCED SQL : MORE ON }
-SCHEMAS AND VIEWS\\ 
+SCHEMAS AND VIEWS\\
 \newpage
 19.4\\ 
- \\ 
+ \\
 \section{Introduction}
 \begin{itemize}
-  \item Following on from the earlier “Schemas and \\ 
-Views” Unit.\\ 
-  \item How to\\ 
+  \item Following on from the earlier “Schemas and 
+Views” Unit.\\
+  \item How to
 \begin{itemize}
-  \item Set up a schema in SQL\\ 
-  \item Define tables in SQL\\ 
-  \item Define views in SQL\\ 
+  \item Set up a schema in SQL
+  \item Define tables in SQL
+  \item Define views in SQL
 \end{itemize}
+  \item Notice this material focuses on full SQL
 \begin{itemize}
-  \item Notice this material focuses on full SQL\\ 
-\begin{itemize}
-  \item Some of these features may not be available in \\ 
-certain subset implementations of SQL\\ 
-(such as in base MySQL or SQLite)\\ 
+  \item Some of these features may not be available in 
+certain subset implementations of SQL\\
+(such as in base MySQL or SQLite)\\
 \end{itemize}
 \end{itemize}
 \newpage
 19.5\\ 
- \\ 
+ \\
 \section{Conceptual Schema Definition in SQL (1)}
 \begin{itemize}
-  \item We will use our example from ER-to-\\ 
-relational mapping:\\ 
-DEPARTMENT DName HoD NoOfEmps\\ 
-COURSE CName Description DName\\ 
-STUDENT\\ 
-FName LName RegNum BDate Address Gender DName\\ 
-TAKES CName RegNum\\ 
-DEPT_LOCATIONS DName DLocation\\ 
+  \item We will use our example from ER-to-
+relational mapping:\\
+DEPARTMENT DName HoD NoOfEmps\\
+COURSE CName Description DName\\
+STUDENT\\
+FName LName RegNum BDate Address Gender DName\\
+TAKES CName RegNum\\
+DEPT\_LOCATIONS DName DLocation\\
 \end{itemize}
 \newpage
 19.6\\ 
- \\ 
+ \\
 \section{Conceptual Schema Definition in SQL (2)}
 \begin{itemize}
-  \item To create schema:\\ 
+  \item To create schema:
 \begin{itemize}
-  \item CREATE SCHEMA <SCHEMA_NAME>\\ 
-AUTHORISATION <AUTH_IDENTIFIER>\\ 
+  \item CREATE SCHEMA \<SCHEMA\_NAME\>
+AUTHORISATION \<AUTH\_IDENTIFIER\>
 \end{itemize}
+  \item In our example:
 \begin{itemize}
-  \item In our example:\\ 
-\begin{itemize}
-  \item CREATE SCHEMA UNIVERSITY\\ 
-AUTHORISATION JDOE\\ 
+  \item CREATE SCHEMA UNIVERSITY
+AUTHORISATION JDOE\\
 \end{itemize}
 \end{itemize}
 \newpage
 19.7\\ 
- \\ 
+ \\
 \section{Conceptual Schema Definition in SQL (3)}
 \begin{itemize}
-  \item To create tables for a schema explicitly:\\ 
+  \item To create tables for a schema explicitly:
 \begin{itemize}
-  \item CREATE TABLE\\ 
-<SCHEMA_NAME>. <TABLE_NAME> \\ 
-<TABLE_DEFINITION>\\ 
+  \item CREATE TABLE
+\<SCHEMA\_NAME\>. \<TABLE\_NAME\> \\
+\<TABLE\_DEFINITION\>\\
 \end{itemize}
+  \item To create tables for a schema implicitly:
 \begin{itemize}
-  \item To create tables for a schema implicitly:\\ 
-\begin{itemize}
-  \item CREATE TABLE\\ 
-<TABLE_NAME>\\ 
-<TABLE_DEFINITION>\\ 
-  \item Schema name specified in environment is used\\ 
+  \item CREATE TABLE
+\<TABLE\_NAME\>\\
+\<TABLE\_DEFINITION\>\\
+  \item Schema name specified in environment is used
 \end{itemize}
 \end{itemize}
 \newpage
 19.8\\ 
- \\ 
+ \\
 \section{Conceptual Schema Definition in SQL (4)}
-CREATE TABLE STUDENT\\ 
-(FNAME VARCHAR(20) NOT NULL,\\ 
-LNAME VARCHAR(20) NOT NULL,\\ 
-REGNUM   INT NOT NULL,\\ 
-BDATE DATE,\\ 
-ADDRESSVARCHAR(30) ,\\ 
-GENDER CHAR,\\ 
-DNAME VARCHAR(20) NOT NULL,\\ 
-PRIMARY KEY(REGNUM),\\ 
-FOREIGN KEY(DNAME) REFERENCES DEPARTMENT(NAME)\\ 
-);\\ 
+CREATE TABLE STUDENT\\
+(FNAME VARCHAR(20) NOT NULL,\\
+LNAME VARCHAR(20) NOT NULL,\\
+REGNUM   INT NOT NULL,\\
+BDATE DATE,\\
+ADDRESSVARCHAR(30) ,\\
+GENDER CHAR,\\
+DNAME VARCHAR(20) NOT NULL,\\
+PRIMARY KEY(REGNUM),\\
+FOREIGN KEY(DNAME) REFERENCES DEPARTMENT(NAME)\\
+);\\
 \newpage
 19.9\\ 
- \\ 
+ \\
 \section{Conceptual Schema Definition in SQL (5)}
-CREATE TABLE DEPARTMENT\\ 
-(NAME VARCHAR(20) NOT NULL,\\ 
-HoD VARCHAR(20) NOT NULL,\\ 
-NUMOFEMPS INT NOT NULL DEFAULT 1,\\ 
-PRIMARY KEY(NAME)\\ 
-);\\ 
-CREATE TABLE COURSE\\ 
-(NAME VARCHAR(20) NOT NULL,\\ 
-DESCRIPTION VARCHAR(40),\\ 
-DNAME VARCHAR(20) NOT NULL,\\ 
-PRIMARY KEY(NAME),\\ 
-FOREIGN KEY(NAME) REFERENCES DEPARTMENT(NAME)\\ 
-);\\ 
+CREATE TABLE DEPARTMENT\\
+(NAME VARCHAR(20) NOT NULL,\\
+HoD VARCHAR(20) NOT NULL,\\
+NUMOFEMPS INT NOT NULL DEFAULT 1,\\
+PRIMARY KEY(NAME)\\
+);\\
+CREATE TABLE COURSE\\
+(NAME VARCHAR(20) NOT NULL,\\
+DESCRIPTION VARCHAR(40),\\
+DNAME VARCHAR(20) NOT NULL,\\
+PRIMARY KEY(NAME),\\
+FOREIGN KEY(NAME) REFERENCES DEPARTMENT(NAME)\\
+);\\
 \newpage
 19.10\\ 
- \\ 
+ \\
 \section{Conceptual Schema Definition in SQL (6)}
-CREATE TABLE TAKES\\ 
-(CNAME VARCHAR(20) NOT NULL,\\ 
-REGNUM INT NOT NULL,\\ 
-PRIMARY KEY(CNAME, REGNUM),\\ 
-FOREIGN KEY(CNAME)    REFERENCES COURSE(NAME),\\ 
-FOREIGN KEY(REGNUM) REFERENCES STUDENT(REGNUM)\\ 
-);\\ 
-CREATE TABLE DEPT_LOCATIONS\\ 
-(DNAME VARCHAR(20) NOT NULL,\\ 
-LOCATION VARCHAR(20) NOT NULL,\\ 
-PRIMARY KEY(DNAME, LOCATION),\\ 
-FOREIGN KEY(DNAME) REFERENCES DEPARTMENT(NAME)\\ 
-);\\ 
+CREATE TABLE TAKES\\
+(CNAME VARCHAR(20) NOT NULL,\\
+REGNUM INT NOT NULL,\\
+PRIMARY KEY(CNAME, REGNUM),\\
+FOREIGN KEY(CNAME)    REFERENCES COURSE(NAME),\\
+FOREIGN KEY(REGNUM) REFERENCES STUDENT(REGNUM)\\
+);\\
+CREATE TABLE DEPT\_LOCATIONS\\
+(DNAME VARCHAR(20) NOT NULL,\\
+LOCATION VARCHAR(20) NOT NULL,\\
+PRIMARY KEY(DNAME, LOCATION),\\
+FOREIGN KEY(DNAME) REFERENCES DEPARTMENT(NAME)\\
+);\\
 \newpage
 19.11\\ 
- \\ 
+ \\
 \section{Schema Evolution using SQL}
 \begin{itemize}
-  \item We can use following three commands:\\ 
+  \item We can use following three commands:
 \begin{itemize}
-  \item DROP SCHEMA\\ 
-  \item DROP TABLE\\ 
-  \item ALTER TABLE\\ 
+  \item DROP SCHEMA
+  \item DROP TABLE
+  \item ALTER TABLE
 \end{itemize}
 \end{itemize}
 \newpage
 19.12\\ 
- \\ 
+ \\
 \section{Views in SQL (1)}
 \begin{itemize}
-  \item Views are virtual tables\\ 
+  \item Views are virtual tables
 \begin{itemize}
-  \item Do not necessarily exist in physical form\\ 
-  \item As opposed to base tables whose tuples are \\ 
-actually stored in a database\\ 
+  \item Do not necessarily exist in physical form
+  \item As opposed to base tables whose tuples are 
+actually stored in a database\\
 \end{itemize}
+  \item If same query frequently executed on 
+database it makes sense to define view based \\
+on results of query and use simpler query to \\
+retrieve tuples of interest from view\\
 \begin{itemize}
-  \item If same query frequently executed on \\ 
-database it makes sense to define view based \\ 
-on results of query and use simpler query to \\ 
-retrieve tuples of interest from view\\ 
-\begin{itemize}
-  \item Particularly useful if original query is complex,\\ 
-e.g. involves a number of joins\\ 
+  \item Particularly useful if original query is complex,
+e.g. involves a number of joins\\
 \end{itemize}
 \end{itemize}
 \newpage
 19.13\\ 
- \\ 
+ \\
 \section{Views in SQL (2)}
 \begin{itemize}
-  \item Use the command:\\ 
+  \item Use the command:
 \begin{itemize}
-  \item CREATE VIEW <VIEW_NAME> AS\\ 
-<SQL_QUERY>\\ 
-  \item CREATE VIEW PHYSICS_STUDENTS AS\\ 
-SELECT *\\ 
-FROM STUDENT\\ 
-WHERE   DNAME = ‘Physics’ ;\\ 
+  \item CREATE VIEW \<VIEW\_NAME\> AS
+\<SQL\_QUERY\>\\
+  \item CREATE VIEW PHYSICS\_STUDENTS AS
+SELECT *\\
+FROM STUDENT\\
+WHERE   DNAME = ‘Physics’ ;\\
 \end{itemize}
 \end{itemize}
 \newpage
 19.14\\ 
- \\ 
+ \\
 \section{Views in SQL (3)}
 \begin{itemize}
-  \item Notice that virtual relations can be used in \\ 
-same way as base relations in SQL \\ 
-statements\\ 
+  \item Notice that virtual relations can be used in 
+same way as base relations in SQL \\
+statements\\
 \begin{itemize}
-  \item SELECT FNAME, LNAME\\ 
-FROM PHYSICS_STUDENTS\\ 
-WHERE GENDER = ‘M’\\ 
+  \item SELECT FNAME, LNAME
+FROM PHYSICS\_STUDENTS\\
+WHERE GENDER = ‘M’\\
 \end{itemize}
+  \item Views can be dropped by using command:
 \begin{itemize}
-  \item Views can be dropped by using command:\\ 
-\begin{itemize}
-  \item DROP VIEW <VIEW_NAME>\\ 
-e.g.\\ 
-DROP VIEW PHYSICS_STUDENTS\\ 
+  \item DROP VIEW \<VIEW\_NAME\>
+e.g.\\
+DROP VIEW PHYSICS\_STUDENTS\\
 \end{itemize}
 \end{itemize}
 \newpage
 19.15\\ 
- \\ 
+ \\
 \section{ACCESS CONTROL : SECURITY IN }
-SQL\\ 
+SQL\\
 \newpage
 19.16\\ 
- \\ 
+ \\
 \section{Mandatory Access Control}
 \begin{itemize}
-  \item Each database object is assigned a certain \\ 
-classification level\\ 
-  \item i.e. top secret, secret, confidential, unclassified\\ 
-  \item The levels form a strict ordering.\\ 
-  \item top secret > secret > confidential> unclassified\\ 
-  \item Each subject (users or programs) is given a \\ 
-clearance level.\\ 
-  \item To access an object, a subject requires the \\ 
-necessary clearance to read or write a database \\ 
-object.\\ 
-  \item See the Bell-LaPadula access control model (1974).\\ 
-  \item We will not cover this approach further in this \\ 
-course.\\ 
+  \item Each database object is assigned a certain 
+classification level\\
+  \item i.e. top secret, secret, confidential, unclassified
+  \item The levels form a strict ordering.
+  \item top secret \> secret \> confidential\> unclassified
+  \item Each subject (users or programs) is given a 
+clearance level.\\
+  \item To access an object, a subject requires the 
+necessary clearance to read or write a database \\
+object.\\
+  \item See the Bell-LaPadula access control model (1974).
+  \item We will not cover this approach further in this 
+course.\\
 \end{itemize}
 \newpage
 19.17\\ 
- \\ 
+ \\
 \section{Discretionary Access Control}
 \begin{itemize}
-  \item Each user is given appropriate access rights \\ 
-(or privileges) on specific database objects.\\ 
-  \item Users obtain certain privileges when they \\ 
-create an object and can pass some or all of \\ 
-these privileges to other users at their \\ 
-discretion.\\ 
-  \item This approach is used in SQL.\\ 
+  \item Each user is given appropriate access rights 
+(or privileges) on specific database objects.\\
+  \item Users obtain certain privileges when they 
+create an object and can pass some or all of \\
+these privileges to other users at their \\
+discretion.\\
+  \item This approach is used in SQL.
 \end{itemize}
 \newpage
 19.18\\ 
- \\ 
+ \\
 \section{Authorisation Identifier}
 \begin{itemize}
-  \item An SQL identifier used to establish the identity \\ 
-of a user.\\ 
-  \item The DBA sets up your username and usually a \\ 
-password.\\ 
-  \item Every SQL statement executed by the DBMS is \\ 
-performed on behalf of a specific user.\\ 
-  \item By the access rights associated with a user, we \\ 
-can determine \\ 
+  \item An SQL identifier used to establish the identity 
+of a user.\\
+  \item The DBA sets up your username and usually a 
+password.\\
+  \item Every SQL statement executed by the DBMS is 
+performed on behalf of a specific user.\\
+  \item By the access rights associated with a user, we 
+can determine \\
 \begin{itemize}
-  \item what database objects a user can reference and \\ 
-  \item what operations can be performed by that user.\\ 
+  \item what database objects a user can reference and 
+  \item what operations can be performed by that user.
 \end{itemize}
 \end{itemize}
 \newpage
 19.19\\ 
- \\ 
+ \\
 \section{Ownership}
 \begin{itemize}
-  \item Each object created in SQL has an owner.\\ 
-  \item The owner is identified by the authorisation \\ 
-identifier defined in the AUTHORIZATION \\ 
-clause of the schema to which the object \\ 
-belongs.\\ 
-  \item The owner is initially the only person who \\ 
-knows that object exists and subsequently \\ 
-perform operations on that object.\\ 
+  \item Each object created in SQL has an owner.
+  \item The owner is identified by the authorisation 
+identifier defined in the AUTHORIZATION \\
+clause of the schema to which the object \\
+belongs.\\
+  \item The owner is initially the only person who 
+knows that object exists and subsequently \\
+perform operations on that object.\\
 \end{itemize}
 \newpage
 19.20\\ 
- \\ 
+ \\
 \section{Privileges}
 \begin{itemize}
-  \item The ISO standard defines the following privileges, \\ 
-among others.\\ 
-select to retrieve data from a table\\ 
-insert to insert new rows into a table. Can be \\ 
-restricted to specific columns.\\ 
-update to modify rows of data in a table. Can be \\ 
-restricted to specific columns.\\ 
-delete to delete rows of data from a table\\ 
-references to reference columns of a named table in \\ 
-integrity constraints. Can be restricted to \\ 
-specific columns.\\ 
+  \item The ISO standard defines the following privileges, 
+among others.\\
+select to retrieve data from a table\\
+insert to insert new rows into a table. Can be \\
+restricted to specific columns.\\
+update to modify rows of data in a table. Can be \\
+restricted to specific columns.\\
+delete to delete rows of data from a table\\
+references to reference columns of a named table in \\
+integrity constraints. Can be restricted to \\
+specific columns.\\
 \end{itemize}
 \newpage
 19.21\\ 
- \\ 
+ \\
 \section{Create Table}
 \begin{itemize}
-  \item When you create a table, you are the \\ 
-owner and have full privileges.\\ 
-  \item Other users have no access, and must be \\ 
-GRANTed permissions by the owner.\\ 
-  \item When you create a view, you are the owner\\ 
-of the view. But you may not have full \\ 
-privileges.\\ 
-  \item You must have select privilege on the base \\ 
-table, in order to create the view in the first \\ 
-place.\\ 
+  \item When you create a table, you are the 
+owner and have full privileges.\\
+  \item Other users have no access, and must be 
+GRANTed permissions by the owner.\\
+  \item When you create a view, you are the owner
+of the view. But you may not have full \\
+privileges.\\
+  \item You must have select privilege on the base 
+table, in order to create the view in the first \\
+place.\\
 \end{itemize}
 \newpage
 19.22\\ 
- \\ 
+ \\
 \section{GRANT {PrivilegeList | ALL PRIVILEGES}}
-ON ObjectName\\ 
-TO {AuthorizationList | PUBLIC}\\ 
-[WITH GRANT OPTION]\\ 
-The GRANT command\\ 
-select\\ 
-delete\\ 
-insert [(columnName, [...])]\\ 
-update [(columnName, [...])]\\ 
-references [(columnName, [...])]\\ 
-PrivilegeList\\ 
+ON ObjectName\\
+TO {AuthorizationList | PUBLIC}\\
+[WITH GRANT OPTION]\\
+The GRANT command\\
+select\\
+delete\\
+insert [(columnName, [...])]\\
+update [(columnName, [...])]\\
+references [(columnName, [...])]\\
+PrivilegeList\\
 \newpage
 19.23\\ 
- \\ 
+ \\
 \section{Examples}
-GRANT ALL PRIVILEGES\\ 
-ON Staff\\ 
-TO Manager\\ 
-WITH GRANT OPTION\\ 
-The user Manager can now retrieve rows from the \\ 
-Staff table, and also insert, update and delete.\\ 
-The Manager can pass these privileges onto other \\ 
-users.\\ 
+GRANT ALL PRIVILEGES\\
+ON Staff\\
+TO Manager\\
+WITH GRANT OPTION\\
+The user Manager can now retrieve rows from the \\
+Staff table, and also insert, update and delete.\\
+The Manager can pass these privileges onto other \\
+users.\\
 \newpage
 19.24\\ 
- \\ 
+ \\
 \section{Examples}
-GRANT SELECT, UPDATE (salary)\\ 
-ON Staff\\ 
-TO Personnel, Director\\ 
-Gives the users Personnel and Director the privileges \\ 
-to select and update the salary column of the Staff \\ 
-table.\\ 
-GRANT SELECT\\ 
-ON Branch\\ 
-TO PUBLIC\\ 
-Gives all users the privilege \\ 
-SELECT on the Branch table.\\ 
+GRANT SELECT, UPDATE (salary)\\
+ON Staff\\
+TO Personnel, Director\\
+Gives the users Personnel and Director the privileges \\
+to select and update the salary column of the Staff \\
+table.\\
+GRANT SELECT\\
+ON Branch\\
+TO PUBLIC\\
+Gives all users the privilege \\
+SELECT on the Branch table.\\
 \newpage
 19.25\\ 
- \\ 
+ \\
 \section{Revoking privileges from users}
 \begin{itemize}
-  \item The REVOKE statement can take away all or \\ 
-some of the privileges previously GRANTed.\\ 
-REVOKE {PrivilegeList | ALL PRIVILEGES}\\ 
-ON ObjectName\\ 
-FROM {AuthorizationList | PUBLIC}\\ 
+  \item The REVOKE statement can take away all or 
+some of the privileges previously GRANTed.\\
+REVOKE {PrivilegeList | ALL PRIVILEGES}\\
+ON ObjectName\\
+FROM {AuthorizationList | PUBLIC}\\
 \end{itemize}
 \newpage
 19.26\\ 
- \\ 
+ \\
 \section{Examples}
-REVOKE SELECT\\ 
-ON Branch\\ 
-FROM PUBLIC\\ 
-Revoke the SELECT \\ 
-privilege on the Branch \\ 
-table from all users.\\ 
-REVOKE ALL PRIVILEGES\\ 
-ON Staff\\ 
-FROM Director\\ 
-Revoke all privileges \\ 
-you have given to \\ 
-Director on the Staff \\ 
-table.\\ 
+REVOKE SELECT\\
+ON Branch\\
+FROM PUBLIC\\
+Revoke the SELECT \\
+privilege on the Branch \\
+table from all users.\\
+REVOKE ALL PRIVILEGES\\
+ON Staff\\
+FROM Director\\
+Revoke all privileges \\
+you have given to \\
+Director on the Staff \\
+table.\\
 \newpage
 19.27\\ 
- \\ 
+ \\
 \section{THE END}
 \newpage
 \\ 
