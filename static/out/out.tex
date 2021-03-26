@@ -1,6 +1,6 @@
 \documentclass[12pt]{article}
 
-\begin{document}
+\usepackage[T1]{fontenc}\begin{document}
 19.1\\
 SC\\
 C\\
@@ -63,8 +63,8 @@ DEPT\_LOCATIONS DName DLocation\\
 \begin{itemize}
   \item To create schema:
 \begin{itemize}
-  \item CREATE SCHEMA \<SCHEMA\_NAME\>
-AUTHORISATION \<AUTH\_IDENTIFIER\>
+  \item CREATE SCHEMA <SCHEMA\_NAME>
+AUTHORISATION <AUTH\_IDENTIFIER>\\
 \end{itemize}
   \item In our example:
 \begin{itemize}
@@ -80,14 +80,14 @@ AUTHORISATION JDOE\\
   \item To create tables for a schema explicitly:
 \begin{itemize}
   \item CREATE TABLE
-\<SCHEMA\_NAME\>. \<TABLE\_NAME\> \\
-\<TABLE\_DEFINITION\>\\
+<SCHEMA\_NAME>. <TABLE\_NAME> \\
+<TABLE\_DEFINITION>\\
 \end{itemize}
   \item To create tables for a schema implicitly:
 \begin{itemize}
   \item CREATE TABLE
-\<TABLE\_NAME\>\\
-\<TABLE\_DEFINITION\>\\
+<TABLE\_NAME>\\
+<TABLE\_DEFINITION>\\
   \item Schema name specified in environment is used
 \end{itemize}
 \end{itemize}
@@ -179,8 +179,8 @@ e.g. involves a number of joins\\
 \begin{itemize}
   \item Use the command:
 \begin{itemize}
-  \item CREATE VIEW \<VIEW\_NAME\> AS
-\<SQL\_QUERY\>\\
+  \item CREATE VIEW <VIEW\_NAME> AS
+<SQL\_QUERY>\\
   \item CREATE VIEW PHYSICS\_STUDENTS AS
 SELECT *\\
 FROM STUDENT\\
@@ -202,7 +202,7 @@ WHERE GENDER = ‘M’\\
 \end{itemize}
   \item Views can be dropped by using command:
 \begin{itemize}
-  \item DROP VIEW \<VIEW\_NAME\>
+  \item DROP VIEW <VIEW\_NAME>
 e.g.\\
 DROP VIEW PHYSICS\_STUDENTS\\
 \end{itemize}
@@ -221,7 +221,7 @@ SQL\\
 classification level\\
   \item i.e. top secret, secret, confidential, unclassified
   \item The levels form a strict ordering.
-  \item top secret \> secret \> confidential\> unclassified
+  \item top secret > secret > confidential> unclassified
   \item Each subject (users or programs) is given a 
 clearance level.\\
   \item To access an object, a subject requires the 
@@ -312,9 +312,9 @@ place.\\
 \newpage
 19.22\\ 
  \\
-\section{GRANT {PrivilegeList | ALL PRIVILEGES}}
+\section{GRANT \{PrivilegeList | ALL PRIVILEGES\}}
 ON ObjectName\\
-TO {AuthorizationList | PUBLIC}\\
+TO \{AuthorizationList | PUBLIC\}\\
 [WITH GRANT OPTION]\\
 The GRANT command\\
 select\\
@@ -357,9 +357,9 @@ SELECT on the Branch table.\\
 \begin{itemize}
   \item The REVOKE statement can take away all or 
 some of the privileges previously GRANTed.\\
-REVOKE {PrivilegeList | ALL PRIVILEGES}\\
+REVOKE \{PrivilegeList | ALL PRIVILEGES\}\\
 ON ObjectName\\
-FROM {AuthorizationList | PUBLIC}\\
+FROM \{AuthorizationList | PUBLIC\}\\
 \end{itemize}
 \newpage
 19.26\\ 

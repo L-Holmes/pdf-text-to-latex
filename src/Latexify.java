@@ -5,13 +5,14 @@ import java.util.Stack;
  */
 public class Latexify {
     private static Stack<String> nestedBulletPointStyleStack = new Stack<String>();
-    private static String[] charactersToBackslash = {"<",">","_"};  //charcters which are interpreted as special/modifier characters in latex, and so must be prepended by a backslash when converted
+    private static String[] charactersToBackslash = {"_", "&" , "%" , "$" , "#" , "{" , "}" , "~" , "^"};  //charcters which are interpreted as special/modifier characters in latex, and so must be prepended by a backslash when converted
 
     public static String convertTextToLatex(String textToConvert, String newPageSeperator)
     {
         StringBuilder asLatex  = new StringBuilder();
         //add required start of latex document
         asLatex.append("\\documentclass[12pt]{article}\n\n");
+        asLatex.append("\\usepackage[T1]{fontenc}");
         asLatex.append("\\begin{document}\n");
         //add the body of the document (add the data parsed from the pdf)
         asLatex = addDocumentBody(asLatex, textToConvert, newPageSeperator);
@@ -25,6 +26,7 @@ public class Latexify {
         StringBuilder asLatex  = new StringBuilder();
         //add required start of latex document
         asLatex.append("\\documentclass[12pt]{article}\n\n");
+        asLatex.append("\\usepackage[T1]{fontenc}");
         asLatex.append("\\begin{document}\n");
         //add the body of the document (add the data parsed from the pdf)
         asLatex = addDocumentBody(asLatex, textToConvert, newPageSeperator, removePatternOnLine, removePatternOnPara);
@@ -38,6 +40,7 @@ public class Latexify {
         StringBuilder asLatex  = new StringBuilder();
         //add required start of latex document
         asLatex.append("\\documentclass[12pt]{article}\n\n");
+        asLatex.append("\\usepackage[T1]{fontenc}");
         asLatex.append("\\begin{document}\n");
         //add the body of the document (add the data parsed from the pdf)
         asLatex = addDocumentBody(asLatex, textToConvert, newPageSeperator, numStartLinesToRemoveForEachPage);
@@ -67,6 +70,8 @@ public class Latexify {
                     line = line.replace(specialChar, "\\".concat(specialChar));
                 }
             }
+            line.replace("<", " \\textless ");
+            line.replace(">", " \\textgreater ");
             RegularDocLineOut regLineOutput = addDocLine(prevLineWasPageBreak, line, textBuilder, previousBulletStyle);
             prevLineWasPageBreak = regLineOutput.previousLineWasPageBreak();
             textBuilder = regLineOutput.textBuilder();
@@ -94,7 +99,8 @@ public class Latexify {
                     line = line.replace(specialChar, "\\".concat(specialChar));
                 }
             }
-
+            line.replace("<", " \\textless ");
+            line.replace(">", " \\textgreater ");
            if(!lineContainsPattern(line, patternToRemoveLine)) {
                if(line.contains(newPageSeperator)){
                    line = line.replace(newPageSeperator, "\\newpage\n");
@@ -138,9 +144,13 @@ public class Latexify {
             //prepend a backslash to any special characters so that they are literally interpreted in the latex code
             for (String specialChar : charactersToBackslash){
                 if (line.contains(specialChar)){
+                    System.out.println("char: "+specialChar+" - before:"+ line);
                     line = line.replace(specialChar, "\\".concat(specialChar));
+                    System.out.println("line after:"+ line);
                 }
             }
+            line.replace("<", " \\textless ");
+            line.replace(">", " \\textgreater ");
             if (linesToRemoveCount >0){
                 if (linesToRemoveCount == numStartLinesToRemove){
                     textBuilder.append(line);
