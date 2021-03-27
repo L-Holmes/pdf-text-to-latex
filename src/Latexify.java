@@ -7,8 +7,39 @@ public class Latexify {
     private static Stack<String> nestedBulletPointStyleStack = new Stack<String>();
     private static String[] charactersToBackslash = {"_", "&" , "%" , "$" , "#" , "{" , "}" , "~" , "^"};  //charcters which are interpreted as special/modifier characters in latex, and so must be prepended by a backslash when converted
 
-    public static String convertTextToLatex(String textToConvert, String newPageSeperator)
+    //--optional arguments--
+    private static boolean quizMode = false;
+    private static short numStartLinesToRemoveForEachPage = 0;
+    private static String removePatternOnLine = "";
+    private static String removePatternOnPara = "";
+
+
+    //----Optional argument setting---
+    /**
+     * Resets all of the optional variables back to their default value
+     */
+    private static void resetOptionalArguments()
     {
+        quizMode = false;
+        numStartLinesToRemoveForEachPage = 0;
+        removePatternOnLine = "";
+        removePatternOnPara = "";
+    }
+
+    private static void initialiseOptionalArguments(LatexifyOptionalArguments args)
+    {
+        if (args != null){
+            quizMode = args.getQuizMode();
+            numStartLinesToRemoveForEachPage = args.getNumStartLinesToRemoveForEachPage();
+            removePatternOnLine = args.getRemovePatternOnLine();
+            removePatternOnPara = args.getRemovePatternOnPara();
+        }
+    }
+    //--- ---
+
+    public static String convertTextToLatex(String textToConvert, String newPageSeperator, LatexifyOptionalArguments args)
+    {
+        initialiseOptionalArguments(args);
         StringBuilder asLatex  = new StringBuilder();
         //add required start of latex document
         asLatex.append("\\documentclass[12pt]{article}\n\n");
@@ -18,34 +49,9 @@ public class Latexify {
         asLatex = addDocumentBody(asLatex, textToConvert, newPageSeperator);
         //add required end of document
         asLatex.append("\\end{document}");
-        return asLatex.toString();
-    }
-
-    public static String convertTextToLatex(String textToConvert, String newPageSeperator, String removePatternOnLine, String removePatternOnPara)
-    {
-        StringBuilder asLatex  = new StringBuilder();
-        //add required start of latex document
-        asLatex.append("\\documentclass[12pt]{article}\n\n");
-        asLatex.append("\\usepackage[T1]{fontenc}");
-        asLatex.append("\\begin{document}\n");
-        //add the body of the document (add the data parsed from the pdf)
-        asLatex = addDocumentBody(asLatex, textToConvert, newPageSeperator, removePatternOnLine, removePatternOnPara);
-        //add required end of document
-        asLatex.append("\\end{document}");
-        return asLatex.toString();
-    }
-
-    public static String convertTextToLatex(String textToConvert, String newPageSeperator, short numStartLinesToRemoveForEachPage)
-    {
-        StringBuilder asLatex  = new StringBuilder();
-        //add required start of latex document
-        asLatex.append("\\documentclass[12pt]{article}\n\n");
-        asLatex.append("\\usepackage[T1]{fontenc}");
-        asLatex.append("\\begin{document}\n");
-        //add the body of the document (add the data parsed from the pdf)
-        asLatex = addDocumentBody(asLatex, textToConvert, newPageSeperator, numStartLinesToRemoveForEachPage);
-        //add required end of document
-        asLatex.append("\\end{document}");
+        //reset options for next call
+        resetOptionalArguments();
+        //return latexified string
         return asLatex.toString();
     }
 
@@ -54,119 +60,95 @@ public class Latexify {
         boolean prevLineWasPageBreak = false;
         String previousBulletStyle = "";
 
-        for (String line : textToAdd.split("\n")){
 
-            if(line.contains(newPageSeperator)){
-                line = line.replace(newPageSeperator, "\\newpage\n");
-                prevLineWasPageBreak = true;
-                if (previousBulletStyle != ""){
-                    textBuilder.append("\\end{itemize}\n");
-                    previousBulletStyle = "";
-                }
-            }
-            //prepend a backslash to any special characters so that they are literally interpreted in the latex code
-            for (String specialChar : charactersToBackslash){
-                if (line.contains(specialChar)){
-                    line = line.replace(specialChar, "\\".concat(specialChar));
-                }
-            }
-            line.replace("<", " \\textless ");
-            line.replace(">", " \\textgreater ");
-            RegularDocLineOut regLineOutput = addDocLine(prevLineWasPageBreak, line, textBuilder, previousBulletStyle);
-            prevLineWasPageBreak = regLineOutput.previousLineWasPageBreak();
-            textBuilder = regLineOutput.textBuilder();
-            previousBulletStyle = regLineOutput.prevBulletStyle();
-        }
-        return textBuilder;
-    }
-
-    private static StringBuilder addDocumentBody(StringBuilder textBuilder,String textToAdd, String newPageSeperator, String patternToRemoveSentence, String patternToRemoveLine)
-    {
-        boolean prevLineWasPageBreak = false;
+        //op;tional arguments
         StringBuilder paragraphBuffer = new StringBuilder();
-        String previousBulletStyle = "";
-
-        for (String line : textToAdd.split("\n")){
-
-            //perform paragraph related checks
-            ParagraphSearchOut paragraphData = performParagraphChecks(line, paragraphBuffer, textBuilder, patternToRemoveSentence, patternToRemoveLine);
-            line = paragraphData.firstLineOfNextParagraph();
-            paragraphBuffer = paragraphData.paragraph();
-            textBuilder = paragraphData.constructedOutText();
-            //prepend a backslash to any special characters so that they are literally interpreted in the latex code
-            for (String specialChar : charactersToBackslash){
-                if (line.contains(specialChar)){
-                    line = line.replace(specialChar, "\\".concat(specialChar));
-                }
-            }
-            line.replace("<", " \\textless ");
-            line.replace(">", " \\textgreater ");
-           if(!lineContainsPattern(line, patternToRemoveLine)) {
-               if(line.contains(newPageSeperator)){
-                   line = line.replace(newPageSeperator, "\\newpage\n");
-                   prevLineWasPageBreak = true;
-                   if (previousBulletStyle != ""){
-                       paragraphBuffer.append("\\end{itemize}\n");
-                       previousBulletStyle = "";
-                   }
-               }
-
-               RegularDocLineOut regLineOutput = addDocLine(prevLineWasPageBreak, line, paragraphBuffer, previousBulletStyle);
-               prevLineWasPageBreak = regLineOutput.previousLineWasPageBreak();
-               paragraphBuffer = regLineOutput.textBuilder();
-               previousBulletStyle = regLineOutput.prevBulletStyle();
-           }
-        }
-        return textBuilder;
-    }
-
-    private static StringBuilder addDocumentBody(StringBuilder textBuilder,String textToAdd, String newPageSeperator, short numStartLinesToRemove)
-    {
-        boolean prevLineWasPageBreak = false;
         short linesToRemoveCount = 0;
-        String previousBulletStyle = "";
+
 
         for (String line : textToAdd.split("\n")){
 
-            if(line.contains(newPageSeperator)){
-                line = line.replace(newPageSeperator, "\\newpage\n");
-                prevLineWasPageBreak = true;
-                linesToRemoveCount = numStartLinesToRemove;
-                //ensure that bullet points are reset before moving to the next page
-                if (previousBulletStyle != ""){
-                    for (int i = 0; i < nestedBulletPointStyleStack.size(); i++){
-                        textBuilder.append("\\end{itemize}\n");
-                    }
-                    previousBulletStyle = "";
-                }
-                nestedBulletPointStyleStack.clear();
+            if (!removePatternOnPara.isBlank() && !removePatternOnLine.isBlank()){
+                //performing paragraph related checks
+                ParagraphSearchOut paragraphData = performParagraphChecks(line, paragraphBuffer, textBuilder, removePatternOnPara, removePatternOnLine);
+                line = paragraphData.firstLineOfNextParagraph();
+                paragraphBuffer = paragraphData.paragraph();
+                textBuilder = paragraphData.constructedOutText();
+            }
+            else{
+                //performing new page releated checks
+                adjustAnyNewpagesOutput newpageAdjustOut = adjustAnyNewpages(line, newPageSeperator, prevLineWasPageBreak, previousBulletStyle, textBuilder, linesToRemoveCount);
+                line = newpageAdjustOut.line();
+                prevLineWasPageBreak = newpageAdjustOut.prevLineWasPageBreak();
+                previousBulletStyle = newpageAdjustOut.previousBulletStyle();
+                textBuilder = newpageAdjustOut.textBuilder();
+                linesToRemoveCount = newpageAdjustOut.lineToRemoveCount();
             }
             //prepend a backslash to any special characters so that they are literally interpreted in the latex code
             for (String specialChar : charactersToBackslash){
                 if (line.contains(specialChar)){
-                    System.out.println("char: "+specialChar+" - before:"+ line);
                     line = line.replace(specialChar, "\\".concat(specialChar));
-                    System.out.println("line after:"+ line);
                 }
             }
             line.replace("<", " \\textless ");
             line.replace(">", " \\textgreater ");
+
+            if (!removePatternOnLine.isBlank()){
+                //
+                if(!lineContainsPattern(line, removePatternOnLine)) {
+                    if(line.contains(newPageSeperator)){
+                        line = line.replace(newPageSeperator, "\\newpage\n");
+                        prevLineWasPageBreak = true;
+                        if (previousBulletStyle != ""){
+                            paragraphBuffer.append("\\end{itemize}\n");
+                            previousBulletStyle = "";
+                        }
+                    }
+                }
+            }
+
             if (linesToRemoveCount >0){
-                if (linesToRemoveCount == numStartLinesToRemove){
+                if (linesToRemoveCount == numStartLinesToRemoveForEachPage){
                     textBuilder.append(line);
                     textBuilder.append("\\\\ \n");
                 }
                 linesToRemoveCount--;
             }
             else{
-                RegularDocLineOut regLineOutput = addDocLine(prevLineWasPageBreak, line, textBuilder, previousBulletStyle);
+                //perform regular line adjustments
+                RegularDocLineOut regLineOutput;
+                if (!removePatternOnPara.isBlank() && !removePatternOnLine.isBlank()){
+                    regLineOutput = addDocLine(prevLineWasPageBreak, line, paragraphBuffer, previousBulletStyle);
+                    paragraphBuffer = regLineOutput.textBuilder();
+                }
+                else{
+                    regLineOutput = addDocLine(prevLineWasPageBreak, line, textBuilder, previousBulletStyle);
+                    textBuilder = regLineOutput.textBuilder();
+                }
                 prevLineWasPageBreak = regLineOutput.previousLineWasPageBreak();
-                textBuilder = regLineOutput.textBuilder();
                 previousBulletStyle = regLineOutput.prevBulletStyle();
             }
+
         }
         return textBuilder;
     }
+
+
+    private static adjustAnyNewpagesOutput adjustAnyNewpages(String line, String newPageSeperator, boolean prevLineWasPageBreak, String previousBulletStyle, StringBuilder textBuilder, short linesToRemoveCount)
+    {
+        if(line.contains(newPageSeperator)){
+            line = line.replace(newPageSeperator, "\\newpage\n");
+            prevLineWasPageBreak = true;
+            linesToRemoveCount = numStartLinesToRemoveForEachPage;
+            if (previousBulletStyle != ""){
+                textBuilder.append("\\end{itemize}\n");
+                previousBulletStyle = "";
+            }
+        }
+        return new adjustAnyNewpagesOutput(line, prevLineWasPageBreak, previousBulletStyle, textBuilder, linesToRemoveCount);
+    }
+
+    private record adjustAnyNewpagesOutput(String line, boolean prevLineWasPageBreak, String previousBulletStyle, StringBuilder textBuilder, short lineToRemoveCount){}
 
     /**
      * This function converts the common aspects of the pdf into latex indlucing:

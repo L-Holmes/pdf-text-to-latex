@@ -41,12 +41,11 @@ Views” Unit.\\
 certain subset implementations of SQL\\
 (such as in base MySQL or SQLite)\\
 \end{itemize}
-\end{itemize}
 \newpage
 19.5\\ 
  \\
 \section{Conceptual Schema Definition in SQL (1)}
-\begin{itemize}
+\end{itemize}
   \item We will use our example from ER-to-
 relational mapping:\\
 DEPARTMENT DName HoD NoOfEmps\\
@@ -60,17 +59,16 @@ DEPT\_LOCATIONS DName DLocation\\
 19.6\\ 
  \\
 \section{Conceptual Schema Definition in SQL (2)}
-\begin{itemize}
+\end{itemize}
   \item To create schema:
 \begin{itemize}
   \item CREATE SCHEMA <SCHEMA\_NAME>
 AUTHORISATION <AUTH\_IDENTIFIER>\\
-\end{itemize}
-  \item In our example:
 \begin{itemize}
+  \item In our example:
+\end{itemize}
   \item CREATE SCHEMA UNIVERSITY
 AUTHORISATION JDOE\\
-\end{itemize}
 \end{itemize}
 \newpage
 19.7\\ 
@@ -78,18 +76,17 @@ AUTHORISATION JDOE\\
 \section{Conceptual Schema Definition in SQL (3)}
 \begin{itemize}
   \item To create tables for a schema explicitly:
-\begin{itemize}
+\end{itemize}
   \item CREATE TABLE
 <SCHEMA\_NAME>. <TABLE\_NAME> \\
 <TABLE\_DEFINITION>\\
-\end{itemize}
-  \item To create tables for a schema implicitly:
 \begin{itemize}
+  \item To create tables for a schema implicitly:
+\end{itemize}
   \item CREATE TABLE
 <TABLE\_NAME>\\
 <TABLE\_DEFINITION>\\
   \item Schema name specified in environment is used
-\end{itemize}
 \end{itemize}
 \newpage
 19.8\\ 
@@ -146,11 +143,10 @@ FOREIGN KEY(DNAME) REFERENCES DEPARTMENT(NAME)\\
 \section{Schema Evolution using SQL}
 \begin{itemize}
   \item We can use following three commands:
-\begin{itemize}
+\end{itemize}
   \item DROP SCHEMA
   \item DROP TABLE
   \item ALTER TABLE
-\end{itemize}
 \end{itemize}
 \newpage
 19.12\\ 
@@ -158,19 +154,18 @@ FOREIGN KEY(DNAME) REFERENCES DEPARTMENT(NAME)\\
 \section{Views in SQL (1)}
 \begin{itemize}
   \item Views are virtual tables
-\begin{itemize}
+\end{itemize}
   \item Do not necessarily exist in physical form
   \item As opposed to base tables whose tuples are 
 actually stored in a database\\
-\end{itemize}
+\begin{itemize}
   \item If same query frequently executed on 
 database it makes sense to define view based \\
 on results of query and use simpler query to \\
 retrieve tuples of interest from view\\
-\begin{itemize}
+\end{itemize}
   \item Particularly useful if original query is complex,
 e.g. involves a number of joins\\
-\end{itemize}
 \end{itemize}
 \newpage
 19.13\\ 
@@ -178,14 +173,13 @@ e.g. involves a number of joins\\
 \section{Views in SQL (2)}
 \begin{itemize}
   \item Use the command:
-\begin{itemize}
+\end{itemize}
   \item CREATE VIEW <VIEW\_NAME> AS
 <SQL\_QUERY>\\
   \item CREATE VIEW PHYSICS\_STUDENTS AS
 SELECT *\\
 FROM STUDENT\\
 WHERE   DNAME = ‘Physics’ ;\\
-\end{itemize}
 \end{itemize}
 \newpage
 19.14\\ 
@@ -195,17 +189,16 @@ WHERE   DNAME = ‘Physics’ ;\\
   \item Notice that virtual relations can be used in 
 same way as base relations in SQL \\
 statements\\
-\begin{itemize}
+\end{itemize}
   \item SELECT FNAME, LNAME
 FROM PHYSICS\_STUDENTS\\
 WHERE GENDER = ‘M’\\
-\end{itemize}
-  \item Views can be dropped by using command:
 \begin{itemize}
+  \item Views can be dropped by using command:
+\end{itemize}
   \item DROP VIEW <VIEW\_NAME>
 e.g.\\
 DROP VIEW PHYSICS\_STUDENTS\\
-\end{itemize}
 \end{itemize}
 \newpage
 19.15\\ 
@@ -235,7 +228,7 @@ course.\\
 19.17\\ 
  \\
 \section{Discretionary Access Control}
-\begin{itemize}
+\end{itemize}
   \item Each user is given appropriate access rights 
 (or privileges) on specific database objects.\\
   \item Users obtain certain privileges when they 
@@ -257,10 +250,9 @@ password.\\
 performed on behalf of a specific user.\\
   \item By the access rights associated with a user, we 
 can determine \\
-\begin{itemize}
+\end{itemize}
   \item what database objects a user can reference and 
   \item what operations can be performed by that user.
-\end{itemize}
 \end{itemize}
 \newpage
 19.19\\ 
@@ -280,7 +272,7 @@ perform operations on that object.\\
 19.20\\ 
  \\
 \section{Privileges}
-\begin{itemize}
+\end{itemize}
   \item The ISO standard defines the following privileges, 
 among others.\\
 select to retrieve data from a table\\
@@ -354,7 +346,7 @@ SELECT on the Branch table.\\
 19.25\\ 
  \\
 \section{Revoking privileges from users}
-\begin{itemize}
+\end{itemize}
   \item The REVOKE statement can take away all or 
 some of the privileges previously GRANTed.\\
 REVOKE \{PrivilegeList | ALL PRIVILEGES\}\\
