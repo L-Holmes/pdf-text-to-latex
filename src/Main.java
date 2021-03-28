@@ -1,10 +1,10 @@
 import util.WriteTextToFileHandle;
 /*
 TODO:
--refactor latexify so that is has 1 constructor and then has some setters, where you pass in any addiional checks that you want to be performed
--fix multi-line bullet points
--add pictures
-e.g. setNumInitialLinesToRemove(4)
+-find out why images are not being added correctly
+-make image file loading threaded
+-add the quiz convert feature
+-for paragraph search, I don't think that an empty line is seen as a '\n'??
  */
 class Main
 {
@@ -13,6 +13,4 @@ class Main
         System.out.println("\n...starting main...");
         RunProgram runner = new RunProgram();
     }
-
-
 }

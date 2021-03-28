@@ -1,6 +1,6 @@
 \documentclass[12pt]{article}
 
-\usepackage[T1]{fontenc}\begin{document}
+\usepackage[T1]{fontenc}\usepackage{graphicx}\graphicspath{ {./images/} } \begin{document}
 19.1\\
 SC\\
 C\\
@@ -13,10 +13,16 @@ Access Control\\
 SCC201 Databases\\
 Based of slides from\\
 John Mariani\\
+\begin{figure}
+\includegraphics[width=\linewidth]{page13-image-1.png}
+\end{figure}
 \newpage
 19.2\\ 
  \\
 \section{In this Unit …}
+\begin{figure}
+\includegraphics[width=\linewidth]{page20-image-2.png}
+\end{figure}
 \newpage
 19.3\\ 
  \\

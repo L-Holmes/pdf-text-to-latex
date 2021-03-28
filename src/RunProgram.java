@@ -14,11 +14,14 @@ public class RunProgram {
 
     private void readPdfAndWriteOutputToFile(String pdfToReadFromPath, String fileToWriteToPath)
     {
-        String contentsToWrite = pdfParser.getPdfText(pdfToReadFromPath);
+        String newPageSeperatorText = "ACCESS MAIN PROGRAM GRID";
+        ParsePdfOut pdfParseOutput = pdfParser.getPdfText(pdfToReadFromPath, newPageSeperatorText);
+        String contentsToWrite = pdfParseOutput.outText();
+        String[] textToAddImgs = pdfParseOutput.imgAddingForEachPage();
         short numLinesToIgnore = 6;
         LatexifyOptionalArguments optionalArgs = new LatexifyOptionalArguments();
         optionalArgs.setNumStartLinesToRemoveForEachPage(numLinesToIgnore);
-        String latexifiedContents = Latexify.convertTextToLatex(contentsToWrite, "<<<new page>>>", optionalArgs);
+        String latexifiedContents = Latexify.convertTextToLatex(contentsToWrite, textToAddImgs, newPageSeperatorText, optionalArgs);
         WriteTextToFileHandle fileWriter = new WriteTextToFileHandle(fileToWriteToPath, latexifiedContents);
         System.out.println("writing to system out...... -->");
         fileWriter.writeDataToFile();

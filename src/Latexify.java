@@ -6,6 +6,7 @@ import java.util.Stack;
 public class Latexify {
     private static Stack<String> nestedBulletPointStyleStack = new Stack<String>();
     private static String[] charactersToBackslash = {"_", "&" , "%" , "$" , "#" , "{" , "}" , "~" , "^"};  //charcters which are interpreted as special/modifier characters in latex, and so must be prepended by a backslash when converted
+    private static int currentPage = 0;
 
     //--optional arguments--
     private static boolean quizMode = false;
@@ -37,16 +38,20 @@ public class Latexify {
     }
     //--- ---
 
-    public static String convertTextToLatex(String textToConvert, String newPageSeperator, LatexifyOptionalArguments args)
+    public static String convertTextToLatex(String textToConvert, String[] textToAddImages, String newPageSeperator, LatexifyOptionalArguments args)
     {
         initialiseOptionalArguments(args);
         StringBuilder asLatex  = new StringBuilder();
         //add required start of latex document
         asLatex.append("\\documentclass[12pt]{article}\n\n");
         asLatex.append("\\usepackage[T1]{fontenc}");
+        //for images
+        asLatex.append("\\usepackage{graphicx}");
+        asLatex.append("\\graphicspath{ {./images/} } ");
+        //begining the document
         asLatex.append("\\begin{document}\n");
         //add the body of the document (add the data parsed from the pdf)
-        asLatex = addDocumentBody(asLatex, textToConvert, newPageSeperator);
+        asLatex = addDocumentBody(asLatex, textToConvert, newPageSeperator, textToAddImages);
         //add required end of document
         asLatex.append("\\end{document}");
         //reset options for next call
@@ -55,35 +60,19 @@ public class Latexify {
         return asLatex.toString();
     }
 
-    private static StringBuilder addDocumentBody(StringBuilder textBuilder,String textToAdd, String newPageSeperator)
+    private static StringBuilder addDocumentBody(StringBuilder textBuilder,String textToAdd, String newPageSeperator, String[] textToAddImages)
     {
         boolean prevLineWasPageBreak = false;
         String previousBulletStyle = "";
 
 
-        //op;tional arguments
+        //optional arguments
         StringBuilder paragraphBuffer = new StringBuilder();
         short linesToRemoveCount = 0;
 
 
         for (String line : textToAdd.split("\n")){
-
-            if (!removePatternOnPara.isBlank() && !removePatternOnLine.isBlank()){
-                //performing paragraph related checks
-                ParagraphSearchOut paragraphData = performParagraphChecks(line, paragraphBuffer, textBuilder, removePatternOnPara, removePatternOnLine);
-                line = paragraphData.firstLineOfNextParagraph();
-                paragraphBuffer = paragraphData.paragraph();
-                textBuilder = paragraphData.constructedOutText();
-            }
-            else{
-                //performing new page releated checks
-                adjustAnyNewpagesOutput newpageAdjustOut = adjustAnyNewpages(line, newPageSeperator, prevLineWasPageBreak, previousBulletStyle, textBuilder, linesToRemoveCount);
-                line = newpageAdjustOut.line();
-                prevLineWasPageBreak = newpageAdjustOut.prevLineWasPageBreak();
-                previousBulletStyle = newpageAdjustOut.previousBulletStyle();
-                textBuilder = newpageAdjustOut.textBuilder();
-                linesToRemoveCount = newpageAdjustOut.lineToRemoveCount();
-            }
+            currentPage++;
             //prepend a backslash to any special characters so that they are literally interpreted in the latex code
             for (String specialChar : charactersToBackslash){
                 if (line.contains(specialChar)){
@@ -93,22 +82,28 @@ public class Latexify {
             line.replace("<", " \\textless ");
             line.replace(">", " \\textgreater ");
 
-            if (!removePatternOnLine.isBlank()){
-                //
-                if(!lineContainsPattern(line, removePatternOnLine)) {
-                    if(line.contains(newPageSeperator)){
-                        line = line.replace(newPageSeperator, "\\newpage\n");
-                        prevLineWasPageBreak = true;
-                        if (previousBulletStyle != ""){
-                            paragraphBuffer.append("\\end{itemize}\n");
-                            previousBulletStyle = "";
-                        }
-                    }
-                }
+            //performing paragraph related checks
+            if (!removePatternOnPara.isBlank() && !removePatternOnLine.isBlank()){
+                ParagraphSearchOut paragraphData = performParagraphChecks(line, paragraphBuffer, textBuilder, removePatternOnPara, removePatternOnLine);
+                line = paragraphData.firstLineOfNextParagraph();
+                paragraphBuffer = paragraphData.paragraph();
+                textBuilder = paragraphData.constructedOutText();
             }
 
+            //performing new page related checks
+            adjustAnyNewpagesOutput newpageAdjustOut = adjustAnyNewpages(line, newPageSeperator, prevLineWasPageBreak, previousBulletStyle, textBuilder, linesToRemoveCount, textToAddImages);
+            line = newpageAdjustOut.line();
+            prevLineWasPageBreak = newpageAdjustOut.prevLineWasPageBreak();
+            previousBulletStyle = newpageAdjustOut.previousBulletStyle();
+            textBuilder = newpageAdjustOut.textBuilder();
+            linesToRemoveCount = newpageAdjustOut.lineToRemoveCount();
+
+
+
             if (linesToRemoveCount >0){
+                //if the user has chosen to ignore the first 'x' lines of each page, here, they are ignored (i.e. not added to the output text)
                 if (linesToRemoveCount == numStartLinesToRemoveForEachPage){
+                    //add the first line
                     textBuilder.append(line);
                     textBuilder.append("\\\\ \n");
                 }
@@ -134,12 +129,32 @@ public class Latexify {
     }
 
 
-    private static adjustAnyNewpagesOutput adjustAnyNewpages(String line, String newPageSeperator, boolean prevLineWasPageBreak, String previousBulletStyle, StringBuilder textBuilder, short linesToRemoveCount)
+    private static adjustAnyNewpagesOutput adjustAnyNewpages(String line, String newPageSeperator, boolean prevLineWasPageBreak, String previousBulletStyle, StringBuilder textBuilder, short linesToRemoveCount, String[] textToAddImages)
     {
         if(line.contains(newPageSeperator)){
+            //get the image text
+            String  currentPageImageAddingText;
+            try {
+                currentPageImageAddingText= textToAddImages[currentPage-1];
+            }
+            catch(ArrayIndexOutOfBoundsException e){
+                currentPageImageAddingText= "";
+            }            //add the newpage indications
             line = line.replace(newPageSeperator, "\\newpage\n");
             prevLineWasPageBreak = true;
             linesToRemoveCount = numStartLinesToRemoveForEachPage;
+            //add the images to the and of the page
+            System.out.println("\nbeforea adding "+currentPageImageAddingText+" : "+ line);
+            String[] splitLine = line.split("\\newpage\n");
+            try {
+                line = splitLine[0].concat(currentPageImageAddingText).concat(splitLine[1]);
+            }
+            catch(ArrayIndexOutOfBoundsException e){
+                //if the newpage is at the immediate start/end of the sentence
+                line = currentPageImageAddingText.concat(splitLine[0]);
+            }
+            System.out.println("after adding "+currentPageImageAddingText+" : "+ line);
+            //end any bullet points
             if (previousBulletStyle != ""){
                 textBuilder.append("\\end{itemize}\n");
                 previousBulletStyle = "";
@@ -259,32 +274,46 @@ public class Latexify {
         return false;
     }
 
+    /**
+     * Checks if a new paragraph has started.
+     * If so, adds the currently contstructed paragraph to the output string, if it is valid
+     * the next paragraph is then started.
+     * @param line = the line that is being checked to see if it is the last line of the paragraph
+     * @param paragraphBuffer = contains the current paragraph that is being constructed, line-by-line
+     * @param textBuilder = contains the output text, that has been constructed thus far
+     * @param patternToRemoveLine = the pattern of letters/string, that will invalidate a line, should the line contain it (i.e. the line will be deleted; e.g. if it contains: 'remove me', delete this line)
+     * @param patternToRemoveSentence = the pattern of letters/string, that will invalidate a paragraph, should the paragraph contain it (i.e. the paragraph will be deleted; e.g. if it contains: 'remove me', delete this paragraph)
+     * @return the updated information; the current line that is being investigated, the current paragraph that is being investigated, and the output text.
+     */
     private static ParagraphSearchOut performParagraphChecks(String line, StringBuilder paragraphBuffer, StringBuilder textBuilder, String patternToRemoveLine, String patternToRemoveSentence)
     {
         //handling paragraphs
-        if(line.contains("\n")){
-            //split the line at the newline
-            String[] splitLine = line.split("\n");
-            if (splitLine.length!=2){
-                splitLine = new String[]{"", ""};
-            }
-            String prevLine = splitLine[0];
-            line = splitLine[1];
 
-            //add the last part of the previous paragraph
-            if(!lineContainsPattern(line, patternToRemoveLine)) {
-                paragraphBuffer.append(prevLine);
-            }
-
-            //add the previous paragraph if it was valid
-            String previousParagraph = paragraphBuffer.toString();
-            if(!paragraphContainsPattern(previousParagraph, patternToRemoveSentence)){
-                textBuilder.append(previousParagraph);
-            }
-            paragraphBuffer.setLength(0);//empty the buffer, for the start of the next paragraph
+        //if line contains a newline, then a new paragraph has been reached
+        if(!line.contains("\n")){
+            return new ParagraphSearchOut(line, paragraphBuffer, textBuilder);
         }
-        ParagraphSearchOut outInfo = new ParagraphSearchOut(line, paragraphBuffer, textBuilder);
-        return outInfo;
+        //split the line at the newline
+        String[] splitLine = line.split("\n");
+        if (splitLine.length!=2){
+            splitLine = new String[]{"", ""};
+        }
+        String lastLineOfPrevParagraph = splitLine[0];
+        line = splitLine[1];
+
+        //Finish constructing the previous paragraph by adding the last line
+        if(!lineContainsPattern(line, patternToRemoveLine)) {
+            paragraphBuffer.append(lastLineOfPrevParagraph);
+        }
+
+        //add the previous paragraph  to the output string, if it is valid
+        String previousParagraph = paragraphBuffer.toString();
+        if(!paragraphContainsPattern(previousParagraph, patternToRemoveSentence)){
+            textBuilder.append(previousParagraph);
+        }
+        //reset the to start the next paragraph
+        paragraphBuffer.setLength(0);//empty the buffer, for the start of the next paragraph
+        return new ParagraphSearchOut(line, paragraphBuffer, textBuilder);
     }
 
     private record ParagraphSearchOut(String firstLineOfNextParagraph,StringBuilder paragraph, StringBuilder constructedOutText){}

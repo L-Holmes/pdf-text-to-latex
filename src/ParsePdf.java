@@ -37,8 +37,9 @@ public class ParsePdf {
     /**
      * @param fileToRead = the filepath to the pdf, that is to have its contents read.
      */
-    public String getPdfText(String fileToRead)
+    public ParsePdfOut getPdfText(String fileToRead, String newPageSeperator)
     {
+        String[] imgAddingTextForEachPage = new String[0];
         StringBuilder outText = new StringBuilder();
         try {
             File inputFile = new File(fileToRead);
@@ -56,18 +57,20 @@ public class ParsePdf {
 
 
                 //adding the end of page marker
-                outText.append("<<<new page>>>");
+                outText.append(newPageSeperator);
                 page.close();
             }
-            getAllPageImages(documentToRead);
+            imgAddingTextForEachPage = getAllPageImages(documentToRead);
             documentToRead.close();
         } catch (IOException e) {
             System.out.println("could not load the file to read: '"+fileToRead+"'");
             //file may be empty
             e.printStackTrace();
         }
-        return outText.toString();
+        return new ParsePdfOut(outText.toString(), imgAddingTextForEachPage);
     }
+
+
 
     private String[] getAllPageImages(PDDocument documentToRead)
     {
@@ -78,13 +81,12 @@ public class ParsePdf {
         while (iteratorOfPages.hasNext()){
             pageNum++;
             PDPage singlePage = iteratorOfPages.next();
-            getImagesFromPage(singlePage, pageNum);
+            imageAddingTextForEachPage = getImagesFromPage(singlePage, pageNum, imageAddingTextForEachPage);
         }
-
         return imageAddingTextForEachPage.toArray(new String[0]);
     }
 
-    private void getImagesFromPage(PDPage page, int pageNumber)
+    private ArrayList<String> getImagesFromPage(PDPage page, int pageNumber, ArrayList<String> textToAddTheImages)
     {
         PDResources pdResources = page.getResources();
         int i = 1;
@@ -95,13 +97,22 @@ public class ParsePdf {
                     PDImageXObject image = (PDImageXObject) o;
                     String userDir = System.getProperty("user.dir");
                     String outputDir = userDir.concat("/static/out/images/");
-                    String filename = outputDir.concat("page".concat(String.valueOf(pageNumber).concat("-image-").concat(String.valueOf(i)).concat(".png")));
+                    String nameOfImgFile = "page".concat(String.valueOf(pageNumber).concat("-image-").concat(String.valueOf(i)).concat(".png"));
+                    String filename = outputDir.concat(nameOfImgFile);
                     ImageIO.write(image.getImage(), "png", new File(filename));
                     i++;
+                    //add the text that adds the image into the latex document
+                    StringBuilder textToAddTheImage = new StringBuilder();
+                    textToAddTheImage.append("\\begin{figure}\n");
+                    textToAddTheImage.append("\\includegraphics[width=\\linewidth]{"+nameOfImgFile+"}\n");
+                    textToAddTheImage.append("\\end{figure}\n");
+                    textToAddTheImages.add(textToAddTheImage.toString());
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+        return textToAddTheImages;
     }
 }
+
