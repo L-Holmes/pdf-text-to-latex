@@ -1,6 +1,6 @@
 \documentclass[12pt]{article}
 
-\usepackage[T1]{fontenc}\usepackage{graphicx}\graphicspath{ {./images/} } \begin{document}
+\usepackage[T1]{fontenc}\usepackage{graphicx}\graphicspath{ {./images/} } \usepackage{float}\begin{document}
 19.1\\
 SC\\
 C\\
@@ -13,23 +13,23 @@ Access Control\\
 SCC201 Databases\\
 Based of slides from\\
 John Mariani\\
-\begin{figure}
-\includegraphics[width=\linewidth]{page13-image-1.png}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
-\newpage
-19.2\\ 
+\clearpage19.2\\ 
  \\
 \section{In this Unit …}
-\begin{figure}
-\includegraphics[width=\linewidth]{page20-image-2.png}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page2-image-1.png}
 \end{figure}
-\newpage
-19.3\\ 
+\clearpage19.3\\ 
  \\
 \section{ADVANCED SQL : MORE ON }
 SCHEMAS AND VIEWS\\
-\newpage
-19.4\\ 
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page3-image-1.png}
+\end{figure}
+\clearpage19.4\\ 
  \\
 \section{Introduction}
 \begin{itemize}
@@ -47,8 +47,10 @@ Views” Unit.\\
 certain subset implementations of SQL\\
 (such as in base MySQL or SQLite)\\
 \end{itemize}
-\newpage
-19.5\\ 
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page4-image-1.png}
+\end{figure}
+\clearpage19.5\\ 
  \\
 \section{Conceptual Schema Definition in SQL (1)}
 \end{itemize}
@@ -61,8 +63,10 @@ FName LName RegNum BDate Address Gender DName\\
 TAKES CName RegNum\\
 DEPT\_LOCATIONS DName DLocation\\
 \end{itemize}
-\newpage
-19.6\\ 
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page5-image-1.png}
+\end{figure}
+\clearpage19.6\\ 
  \\
 \section{Conceptual Schema Definition in SQL (2)}
 \end{itemize}
@@ -76,8 +80,10 @@ AUTHORISATION <AUTH\_IDENTIFIER>\\
   \item CREATE SCHEMA UNIVERSITY
 AUTHORISATION JDOE\\
 \end{itemize}
-\newpage
-19.7\\ 
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page6-image-1.png}
+\end{figure}
+\clearpage19.7\\ 
  \\
 \section{Conceptual Schema Definition in SQL (3)}
 \begin{itemize}
@@ -94,8 +100,10 @@ AUTHORISATION JDOE\\
 <TABLE\_DEFINITION>\\
   \item Schema name specified in environment is used
 \end{itemize}
-\newpage
-19.8\\ 
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page7-image-1.png}
+\end{figure}
+\clearpage19.8\\ 
  \\
 \section{Conceptual Schema Definition in SQL (4)}
 CREATE TABLE STUDENT\\
@@ -109,8 +117,10 @@ DNAME VARCHAR(20) NOT NULL,\\
 PRIMARY KEY(REGNUM),\\
 FOREIGN KEY(DNAME) REFERENCES DEPARTMENT(NAME)\\
 );\\
-\newpage
-19.9\\ 
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page8-image-1.png}
+\end{figure}
+\clearpage19.9\\ 
  \\
 \section{Conceptual Schema Definition in SQL (5)}
 CREATE TABLE DEPARTMENT\\
@@ -126,8 +136,10 @@ DNAME VARCHAR(20) NOT NULL,\\
 PRIMARY KEY(NAME),\\
 FOREIGN KEY(NAME) REFERENCES DEPARTMENT(NAME)\\
 );\\
-\newpage
-19.10\\ 
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page9-image-1.png}
+\end{figure}
+\clearpage19.10\\ 
  \\
 \section{Conceptual Schema Definition in SQL (6)}
 CREATE TABLE TAKES\\
@@ -143,8 +155,10 @@ LOCATION VARCHAR(20) NOT NULL,\\
 PRIMARY KEY(DNAME, LOCATION),\\
 FOREIGN KEY(DNAME) REFERENCES DEPARTMENT(NAME)\\
 );\\
-\newpage
-19.11\\ 
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page10-image-1.png}
+\end{figure}
+\clearpage19.11\\ 
  \\
 \section{Schema Evolution using SQL}
 \begin{itemize}
@@ -154,8 +168,10 @@ FOREIGN KEY(DNAME) REFERENCES DEPARTMENT(NAME)\\
   \item DROP TABLE
   \item ALTER TABLE
 \end{itemize}
-\newpage
-19.12\\ 
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page11-image-1.png}
+\end{figure}
+\clearpage19.12\\ 
  \\
 \section{Views in SQL (1)}
 \begin{itemize}
@@ -173,8 +189,10 @@ retrieve tuples of interest from view\\
   \item Particularly useful if original query is complex,
 e.g. involves a number of joins\\
 \end{itemize}
-\newpage
-19.13\\ 
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page12-image-1.png}
+\end{figure}
+\clearpage19.13\\ 
  \\
 \section{Views in SQL (2)}
 \begin{itemize}
@@ -187,8 +205,10 @@ SELECT *\\
 FROM STUDENT\\
 WHERE   DNAME = ‘Physics’ ;\\
 \end{itemize}
-\newpage
-19.14\\ 
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page13-image-1.png}
+\end{figure}
+\clearpage19.14\\ 
  \\
 \section{Views in SQL (3)}
 \begin{itemize}
@@ -206,13 +226,17 @@ WHERE GENDER = ‘M’\\
 e.g.\\
 DROP VIEW PHYSICS\_STUDENTS\\
 \end{itemize}
-\newpage
-19.15\\ 
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page14-image-1.png}
+\end{figure}
+\clearpage19.15\\ 
  \\
 \section{ACCESS CONTROL : SECURITY IN }
 SQL\\
-\newpage
-19.16\\ 
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page15-image-1.png}
+\end{figure}
+\clearpage19.16\\ 
  \\
 \section{Mandatory Access Control}
 \begin{itemize}
@@ -230,8 +254,10 @@ object.\\
   \item We will not cover this approach further in this 
 course.\\
 \end{itemize}
-\newpage
-19.17\\ 
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page16-image-1.png}
+\end{figure}
+\clearpage19.17\\ 
  \\
 \section{Discretionary Access Control}
 \end{itemize}
@@ -243,8 +269,10 @@ these privileges to other users at their \\
 discretion.\\
   \item This approach is used in SQL.
 \end{itemize}
-\newpage
-19.18\\ 
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page17-image-1.png}
+\end{figure}
+\clearpage19.18\\ 
  \\
 \section{Authorisation Identifier}
 \begin{itemize}
@@ -260,8 +288,10 @@ can determine \\
   \item what database objects a user can reference and 
   \item what operations can be performed by that user.
 \end{itemize}
-\newpage
-19.19\\ 
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page18-image-1.png}
+\end{figure}
+\clearpage19.19\\ 
  \\
 \section{Ownership}
 \begin{itemize}
@@ -274,8 +304,10 @@ belongs.\\
 knows that object exists and subsequently \\
 perform operations on that object.\\
 \end{itemize}
-\newpage
-19.20\\ 
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page19-image-1.png}
+\end{figure}
+\clearpage19.20\\ 
  \\
 \section{Privileges}
 \end{itemize}
@@ -291,8 +323,10 @@ references to reference columns of a named table in \\
 integrity constraints. Can be restricted to \\
 specific columns.\\
 \end{itemize}
-\newpage
-19.21\\ 
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page20-image-1.png}
+\end{figure}
+\clearpage19.21\\ 
  \\
 \section{Create Table}
 \begin{itemize}
@@ -307,8 +341,10 @@ privileges.\\
 table, in order to create the view in the first \\
 place.\\
 \end{itemize}
-\newpage
-19.22\\ 
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page20-image-2.png}
+\end{figure}
+\clearpage19.22\\ 
  \\
 \section{GRANT \{PrivilegeList | ALL PRIVILEGES\}}
 ON ObjectName\\
@@ -321,8 +357,10 @@ insert [(columnName, [...])]\\
 update [(columnName, [...])]\\
 references [(columnName, [...])]\\
 PrivilegeList\\
-\newpage
-19.23\\ 
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page21-image-1.png}
+\end{figure}
+\clearpage19.23\\ 
  \\
 \section{Examples}
 GRANT ALL PRIVILEGES\\
@@ -333,8 +371,10 @@ The user Manager can now retrieve rows from the \\
 Staff table, and also insert, update and delete.\\
 The Manager can pass these privileges onto other \\
 users.\\
-\newpage
-19.24\\ 
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page22-image-1.png}
+\end{figure}
+\clearpage19.24\\ 
  \\
 \section{Examples}
 GRANT SELECT, UPDATE (salary)\\
@@ -348,8 +388,10 @@ ON Branch\\
 TO PUBLIC\\
 Gives all users the privilege \\
 SELECT on the Branch table.\\
-\newpage
-19.25\\ 
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page23-image-1.png}
+\end{figure}
+\clearpage19.25\\ 
  \\
 \section{Revoking privileges from users}
 \end{itemize}
@@ -359,8 +401,10 @@ REVOKE \{PrivilegeList | ALL PRIVILEGES\}\\
 ON ObjectName\\
 FROM \{AuthorizationList | PUBLIC\}\\
 \end{itemize}
-\newpage
-19.26\\ 
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page24-image-1.png}
+\end{figure}
+\clearpage19.26\\ 
  \\
 \section{Examples}
 REVOKE SELECT\\
@@ -376,10 +420,14 @@ Revoke all privileges \\
 you have given to \\
 Director on the Staff \\
 table.\\
-\newpage
-19.27\\ 
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page25-image-1.png}
+\end{figure}
+\clearpage19.27\\ 
  \\
 \section{THE END}
-\newpage
-\\ 
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page26-image-1.png}
+\end{figure}
+\clearpage\\ 
 \end{document}

@@ -25,6 +25,7 @@ public class Latexify {
         numStartLinesToRemoveForEachPage = 0;
         removePatternOnLine = "";
         removePatternOnPara = "";
+        currentPage = 0;
     }
 
     private static void initialiseOptionalArguments(LatexifyOptionalArguments args)
@@ -48,6 +49,8 @@ public class Latexify {
         //for images
         asLatex.append("\\usepackage{graphicx}");
         asLatex.append("\\graphicspath{ {./images/} } ");
+        //force images onto the page that they are placed onto
+        asLatex.append("\\usepackage{float}");
         //begining the document
         asLatex.append("\\begin{document}\n");
         //add the body of the document (add the data parsed from the pdf)
@@ -72,7 +75,6 @@ public class Latexify {
 
 
         for (String line : textToAdd.split("\n")){
-            currentPage++;
             //prepend a backslash to any special characters so that they are literally interpreted in the latex code
             for (String specialChar : charactersToBackslash){
                 if (line.contains(specialChar)){
@@ -132,6 +134,7 @@ public class Latexify {
     private static adjustAnyNewpagesOutput adjustAnyNewpages(String line, String newPageSeperator, boolean prevLineWasPageBreak, String previousBulletStyle, StringBuilder textBuilder, short linesToRemoveCount, String[] textToAddImages)
     {
         if(line.contains(newPageSeperator)){
+            currentPage++;
             //get the image text
             String  currentPageImageAddingText;
             try {
@@ -140,7 +143,7 @@ public class Latexify {
             catch(ArrayIndexOutOfBoundsException e){
                 currentPageImageAddingText= "";
             }            //add the newpage indications
-            line = line.replace(newPageSeperator, "\\newpage\n");
+            line = line.replace(newPageSeperator, "\\clearpage");
             prevLineWasPageBreak = true;
             linesToRemoveCount = numStartLinesToRemoveForEachPage;
             //add the images to the and of the page

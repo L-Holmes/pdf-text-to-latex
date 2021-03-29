@@ -103,8 +103,8 @@ public class ParsePdf {
                     i++;
                     //add the text that adds the image into the latex document
                     StringBuilder textToAddTheImage = new StringBuilder();
-                    textToAddTheImage.append("\\begin{figure}\n");
-                    textToAddTheImage.append("\\includegraphics[width=\\linewidth]{"+nameOfImgFile+"}\n");
+                    textToAddTheImage.append("\\begin{figure}[H]\n");
+                    textToAddTheImage.append("\\includegraphics[width=0.5\\linewidth]{"+nameOfImgFile+"}\n");
                     textToAddTheImage.append("\\end{figure}\n");
                     textToAddTheImages.add(textToAddTheImage.toString());
                 }
