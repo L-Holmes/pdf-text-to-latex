@@ -40,7 +40,6 @@ public class LatexifyOptionalArguments {
     }
 
 
-
     /**
      * sets the new quiz mode
      * @param newQuizMode

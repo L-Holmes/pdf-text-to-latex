@@ -1,7 +1,6 @@
 import util.WriteTextToFileHandle;
 /*
 TODO:
--find out why images are not being added correctly
 -make image file loading threaded
 -add the quiz convert feature
 -for paragraph search, I don't think that an empty line is seen as a '\n'??

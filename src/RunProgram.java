@@ -21,6 +21,7 @@ public class RunProgram {
         short numLinesToIgnore = 6;
         LatexifyOptionalArguments optionalArgs = new LatexifyOptionalArguments();
         optionalArgs.setNumStartLinesToRemoveForEachPage(numLinesToIgnore);
+        optionalArgs.setQuizMode(true);
         String latexifiedContents = Latexify.convertTextToLatex(contentsToWrite, textToAddImgs, newPageSeperatorText, optionalArgs);
         WriteTextToFileHandle fileWriter = new WriteTextToFileHandle(fileToWriteToPath, latexifiedContents);
         System.out.println("writing to system out...... -->");

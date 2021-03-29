@@ -1,18 +1,23 @@
+import java.util.ArrayList;
 import java.util.Stack;
+import java.util.regex.Pattern;
 
 /**
  * Converts an input String that has been read from  a pdf into a latex-like format
  */
 public class Latexify {
     private static Stack<String> nestedBulletPointStyleStack = new Stack<String>();
-    private static String[] charactersToBackslash = {"_", "&" , "%" , "$" , "#" , "{" , "}" , "~" , "^"};  //charcters which are interpreted as special/modifier characters in latex, and so must be prepended by a backslash when converted
+    private final static String[] CHARACTERS_TO_BACKSLASH = {"_", "&" , "%" , "$" , "#" , "{" , "}" , "~" , "^"};  //charcters which are interpreted as special/modifier characters in latex, and so must be prepended by a backslash when converted
     private static int currentPage = 0;
+    private final static  String TEXT_TO_ADD_NEW_PAGE_IN_LATEX = "\\clearpage\n";
+    private final static String BEGIN_DOC_PLACEHOLDER = "fsahfvmaekl343nm!";
 
     //--optional arguments--
     private static boolean quizMode = false;
     private static short numStartLinesToRemoveForEachPage = 0;
     private static String removePatternOnLine = "";
     private static String removePatternOnPara = "";
+    private final static String QUIZ_PAGE_INDICATION_TEXT = "(Q)"; //text added to the start of each quiz page, to indicate that this particular page is a quiz page(i.e. a page asking a question)
 
 
     //----Optional argument setting---
@@ -51,16 +56,23 @@ public class Latexify {
         asLatex.append("\\graphicspath{ {./images/} } ");
         //force images onto the page that they are placed onto
         asLatex.append("\\usepackage{float}");
-        //begining the document
-        asLatex.append("\\begin{document}\n");
+        //begining the doc 
+        asLatex.append(BEGIN_DOC_PLACEHOLDER);
         //add the body of the document (add the data parsed from the pdf)
         asLatex = addDocumentBody(asLatex, textToConvert, newPageSeperator, textToAddImages);
         //add required end of document
         asLatex.append("\\end{document}");
+
+        //return latexified string
+        String outputString = asLatex.toString();
+        if(quizMode){
+            outputString = applyQuizFormatting(outputString);
+        }
+        //add in the actual begin doc text
+        outputString = outputString.replace(BEGIN_DOC_PLACEHOLDER, "\\begin{document}\n");
         //reset options for next call
         resetOptionalArguments();
-        //return latexified string
-        return asLatex.toString();
+        return outputString;
     }
 
     private static StringBuilder addDocumentBody(StringBuilder textBuilder,String textToAdd, String newPageSeperator, String[] textToAddImages)
@@ -76,7 +88,7 @@ public class Latexify {
 
         for (String line : textToAdd.split("\n")){
             //prepend a backslash to any special characters so that they are literally interpreted in the latex code
-            for (String specialChar : charactersToBackslash){
+            for (String specialChar : CHARACTERS_TO_BACKSLASH){
                 if (line.contains(specialChar)){
                     line = line.replace(specialChar, "\\".concat(specialChar));
                 }
@@ -133,37 +145,43 @@ public class Latexify {
 
     private static adjustAnyNewpagesOutput adjustAnyNewpages(String line, String newPageSeperator, boolean prevLineWasPageBreak, String previousBulletStyle, StringBuilder textBuilder, short linesToRemoveCount, String[] textToAddImages)
     {
-        if(line.contains(newPageSeperator)){
-            currentPage++;
-            //get the image text
-            String  currentPageImageAddingText;
-            try {
-                currentPageImageAddingText= textToAddImages[currentPage-1];
-            }
-            catch(ArrayIndexOutOfBoundsException e){
-                currentPageImageAddingText= "";
-            }            //add the newpage indications
-            line = line.replace(newPageSeperator, "\\clearpage");
-            prevLineWasPageBreak = true;
-            linesToRemoveCount = numStartLinesToRemoveForEachPage;
-            //add the images to the and of the page
-            System.out.println("\nbeforea adding "+currentPageImageAddingText+" : "+ line);
-            String[] splitLine = line.split("\\newpage\n");
-            try {
-                line = splitLine[0].concat(currentPageImageAddingText).concat(splitLine[1]);
-            }
-            catch(ArrayIndexOutOfBoundsException e){
-                //if the newpage is at the immediate start/end of the sentence
-                line = currentPageImageAddingText.concat(splitLine[0]);
-            }
-            System.out.println("after adding "+currentPageImageAddingText+" : "+ line);
-            //end any bullet points
-            if (previousBulletStyle != ""){
-                textBuilder.append("\\end{itemize}\n");
-                previousBulletStyle = "";
-            }
+        if(!line.contains(newPageSeperator)) {
+            return new adjustAnyNewpagesOutput(line, false, previousBulletStyle, textBuilder, linesToRemoveCount);
         }
-        return new adjustAnyNewpagesOutput(line, prevLineWasPageBreak, previousBulletStyle, textBuilder, linesToRemoveCount);
+
+        currentPage++;
+
+        //get the image text
+        String  currentPageImageAddingText;
+        try {
+            currentPageImageAddingText= textToAddImages[currentPage-1];
+        }
+        catch(ArrayIndexOutOfBoundsException e){
+            currentPageImageAddingText= "";
+        }
+
+        //add the newpage indications
+        line = line.replace(newPageSeperator, TEXT_TO_ADD_NEW_PAGE_IN_LATEX);
+        prevLineWasPageBreak = true;
+        linesToRemoveCount = numStartLinesToRemoveForEachPage;
+
+        //add the images to the and of the page
+        String[] splitLine = line.split(TEXT_TO_ADD_NEW_PAGE_IN_LATEX);
+        try {
+            line = splitLine[0].concat(currentPageImageAddingText).concat(splitLine[1]);
+        }
+        catch(ArrayIndexOutOfBoundsException e){
+            //if the newpage is at the immediate start/end of the sentence
+            line = currentPageImageAddingText.concat(splitLine[0]);
+        }
+
+        //end any bullet points
+        if (previousBulletStyle != ""){
+            textBuilder.append("\\end{itemize}\n");
+            previousBulletStyle = "";
+        }
+
+        return new adjustAnyNewpagesOutput(line, true, previousBulletStyle, textBuilder, linesToRemoveCount);
     }
 
     private record adjustAnyNewpagesOutput(String line, boolean prevLineWasPageBreak, String previousBulletStyle, StringBuilder textBuilder, short lineToRemoveCount){}
@@ -183,7 +201,7 @@ public class Latexify {
     {
         boolean addNewline = true;
         //adding the title to a page
-        if(prevLineWasPageBreak && !line.contains("\\newpage") && !line.isBlank()){
+        if(prevLineWasPageBreak && !line.contains(TEXT_TO_ADD_NEW_PAGE_IN_LATEX) && !line.isBlank()){
             textBuilder.append("\\section{");
             textBuilder.append(line);
             textBuilder.append("}\n");
@@ -306,6 +324,7 @@ public class Latexify {
 
         //Finish constructing the previous paragraph by adding the last line
         if(!lineContainsPattern(line, patternToRemoveLine)) {
+            //perform checks
             paragraphBuffer.append(lastLineOfPrevParagraph);
         }
 
@@ -316,9 +335,70 @@ public class Latexify {
         }
         //reset the to start the next paragraph
         paragraphBuffer.setLength(0);//empty the buffer, for the start of the next paragraph
+
         return new ParagraphSearchOut(line, paragraphBuffer, textBuilder);
     }
 
     private record ParagraphSearchOut(String firstLineOfNextParagraph,StringBuilder paragraph, StringBuilder constructedOutText){}
 
+    private static String applyQuizFormatting(String textToConvert)
+    {
+        String PAGE_TITLE_TEXT_INDICATOR_START = "\\section".concat("{");
+        String PAGE_TITLE_TEXT_INDICATOR_END = "}";
+        ArrayList<String> textAsQuiz = new ArrayList<String>();
+        if(textToConvert.contains(BEGIN_DOC_PLACEHOLDER)){
+            System.out.println("contains");
+        }
+        else{
+            System.out.println("does not contain");
+        }
+        String[] splitAtDocBodyBeginning = textToConvert.split(BEGIN_DOC_PLACEHOLDER);
+        String documentStart = splitAtDocBodyBeginning[0];
+        String documentBody;
+        try{
+            documentBody = splitAtDocBodyBeginning[1];
+        }
+        catch(ArrayIndexOutOfBoundsException e)
+        {
+            documentBody = "";
+        }
+        String separator = TEXT_TO_ADD_NEW_PAGE_IN_LATEX;
+        String[] splitByNewPages = documentBody.split(Pattern.quote(separator));
+
+        StringBuilder quizPage = new StringBuilder();
+        String pageTitle = "...";
+        for (String page : splitByNewPages)
+        {
+            //find the page title
+            if(page.contains(PAGE_TITLE_TEXT_INDICATOR_START)){
+                String textAfterAndIncludingTitle;
+                try {
+                    textAfterAndIncludingTitle = page.split(PAGE_TITLE_TEXT_INDICATOR_START)[1];
+                }
+                catch(ArrayIndexOutOfBoundsException e){
+                    textAfterAndIncludingTitle = page.split(PAGE_TITLE_TEXT_INDICATOR_START)[0];
+                }
+                try {
+                    pageTitle = textAfterAndIncludingTitle.split(PAGE_TITLE_TEXT_INDICATOR_END)[0];
+                }
+                catch(ArrayIndexOutOfBoundsException e){
+                    pageTitle = textAfterAndIncludingTitle.split(PAGE_TITLE_TEXT_INDICATOR_END)[1];
+                }
+            }
+            //add quiz page indication text
+            quizPage.append(QUIZ_PAGE_INDICATION_TEXT+"\n");
+
+            //add the title to the quiz page
+            quizPage.append("Describe: "+pageTitle+"\n");
+
+            //add the quiz page (question page) to the output
+            textAsQuiz.add(quizPage.toString());
+            quizPage.setLength(0);
+            //add the regular [answer] page to the output
+            textAsQuiz.add(page);
+            //add the regular [answer] page to the output
+        }
+        //join all pages back together with Latex's new page indicator text
+        return documentStart.concat(BEGIN_DOC_PLACEHOLDER).concat("\n").concat(String.join(TEXT_TO_ADD_NEW_PAGE_IN_LATEX, textAsQuiz));
+    }
 }
