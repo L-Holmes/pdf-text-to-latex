@@ -18,7 +18,7 @@ public class Latexify {
     private static String removePatternOnLine = "";
     private static String removePatternOnPara = "";
     private final static String QUIZ_PAGE_INDICATION_TEXT = "(Q)"; //text added to the start of each quiz page, to indicate that this particular page is a quiz page(i.e. a page asking a question)
-
+    private static short linesToRemoveCount = 0;
 
     //----Optional argument setting---
     /**
@@ -83,7 +83,7 @@ public class Latexify {
 
         //optional arguments
         StringBuilder paragraphBuffer = new StringBuilder();
-        short linesToRemoveCount = 0;
+
 
 
         for (String line : textToAdd.split("\n")){
@@ -112,9 +112,10 @@ public class Latexify {
             textBuilder = newpageAdjustOut.textBuilder();
             linesToRemoveCount = newpageAdjustOut.lineToRemoveCount();
 
-
+            System.out.println("prev pvb:"+prevLineWasPageBreak);
 
             if (linesToRemoveCount >0){
+                System.out.println("lines to remove count: "+linesToRemoveCount);
                 //if the user has chosen to ignore the first 'x' lines of each page, here, they are ignored (i.e. not added to the output text)
                 if (linesToRemoveCount == numStartLinesToRemoveForEachPage){
                     //add the first line
@@ -127,10 +128,12 @@ public class Latexify {
                 //perform regular line adjustments
                 RegularDocLineOut regLineOutput;
                 if (!removePatternOnPara.isBlank() && !removePatternOnLine.isBlank()){
+                    System.out.println("1"+prevLineWasPageBreak);
                     regLineOutput = addDocLine(prevLineWasPageBreak, line, paragraphBuffer, previousBulletStyle);
                     paragraphBuffer = regLineOutput.textBuilder();
                 }
                 else{
+                    System.out.println("2"+prevLineWasPageBreak);
                     regLineOutput = addDocLine(prevLineWasPageBreak, line, textBuilder, previousBulletStyle);
                     textBuilder = regLineOutput.textBuilder();
                 }
@@ -146,7 +149,8 @@ public class Latexify {
     private static adjustAnyNewpagesOutput adjustAnyNewpages(String line, String newPageSeperator, boolean prevLineWasPageBreak, String previousBulletStyle, StringBuilder textBuilder, short linesToRemoveCount, String[] textToAddImages)
     {
         if(!line.contains(newPageSeperator)) {
-            return new adjustAnyNewpagesOutput(line, false, previousBulletStyle, textBuilder, linesToRemoveCount);
+            System.out.println("\nreturning prev line "+ prevLineWasPageBreak);
+            return new adjustAnyNewpagesOutput(line, prevLineWasPageBreak, previousBulletStyle, textBuilder, linesToRemoveCount);
         }
 
         currentPage++;
@@ -181,6 +185,7 @@ public class Latexify {
             previousBulletStyle = "";
         }
 
+        System.out.println("\nreturning prev line true");
         return new adjustAnyNewpagesOutput(line, true, previousBulletStyle, textBuilder, linesToRemoveCount);
     }
 
@@ -346,12 +351,6 @@ public class Latexify {
         String PAGE_TITLE_TEXT_INDICATOR_START = "\\section".concat("{");
         String PAGE_TITLE_TEXT_INDICATOR_END = "}";
         ArrayList<String> textAsQuiz = new ArrayList<String>();
-        if(textToConvert.contains(BEGIN_DOC_PLACEHOLDER)){
-            System.out.println("contains");
-        }
-        else{
-            System.out.println("does not contain");
-        }
         String[] splitAtDocBodyBeginning = textToConvert.split(BEGIN_DOC_PLACEHOLDER);
         String documentStart = splitAtDocBodyBeginning[0];
         String documentBody;
@@ -372,17 +371,19 @@ public class Latexify {
             //find the page title
             if(page.contains(PAGE_TITLE_TEXT_INDICATOR_START)){
                 String textAfterAndIncludingTitle;
+                String titleTextStartSeperator = PAGE_TITLE_TEXT_INDICATOR_START;
                 try {
-                    textAfterAndIncludingTitle = page.split(PAGE_TITLE_TEXT_INDICATOR_START)[1];
+                    textAfterAndIncludingTitle = page.split(Pattern.quote(titleTextStartSeperator))[1];
                 }
                 catch(ArrayIndexOutOfBoundsException e){
-                    textAfterAndIncludingTitle = page.split(PAGE_TITLE_TEXT_INDICATOR_START)[0];
+                    textAfterAndIncludingTitle = page.split(Pattern.quote(titleTextStartSeperator))[0];
                 }
+                String titleTextEndSeperator = PAGE_TITLE_TEXT_INDICATOR_START;
                 try {
-                    pageTitle = textAfterAndIncludingTitle.split(PAGE_TITLE_TEXT_INDICATOR_END)[0];
+                    pageTitle = textAfterAndIncludingTitle.split(Pattern.quote(titleTextEndSeperator))[0];
                 }
                 catch(ArrayIndexOutOfBoundsException e){
-                    pageTitle = textAfterAndIncludingTitle.split(PAGE_TITLE_TEXT_INDICATOR_END)[1];
+                    pageTitle = textAfterAndIncludingTitle.split(Pattern.quote(titleTextEndSeperator))[1];
                 }
             }
             //add quiz page indication text
