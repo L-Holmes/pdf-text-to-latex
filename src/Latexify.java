@@ -112,10 +112,8 @@ public class Latexify {
             textBuilder = newpageAdjustOut.textBuilder();
             linesToRemoveCount = newpageAdjustOut.lineToRemoveCount();
 
-            System.out.println("prev pvb:"+prevLineWasPageBreak);
 
             if (linesToRemoveCount >0){
-                System.out.println("lines to remove count: "+linesToRemoveCount);
                 //if the user has chosen to ignore the first 'x' lines of each page, here, they are ignored (i.e. not added to the output text)
                 if (linesToRemoveCount == numStartLinesToRemoveForEachPage){
                     //add the first line
@@ -128,12 +126,10 @@ public class Latexify {
                 //perform regular line adjustments
                 RegularDocLineOut regLineOutput;
                 if (!removePatternOnPara.isBlank() && !removePatternOnLine.isBlank()){
-                    System.out.println("1"+prevLineWasPageBreak);
                     regLineOutput = addDocLine(prevLineWasPageBreak, line, paragraphBuffer, previousBulletStyle);
                     paragraphBuffer = regLineOutput.textBuilder();
                 }
                 else{
-                    System.out.println("2"+prevLineWasPageBreak);
                     regLineOutput = addDocLine(prevLineWasPageBreak, line, textBuilder, previousBulletStyle);
                     textBuilder = regLineOutput.textBuilder();
                 }
@@ -149,7 +145,6 @@ public class Latexify {
     private static adjustAnyNewpagesOutput adjustAnyNewpages(String line, String newPageSeperator, boolean prevLineWasPageBreak, String previousBulletStyle, StringBuilder textBuilder, short linesToRemoveCount, String[] textToAddImages)
     {
         if(!line.contains(newPageSeperator)) {
-            System.out.println("\nreturning prev line "+ prevLineWasPageBreak);
             return new adjustAnyNewpagesOutput(line, prevLineWasPageBreak, previousBulletStyle, textBuilder, linesToRemoveCount);
         }
 
@@ -185,7 +180,6 @@ public class Latexify {
             previousBulletStyle = "";
         }
 
-        System.out.println("\nreturning prev line true");
         return new adjustAnyNewpagesOutput(line, true, previousBulletStyle, textBuilder, linesToRemoveCount);
     }
 

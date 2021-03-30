@@ -5,8 +5,10 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.StreamSupport;
 
 import org.apache.pdfbox.cos.COSName;
 import org.apache.pdfbox.io.RandomAccessBufferedFileInputStream;
@@ -30,6 +32,11 @@ import util.WriteTextToFileHandle;
 import javax.imageio.ImageIO;
 
 public class ParsePdf {
+    //image loading info
+    private int numPages = 0;
+    private int pagesProcessed = 0;
+    //
+
     public ParsePdf(String pdfLocation){
         System.out.println("parsing the pdf: "+pdfLocation);
     }
@@ -78,19 +85,38 @@ public class ParsePdf {
         //getting the images
         Iterator<PDPage> iteratorOfPages = documentToRead.getPages().iterator();
         int pageNum = 0;
+        numPages = getLenOfIterator(iteratorOfPages);
+        pagesProcessed = 0;
+        //start status shower
+        ImageLoadingStatusShower statusShower =new ImageLoadingStatusShower(this);
+        Thread statusThread = new Thread(statusShower);
+        statusThread.start();
+
+        System.out.println("Loading images ...");
+
         while (iteratorOfPages.hasNext()){
             pageNum++;
+            pagesProcessed++;
             PDPage singlePage = iteratorOfPages.next();
             imageAddingTextForEachPage = getImagesFromPage(singlePage, pageNum, imageAddingTextForEachPage);
         }
+        statusShower.finishProcess();
+        try {
+            statusThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         return imageAddingTextForEachPage.toArray(new String[0]);
     }
 
     private ArrayList<String> getImagesFromPage(PDPage page, int pageNumber, ArrayList<String> textToAddTheImages)
     {
+        System.out.println("processing a page..........");
         PDResources pdResources = page.getResources();
         int i = 1;
-        for (COSName cosName : pdResources.getXObjectNames()) {
+        Iterable<org.apache.pdfbox.cos.COSName> cosNames =pdResources.getXObjectNames();
+        for (COSName cosName : cosNames) {
             try {
                 PDXObject o = pdResources.getXObject(cosName);
                 if (o instanceof PDImageXObject) {
@@ -107,12 +133,44 @@ public class ParsePdf {
                     textToAddTheImage.append("\\includegraphics[width=0.5\\linewidth]{"+nameOfImgFile+"}\n");
                     textToAddTheImage.append("\\end{figure}\n");
                     textToAddTheImages.add(textToAddTheImage.toString());
+                    
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
         return textToAddTheImages;
+    }
+
+    public synchronized int getImageLoadingPercentage()
+    {
+        //System.out.println("returning images processed:"+pagesProcessed+" num pages" + numPages);
+        return (int) (((float) pagesProcessed/(float)numPages)*100f);
+    }
+
+    private int getLenOfIterable(Iterable<?> iterableToCheckLenOf)
+    {
+        if (iterableToCheckLenOf instanceof Collection) {
+            return ((Collection<?>) iterableToCheckLenOf).size();
+        } else {
+            int count = 0;
+            Iterator iterator = iterableToCheckLenOf.iterator();
+            while(iterator.hasNext()) {
+                iterator.next();
+                count++;
+            }
+            return count;
+        }
+    }
+
+    private int getLenOfIterator(Iterator<?> iteratorToCheckLenOf)
+    {
+        int count = 0;
+        while(iteratorToCheckLenOf.hasNext()) {
+            iteratorToCheckLenOf.next();
+            count++;
+        }
+        return count;
     }
 }
 

@@ -17,39 +17,24 @@ Access Control\\
 SCC201 Databases\\
 Based of slides from\\
 John Mariani\\
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page1-image-1.png}
-\end{figure}
 \clearpage
 (Q)
 Describe: In this Unit …}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page2-image-1.png}
-\end{figure}
 
 \clearpage
 19.2\\ 
  \\
 \section{In this Unit …}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page2-image-1.png}
-\end{figure}
 \clearpage
 (Q)
 Describe: ADVANCED SQL : MORE ON }
 SCHEMAS AND VIEWS\\
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page3-image-1.png}
-\end{figure}
 
 \clearpage
 19.3\\ 
  \\
 \section{ADVANCED SQL : MORE ON }
 SCHEMAS AND VIEWS\\
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page3-image-1.png}
-\end{figure}
 \clearpage
 (Q)
 Describe: Introduction}
@@ -68,9 +53,6 @@ Views” Unit.\\
 certain subset implementations of SQL\\
 (such as in base MySQL or SQLite)\\
 \end{itemize}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page4-image-1.png}
-\end{figure}
 
 \clearpage
 19.4\\ 
@@ -91,9 +73,6 @@ Views” Unit.\\
 certain subset implementations of SQL\\
 (such as in base MySQL or SQLite)\\
 \end{itemize}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page4-image-1.png}
-\end{figure}
 \clearpage
 (Q)
 Describe: Conceptual Schema Definition in SQL (1)}
@@ -107,9 +86,6 @@ FName LName RegNum BDate Address Gender DName\\
 TAKES CName RegNum\\
 DEPT\_LOCATIONS DName DLocation\\
 \end{itemize}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page5-image-1.png}
-\end{figure}
 
 \clearpage
 19.5\\ 
@@ -125,9 +101,6 @@ FName LName RegNum BDate Address Gender DName\\
 TAKES CName RegNum\\
 DEPT\_LOCATIONS DName DLocation\\
 \end{itemize}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page5-image-1.png}
-\end{figure}
 \clearpage
 (Q)
 Describe: Conceptual Schema Definition in SQL (2)}
@@ -142,9 +115,6 @@ AUTHORISATION <AUTH\_IDENTIFIER>\\
   \item CREATE SCHEMA UNIVERSITY
 AUTHORISATION JDOE\\
 \end{itemize}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page6-image-1.png}
-\end{figure}
 
 \clearpage
 19.6\\ 
@@ -161,9 +131,6 @@ AUTHORISATION <AUTH\_IDENTIFIER>\\
   \item CREATE SCHEMA UNIVERSITY
 AUTHORISATION JDOE\\
 \end{itemize}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page6-image-1.png}
-\end{figure}
 \clearpage
 (Q)
 Describe: Conceptual Schema Definition in SQL (3)}
@@ -181,9 +148,6 @@ Describe: Conceptual Schema Definition in SQL (3)}
 <TABLE\_DEFINITION>\\
   \item Schema name specified in environment is used
 \end{itemize}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page7-image-1.png}
-\end{figure}
 
 \clearpage
 19.7\\ 
@@ -203,9 +167,6 @@ Describe: Conceptual Schema Definition in SQL (3)}
 <TABLE\_DEFINITION>\\
   \item Schema name specified in environment is used
 \end{itemize}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page7-image-1.png}
-\end{figure}
 \clearpage
 (Q)
 Describe: Conceptual Schema Definition in SQL (4)}
@@ -220,9 +181,6 @@ DNAME VARCHAR(20) NOT NULL,\\
 PRIMARY KEY(REGNUM),\\
 FOREIGN KEY(DNAME) REFERENCES DEPARTMENT(NAME)\\
 );\\
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page8-image-1.png}
-\end{figure}
 
 \clearpage
 19.8\\ 
@@ -239,9 +197,6 @@ DNAME VARCHAR(20) NOT NULL,\\
 PRIMARY KEY(REGNUM),\\
 FOREIGN KEY(DNAME) REFERENCES DEPARTMENT(NAME)\\
 );\\
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page8-image-1.png}
-\end{figure}
 \clearpage
 (Q)
 Describe: Conceptual Schema Definition in SQL (5)}
@@ -258,9 +213,6 @@ DNAME VARCHAR(20) NOT NULL,\\
 PRIMARY KEY(NAME),\\
 FOREIGN KEY(NAME) REFERENCES DEPARTMENT(NAME)\\
 );\\
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page9-image-1.png}
-\end{figure}
 
 \clearpage
 19.9\\ 
@@ -279,9 +231,6 @@ DNAME VARCHAR(20) NOT NULL,\\
 PRIMARY KEY(NAME),\\
 FOREIGN KEY(NAME) REFERENCES DEPARTMENT(NAME)\\
 );\\
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page9-image-1.png}
-\end{figure}
 \clearpage
 (Q)
 Describe: Conceptual Schema Definition in SQL (6)}
@@ -298,9 +247,6 @@ LOCATION VARCHAR(20) NOT NULL,\\
 PRIMARY KEY(DNAME, LOCATION),\\
 FOREIGN KEY(DNAME) REFERENCES DEPARTMENT(NAME)\\
 );\\
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page10-image-1.png}
-\end{figure}
 
 \clearpage
 19.10\\ 
@@ -319,9 +265,6 @@ LOCATION VARCHAR(20) NOT NULL,\\
 PRIMARY KEY(DNAME, LOCATION),\\
 FOREIGN KEY(DNAME) REFERENCES DEPARTMENT(NAME)\\
 );\\
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page10-image-1.png}
-\end{figure}
 \clearpage
 (Q)
 Describe: Schema Evolution using SQL}
@@ -332,9 +275,6 @@ Describe: Schema Evolution using SQL}
   \item DROP TABLE
   \item ALTER TABLE
 \end{itemize}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page11-image-1.png}
-\end{figure}
 
 \clearpage
 19.11\\ 
@@ -347,9 +287,6 @@ Describe: Schema Evolution using SQL}
   \item DROP TABLE
   \item ALTER TABLE
 \end{itemize}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page11-image-1.png}
-\end{figure}
 \clearpage
 (Q)
 Describe: Views in SQL (1)}
@@ -368,9 +305,6 @@ retrieve tuples of interest from view\\
   \item Particularly useful if original query is complex,
 e.g. involves a number of joins\\
 \end{itemize}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page12-image-1.png}
-\end{figure}
 
 \clearpage
 19.12\\ 
@@ -391,9 +325,6 @@ retrieve tuples of interest from view\\
   \item Particularly useful if original query is complex,
 e.g. involves a number of joins\\
 \end{itemize}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page12-image-1.png}
-\end{figure}
 \clearpage
 (Q)
 Describe: Views in SQL (2)}
@@ -407,9 +338,6 @@ SELECT *\\
 FROM STUDENT\\
 WHERE   DNAME = ‘Physics’ ;\\
 \end{itemize}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page13-image-1.png}
-\end{figure}
 
 \clearpage
 19.13\\ 
@@ -425,9 +353,6 @@ SELECT *\\
 FROM STUDENT\\
 WHERE   DNAME = ‘Physics’ ;\\
 \end{itemize}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page13-image-1.png}
-\end{figure}
 \clearpage
 (Q)
 Describe: Views in SQL (3)}
@@ -446,9 +371,6 @@ WHERE GENDER = ‘M’\\
 e.g.\\
 DROP VIEW PHYSICS\_STUDENTS\\
 \end{itemize}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page14-image-1.png}
-\end{figure}
 
 \clearpage
 19.14\\ 
@@ -469,25 +391,16 @@ WHERE GENDER = ‘M’\\
 e.g.\\
 DROP VIEW PHYSICS\_STUDENTS\\
 \end{itemize}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page14-image-1.png}
-\end{figure}
 \clearpage
 (Q)
 Describe: ACCESS CONTROL : SECURITY IN }
 SQL\\
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page15-image-1.png}
-\end{figure}
 
 \clearpage
 19.15\\ 
  \\
 \section{ACCESS CONTROL : SECURITY IN }
 SQL\\
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page15-image-1.png}
-\end{figure}
 \clearpage
 (Q)
 Describe: Mandatory Access Control}
@@ -506,9 +419,6 @@ object.\\
   \item We will not cover this approach further in this 
 course.\\
 \end{itemize}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page16-image-1.png}
-\end{figure}
 
 \clearpage
 19.16\\ 
@@ -529,9 +439,6 @@ object.\\
   \item We will not cover this approach further in this 
 course.\\
 \end{itemize}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page16-image-1.png}
-\end{figure}
 \clearpage
 (Q)
 Describe: Discretionary Access Control}
@@ -544,9 +451,6 @@ these privileges to other users at their \\
 discretion.\\
   \item This approach is used in SQL.
 \end{itemize}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page17-image-1.png}
-\end{figure}
 
 \clearpage
 19.17\\ 
@@ -561,9 +465,6 @@ these privileges to other users at their \\
 discretion.\\
   \item This approach is used in SQL.
 \end{itemize}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page17-image-1.png}
-\end{figure}
 \clearpage
 (Q)
 Describe: Authorisation Identifier}
@@ -580,9 +481,6 @@ can determine \\
   \item what database objects a user can reference and 
   \item what operations can be performed by that user.
 \end{itemize}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page18-image-1.png}
-\end{figure}
 
 \clearpage
 19.18\\ 
@@ -601,9 +499,6 @@ can determine \\
   \item what database objects a user can reference and 
   \item what operations can be performed by that user.
 \end{itemize}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page18-image-1.png}
-\end{figure}
 \clearpage
 (Q)
 Describe: Ownership}
@@ -617,9 +512,6 @@ belongs.\\
 knows that object exists and subsequently \\
 perform operations on that object.\\
 \end{itemize}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page19-image-1.png}
-\end{figure}
 
 \clearpage
 19.19\\ 
@@ -635,9 +527,6 @@ belongs.\\
 knows that object exists and subsequently \\
 perform operations on that object.\\
 \end{itemize}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page19-image-1.png}
-\end{figure}
 \clearpage
 (Q)
 Describe: Privileges}
@@ -654,9 +543,6 @@ references to reference columns of a named table in \\
 integrity constraints. Can be restricted to \\
 specific columns.\\
 \end{itemize}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page20-image-1.png}
-\end{figure}
 
 \clearpage
 19.20\\ 
@@ -675,9 +561,6 @@ references to reference columns of a named table in \\
 integrity constraints. Can be restricted to \\
 specific columns.\\
 \end{itemize}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page20-image-1.png}
-\end{figure}
 \clearpage
 (Q)
 Describe: Create Table}
@@ -693,9 +576,6 @@ privileges.\\
 table, in order to create the view in the first \\
 place.\\
 \end{itemize}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page20-image-2.png}
-\end{figure}
 
 \clearpage
 19.21\\ 
@@ -713,9 +593,6 @@ privileges.\\
 table, in order to create the view in the first \\
 place.\\
 \end{itemize}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page20-image-2.png}
-\end{figure}
 \clearpage
 (Q)
 Describe: GRANT \{PrivilegeList | ALL PRIVILEGES\}}
@@ -729,9 +606,6 @@ insert [(columnName, [...])]\\
 update [(columnName, [...])]\\
 references [(columnName, [...])]\\
 PrivilegeList\\
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page21-image-1.png}
-\end{figure}
 
 \clearpage
 19.22\\ 
@@ -747,9 +621,6 @@ insert [(columnName, [...])]\\
 update [(columnName, [...])]\\
 references [(columnName, [...])]\\
 PrivilegeList\\
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page21-image-1.png}
-\end{figure}
 \clearpage
 (Q)
 Describe: Examples}
@@ -761,9 +632,6 @@ The user Manager can now retrieve rows from the \\
 Staff table, and also insert, update and delete.\\
 The Manager can pass these privileges onto other \\
 users.\\
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page22-image-1.png}
-\end{figure}
 
 \clearpage
 19.23\\ 
@@ -777,9 +645,6 @@ The user Manager can now retrieve rows from the \\
 Staff table, and also insert, update and delete.\\
 The Manager can pass these privileges onto other \\
 users.\\
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page22-image-1.png}
-\end{figure}
 \clearpage
 (Q)
 Describe: Examples}
@@ -794,9 +659,6 @@ ON Branch\\
 TO PUBLIC\\
 Gives all users the privilege \\
 SELECT on the Branch table.\\
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page23-image-1.png}
-\end{figure}
 
 \clearpage
 19.24\\ 
@@ -813,9 +675,6 @@ ON Branch\\
 TO PUBLIC\\
 Gives all users the privilege \\
 SELECT on the Branch table.\\
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page23-image-1.png}
-\end{figure}
 \clearpage
 (Q)
 Describe: Revoking privileges from users}
@@ -826,9 +685,6 @@ REVOKE \{PrivilegeList | ALL PRIVILEGES\}\\
 ON ObjectName\\
 FROM \{AuthorizationList | PUBLIC\}\\
 \end{itemize}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page24-image-1.png}
-\end{figure}
 
 \clearpage
 19.25\\ 
@@ -841,9 +697,6 @@ REVOKE \{PrivilegeList | ALL PRIVILEGES\}\\
 ON ObjectName\\
 FROM \{AuthorizationList | PUBLIC\}\\
 \end{itemize}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page24-image-1.png}
-\end{figure}
 \clearpage
 (Q)
 Describe: Examples}
@@ -860,9 +713,6 @@ Revoke all privileges \\
 you have given to \\
 Director on the Staff \\
 table.\\
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page25-image-1.png}
-\end{figure}
 
 \clearpage
 19.26\\ 
@@ -881,29 +731,17 @@ Revoke all privileges \\
 you have given to \\
 Director on the Staff \\
 table.\\
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page25-image-1.png}
-\end{figure}
 \clearpage
 (Q)
 Describe: THE END}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page26-image-1.png}
-\end{figure}
 
 \clearpage
 19.27\\ 
  \\
 \section{THE END}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page26-image-1.png}
-\end{figure}
 \clearpage
 (Q)
 Describe: THE END}
-\begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page26-image-1.png}
-\end{figure}
 
 \clearpage
 \\ 
