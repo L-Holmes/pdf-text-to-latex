@@ -85,7 +85,7 @@ public class ParsePdf {
         //getting the images
         Iterator<PDPage> iteratorOfPages = documentToRead.getPages().iterator();
         int pageNum = 0;
-        numPages = getLenOfIterator(iteratorOfPages);
+        numPages = documentToRead.getNumberOfPages();
         pagesProcessed = 0;
         //start status shower
         ImageLoadingStatusShower statusShower =new ImageLoadingStatusShower(this);
@@ -112,7 +112,6 @@ public class ParsePdf {
 
     private ArrayList<String> getImagesFromPage(PDPage page, int pageNumber, ArrayList<String> textToAddTheImages)
     {
-        System.out.println("processing a page..........");
         PDResources pdResources = page.getResources();
         int i = 1;
         Iterable<org.apache.pdfbox.cos.COSName> cosNames =pdResources.getXObjectNames();
@@ -163,14 +162,6 @@ public class ParsePdf {
         }
     }
 
-    private int getLenOfIterator(Iterator<?> iteratorToCheckLenOf)
-    {
-        int count = 0;
-        while(iteratorToCheckLenOf.hasNext()) {
-            iteratorToCheckLenOf.next();
-            count++;
-        }
-        return count;
-    }
+
 }
 

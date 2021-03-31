@@ -17,43 +17,33 @@ Access Control\\
 SCC201 Databases\\
 Based of slides from\\
 John Mariani\\
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page1-image-1.png}
+\end{figure}
 \clearpage
 (Q)
-Describe: In this Unit …}
-
+Describe: In this Unit …
 \clearpage
 19.2\\ 
  \\
 \section{In this Unit …}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page2-image-1.png}
+\end{figure}
 \clearpage
 (Q)
-Describe: ADVANCED SQL : MORE ON }
-SCHEMAS AND VIEWS\\
-
+Describe: ADVANCED SQL : MORE ON 
 \clearpage
 19.3\\ 
  \\
 \section{ADVANCED SQL : MORE ON }
 SCHEMAS AND VIEWS\\
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page3-image-1.png}
+\end{figure}
 \clearpage
 (Q)
-Describe: Introduction}
-\begin{itemize}
-  \item Following on from the earlier “Schemas and 
-Views” Unit.\\
-  \item How to
-\begin{itemize}
-  \item Set up a schema in SQL
-  \item Define tables in SQL
-  \item Define views in SQL
-\end{itemize}
-  \item Notice this material focuses on full SQL
-\begin{itemize}
-  \item Some of these features may not be available in 
-certain subset implementations of SQL\\
-(such as in base MySQL or SQLite)\\
-\end{itemize}
-
+Describe: Introduction
 \clearpage
 19.4\\ 
  \\
@@ -73,20 +63,12 @@ Views” Unit.\\
 certain subset implementations of SQL\\
 (such as in base MySQL or SQLite)\\
 \end{itemize}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page4-image-1.png}
+\end{figure}
 \clearpage
 (Q)
-Describe: Conceptual Schema Definition in SQL (1)}
-\end{itemize}
-  \item We will use our example from ER-to-
-relational mapping:\\
-DEPARTMENT DName HoD NoOfEmps\\
-COURSE CName Description DName\\
-STUDENT\\
-FName LName RegNum BDate Address Gender DName\\
-TAKES CName RegNum\\
-DEPT\_LOCATIONS DName DLocation\\
-\end{itemize}
-
+Describe: Conceptual Schema Definition in SQL (1)
 \clearpage
 19.5\\ 
  \\
@@ -101,21 +83,12 @@ FName LName RegNum BDate Address Gender DName\\
 TAKES CName RegNum\\
 DEPT\_LOCATIONS DName DLocation\\
 \end{itemize}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page5-image-1.png}
+\end{figure}
 \clearpage
 (Q)
-Describe: Conceptual Schema Definition in SQL (2)}
-\end{itemize}
-  \item To create schema:
-\begin{itemize}
-  \item CREATE SCHEMA <SCHEMA\_NAME>
-AUTHORISATION <AUTH\_IDENTIFIER>\\
-\begin{itemize}
-  \item In our example:
-\end{itemize}
-  \item CREATE SCHEMA UNIVERSITY
-AUTHORISATION JDOE\\
-\end{itemize}
-
+Describe: Conceptual Schema Definition in SQL (2)
 \clearpage
 19.6\\ 
  \\
@@ -131,24 +104,12 @@ AUTHORISATION <AUTH\_IDENTIFIER>\\
   \item CREATE SCHEMA UNIVERSITY
 AUTHORISATION JDOE\\
 \end{itemize}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page6-image-1.png}
+\end{figure}
 \clearpage
 (Q)
-Describe: Conceptual Schema Definition in SQL (3)}
-\begin{itemize}
-  \item To create tables for a schema explicitly:
-\end{itemize}
-  \item CREATE TABLE
-<SCHEMA\_NAME>. <TABLE\_NAME> \\
-<TABLE\_DEFINITION>\\
-\begin{itemize}
-  \item To create tables for a schema implicitly:
-\end{itemize}
-  \item CREATE TABLE
-<TABLE\_NAME>\\
-<TABLE\_DEFINITION>\\
-  \item Schema name specified in environment is used
-\end{itemize}
-
+Describe: Conceptual Schema Definition in SQL (3)
 \clearpage
 19.7\\ 
  \\
@@ -167,21 +128,12 @@ Describe: Conceptual Schema Definition in SQL (3)}
 <TABLE\_DEFINITION>\\
   \item Schema name specified in environment is used
 \end{itemize}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page7-image-1.png}
+\end{figure}
 \clearpage
 (Q)
-Describe: Conceptual Schema Definition in SQL (4)}
-CREATE TABLE STUDENT\\
-(FNAME VARCHAR(20) NOT NULL,\\
-LNAME VARCHAR(20) NOT NULL,\\
-REGNUM   INT NOT NULL,\\
-BDATE DATE,\\
-ADDRESSVARCHAR(30) ,\\
-GENDER CHAR,\\
-DNAME VARCHAR(20) NOT NULL,\\
-PRIMARY KEY(REGNUM),\\
-FOREIGN KEY(DNAME) REFERENCES DEPARTMENT(NAME)\\
-);\\
-
+Describe: Conceptual Schema Definition in SQL (4)
 \clearpage
 19.8\\ 
  \\
@@ -197,23 +149,12 @@ DNAME VARCHAR(20) NOT NULL,\\
 PRIMARY KEY(REGNUM),\\
 FOREIGN KEY(DNAME) REFERENCES DEPARTMENT(NAME)\\
 );\\
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page8-image-1.png}
+\end{figure}
 \clearpage
 (Q)
-Describe: Conceptual Schema Definition in SQL (5)}
-CREATE TABLE DEPARTMENT\\
-(NAME VARCHAR(20) NOT NULL,\\
-HoD VARCHAR(20) NOT NULL,\\
-NUMOFEMPS INT NOT NULL DEFAULT 1,\\
-PRIMARY KEY(NAME)\\
-);\\
-CREATE TABLE COURSE\\
-(NAME VARCHAR(20) NOT NULL,\\
-DESCRIPTION VARCHAR(40),\\
-DNAME VARCHAR(20) NOT NULL,\\
-PRIMARY KEY(NAME),\\
-FOREIGN KEY(NAME) REFERENCES DEPARTMENT(NAME)\\
-);\\
-
+Describe: Conceptual Schema Definition in SQL (5)
 \clearpage
 19.9\\ 
  \\
@@ -231,23 +172,12 @@ DNAME VARCHAR(20) NOT NULL,\\
 PRIMARY KEY(NAME),\\
 FOREIGN KEY(NAME) REFERENCES DEPARTMENT(NAME)\\
 );\\
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page9-image-1.png}
+\end{figure}
 \clearpage
 (Q)
-Describe: Conceptual Schema Definition in SQL (6)}
-CREATE TABLE TAKES\\
-(CNAME VARCHAR(20) NOT NULL,\\
-REGNUM INT NOT NULL,\\
-PRIMARY KEY(CNAME, REGNUM),\\
-FOREIGN KEY(CNAME)    REFERENCES COURSE(NAME),\\
-FOREIGN KEY(REGNUM) REFERENCES STUDENT(REGNUM)\\
-);\\
-CREATE TABLE DEPT\_LOCATIONS\\
-(DNAME VARCHAR(20) NOT NULL,\\
-LOCATION VARCHAR(20) NOT NULL,\\
-PRIMARY KEY(DNAME, LOCATION),\\
-FOREIGN KEY(DNAME) REFERENCES DEPARTMENT(NAME)\\
-);\\
-
+Describe: Conceptual Schema Definition in SQL (6)
 \clearpage
 19.10\\ 
  \\
@@ -265,17 +195,12 @@ LOCATION VARCHAR(20) NOT NULL,\\
 PRIMARY KEY(DNAME, LOCATION),\\
 FOREIGN KEY(DNAME) REFERENCES DEPARTMENT(NAME)\\
 );\\
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page10-image-1.png}
+\end{figure}
 \clearpage
 (Q)
-Describe: Schema Evolution using SQL}
-\begin{itemize}
-  \item We can use following three commands:
-\end{itemize}
-  \item DROP SCHEMA
-  \item DROP TABLE
-  \item ALTER TABLE
-\end{itemize}
-
+Describe: Schema Evolution using SQL
 \clearpage
 19.11\\ 
  \\
@@ -287,25 +212,12 @@ Describe: Schema Evolution using SQL}
   \item DROP TABLE
   \item ALTER TABLE
 \end{itemize}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page11-image-1.png}
+\end{figure}
 \clearpage
 (Q)
-Describe: Views in SQL (1)}
-\begin{itemize}
-  \item Views are virtual tables
-\end{itemize}
-  \item Do not necessarily exist in physical form
-  \item As opposed to base tables whose tuples are 
-actually stored in a database\\
-\begin{itemize}
-  \item If same query frequently executed on 
-database it makes sense to define view based \\
-on results of query and use simpler query to \\
-retrieve tuples of interest from view\\
-\end{itemize}
-  \item Particularly useful if original query is complex,
-e.g. involves a number of joins\\
-\end{itemize}
-
+Describe: Views in SQL (1)
 \clearpage
 19.12\\ 
  \\
@@ -325,20 +237,12 @@ retrieve tuples of interest from view\\
   \item Particularly useful if original query is complex,
 e.g. involves a number of joins\\
 \end{itemize}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page12-image-1.png}
+\end{figure}
 \clearpage
 (Q)
-Describe: Views in SQL (2)}
-\begin{itemize}
-  \item Use the command:
-\end{itemize}
-  \item CREATE VIEW <VIEW\_NAME> AS
-<SQL\_QUERY>\\
-  \item CREATE VIEW PHYSICS\_STUDENTS AS
-SELECT *\\
-FROM STUDENT\\
-WHERE   DNAME = ‘Physics’ ;\\
-\end{itemize}
-
+Describe: Views in SQL (2)
 \clearpage
 19.13\\ 
  \\
@@ -353,25 +257,12 @@ SELECT *\\
 FROM STUDENT\\
 WHERE   DNAME = ‘Physics’ ;\\
 \end{itemize}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page13-image-1.png}
+\end{figure}
 \clearpage
 (Q)
-Describe: Views in SQL (3)}
-\begin{itemize}
-  \item Notice that virtual relations can be used in 
-same way as base relations in SQL \\
-statements\\
-\end{itemize}
-  \item SELECT FNAME, LNAME
-FROM PHYSICS\_STUDENTS\\
-WHERE GENDER = ‘M’\\
-\begin{itemize}
-  \item Views can be dropped by using command:
-\end{itemize}
-  \item DROP VIEW <VIEW\_NAME>
-e.g.\\
-DROP VIEW PHYSICS\_STUDENTS\\
-\end{itemize}
-
+Describe: Views in SQL (3)
 \clearpage
 19.14\\ 
  \\
@@ -391,35 +282,23 @@ WHERE GENDER = ‘M’\\
 e.g.\\
 DROP VIEW PHYSICS\_STUDENTS\\
 \end{itemize}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page14-image-1.png}
+\end{figure}
 \clearpage
 (Q)
-Describe: ACCESS CONTROL : SECURITY IN }
-SQL\\
-
+Describe: ACCESS CONTROL : SECURITY IN 
 \clearpage
 19.15\\ 
  \\
 \section{ACCESS CONTROL : SECURITY IN }
 SQL\\
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page15-image-1.png}
+\end{figure}
 \clearpage
 (Q)
-Describe: Mandatory Access Control}
-\begin{itemize}
-  \item Each database object is assigned a certain 
-classification level\\
-  \item i.e. top secret, secret, confidential, unclassified
-  \item The levels form a strict ordering.
-  \item top secret > secret > confidential> unclassified
-  \item Each subject (users or programs) is given a 
-clearance level.\\
-  \item To access an object, a subject requires the 
-necessary clearance to read or write a database \\
-object.\\
-  \item See the Bell-LaPadula access control model (1974).
-  \item We will not cover this approach further in this 
-course.\\
-\end{itemize}
-
+Describe: Mandatory Access Control
 \clearpage
 19.16\\ 
  \\
@@ -439,19 +318,12 @@ object.\\
   \item We will not cover this approach further in this 
 course.\\
 \end{itemize}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page16-image-1.png}
+\end{figure}
 \clearpage
 (Q)
-Describe: Discretionary Access Control}
-\end{itemize}
-  \item Each user is given appropriate access rights 
-(or privileges) on specific database objects.\\
-  \item Users obtain certain privileges when they 
-create an object and can pass some or all of \\
-these privileges to other users at their \\
-discretion.\\
-  \item This approach is used in SQL.
-\end{itemize}
-
+Describe: Discretionary Access Control
 \clearpage
 19.17\\ 
  \\
@@ -465,23 +337,12 @@ these privileges to other users at their \\
 discretion.\\
   \item This approach is used in SQL.
 \end{itemize}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page17-image-1.png}
+\end{figure}
 \clearpage
 (Q)
-Describe: Authorisation Identifier}
-\begin{itemize}
-  \item An SQL identifier used to establish the identity 
-of a user.\\
-  \item The DBA sets up your username and usually a 
-password.\\
-  \item Every SQL statement executed by the DBMS is 
-performed on behalf of a specific user.\\
-  \item By the access rights associated with a user, we 
-can determine \\
-\end{itemize}
-  \item what database objects a user can reference and 
-  \item what operations can be performed by that user.
-\end{itemize}
-
+Describe: Authorisation Identifier
 \clearpage
 19.18\\ 
  \\
@@ -499,20 +360,12 @@ can determine \\
   \item what database objects a user can reference and 
   \item what operations can be performed by that user.
 \end{itemize}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page18-image-1.png}
+\end{figure}
 \clearpage
 (Q)
-Describe: Ownership}
-\begin{itemize}
-  \item Each object created in SQL has an owner.
-  \item The owner is identified by the authorisation 
-identifier defined in the AUTHORIZATION \\
-clause of the schema to which the object \\
-belongs.\\
-  \item The owner is initially the only person who 
-knows that object exists and subsequently \\
-perform operations on that object.\\
-\end{itemize}
-
+Describe: Ownership
 \clearpage
 19.19\\ 
  \\
@@ -527,23 +380,12 @@ belongs.\\
 knows that object exists and subsequently \\
 perform operations on that object.\\
 \end{itemize}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page19-image-1.png}
+\end{figure}
 \clearpage
 (Q)
-Describe: Privileges}
-\end{itemize}
-  \item The ISO standard defines the following privileges, 
-among others.\\
-select to retrieve data from a table\\
-insert to insert new rows into a table. Can be \\
-restricted to specific columns.\\
-update to modify rows of data in a table. Can be \\
-restricted to specific columns.\\
-delete to delete rows of data from a table\\
-references to reference columns of a named table in \\
-integrity constraints. Can be restricted to \\
-specific columns.\\
-\end{itemize}
-
+Describe: Privileges
 \clearpage
 19.20\\ 
  \\
@@ -561,22 +403,12 @@ references to reference columns of a named table in \\
 integrity constraints. Can be restricted to \\
 specific columns.\\
 \end{itemize}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page20-image-1.png}
+\end{figure}
 \clearpage
 (Q)
-Describe: Create Table}
-\begin{itemize}
-  \item When you create a table, you are the 
-owner and have full privileges.\\
-  \item Other users have no access, and must be 
-GRANTed permissions by the owner.\\
-  \item When you create a view, you are the owner
-of the view. But you may not have full \\
-privileges.\\
-  \item You must have select privilege on the base 
-table, in order to create the view in the first \\
-place.\\
-\end{itemize}
-
+Describe: Create Table
 \clearpage
 19.21\\ 
  \\
@@ -593,20 +425,12 @@ privileges.\\
 table, in order to create the view in the first \\
 place.\\
 \end{itemize}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page20-image-2.png}
+\end{figure}
 \clearpage
 (Q)
-Describe: GRANT \{PrivilegeList | ALL PRIVILEGES\}}
-ON ObjectName\\
-TO \{AuthorizationList | PUBLIC\}\\
-[WITH GRANT OPTION]\\
-The GRANT command\\
-select\\
-delete\\
-insert [(columnName, [...])]\\
-update [(columnName, [...])]\\
-references [(columnName, [...])]\\
-PrivilegeList\\
-
+Describe: GRANT \{PrivilegeList | ALL PRIVILEGES\
 \clearpage
 19.22\\ 
  \\
@@ -621,18 +445,12 @@ insert [(columnName, [...])]\\
 update [(columnName, [...])]\\
 references [(columnName, [...])]\\
 PrivilegeList\\
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page21-image-1.png}
+\end{figure}
 \clearpage
 (Q)
-Describe: Examples}
-GRANT ALL PRIVILEGES\\
-ON Staff\\
-TO Manager\\
-WITH GRANT OPTION\\
-The user Manager can now retrieve rows from the \\
-Staff table, and also insert, update and delete.\\
-The Manager can pass these privileges onto other \\
-users.\\
-
+Describe: Examples
 \clearpage
 19.23\\ 
  \\
@@ -645,21 +463,12 @@ The user Manager can now retrieve rows from the \\
 Staff table, and also insert, update and delete.\\
 The Manager can pass these privileges onto other \\
 users.\\
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page22-image-1.png}
+\end{figure}
 \clearpage
 (Q)
-Describe: Examples}
-GRANT SELECT, UPDATE (salary)\\
-ON Staff\\
-TO Personnel, Director\\
-Gives the users Personnel and Director the privileges \\
-to select and update the salary column of the Staff \\
-table.\\
-GRANT SELECT\\
-ON Branch\\
-TO PUBLIC\\
-Gives all users the privilege \\
-SELECT on the Branch table.\\
-
+Describe: Examples
 \clearpage
 19.24\\ 
  \\
@@ -675,17 +484,12 @@ ON Branch\\
 TO PUBLIC\\
 Gives all users the privilege \\
 SELECT on the Branch table.\\
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page23-image-1.png}
+\end{figure}
 \clearpage
 (Q)
-Describe: Revoking privileges from users}
-\end{itemize}
-  \item The REVOKE statement can take away all or 
-some of the privileges previously GRANTed.\\
-REVOKE \{PrivilegeList | ALL PRIVILEGES\}\\
-ON ObjectName\\
-FROM \{AuthorizationList | PUBLIC\}\\
-\end{itemize}
-
+Describe: Revoking privileges from users
 \clearpage
 19.25\\ 
  \\
@@ -697,23 +501,12 @@ REVOKE \{PrivilegeList | ALL PRIVILEGES\}\\
 ON ObjectName\\
 FROM \{AuthorizationList | PUBLIC\}\\
 \end{itemize}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page24-image-1.png}
+\end{figure}
 \clearpage
 (Q)
-Describe: Examples}
-REVOKE SELECT\\
-ON Branch\\
-FROM PUBLIC\\
-Revoke the SELECT \\
-privilege on the Branch \\
-table from all users.\\
-REVOKE ALL PRIVILEGES\\
-ON Staff\\
-FROM Director\\
-Revoke all privileges \\
-you have given to \\
-Director on the Staff \\
-table.\\
-
+Describe: Examples
 \clearpage
 19.26\\ 
  \\
@@ -731,18 +524,22 @@ Revoke all privileges \\
 you have given to \\
 Director on the Staff \\
 table.\\
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page25-image-1.png}
+\end{figure}
 \clearpage
 (Q)
-Describe: THE END}
-
+Describe: THE END
 \clearpage
 19.27\\ 
  \\
 \section{THE END}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page26-image-1.png}
+\end{figure}
 \clearpage
 (Q)
-Describe: THE END}
-
+Describe: THE END
 \clearpage
 \\ 
 \end{document}

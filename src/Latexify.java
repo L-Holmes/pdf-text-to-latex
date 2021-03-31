@@ -372,7 +372,7 @@ public class Latexify {
                 catch(ArrayIndexOutOfBoundsException e){
                     textAfterAndIncludingTitle = page.split(Pattern.quote(titleTextStartSeperator))[0];
                 }
-                String titleTextEndSeperator = PAGE_TITLE_TEXT_INDICATOR_START;
+                String titleTextEndSeperator = PAGE_TITLE_TEXT_INDICATOR_END;
                 try {
                     pageTitle = textAfterAndIncludingTitle.split(Pattern.quote(titleTextEndSeperator))[0];
                 }
