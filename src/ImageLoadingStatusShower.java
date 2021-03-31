@@ -1,12 +1,24 @@
+/**
+ * Creates an output, detailing how much progress has been made by the process (as a percentage)
+ * specifically reports on a pdf parser loading images, and reports a percentage relating to the number of
+ * pages that have been processed.
+ */
 public class ImageLoadingStatusShower implements Runnable{
-    ParsePdf pdfParserToReportOn;
-    private boolean finishedAll = false;
+    ParsePdf pdfParserToReportOn;       //the parser, that is fetching images from a pdf, whose status is being reported on
+    private boolean finishedAll = false;//true if the process being reported on has finished its execution
 
+    /**
+     * @param parentPdfParser = the parser, that is fetching images from a pdf, whose status is being reported on
+     */
     public ImageLoadingStatusShower(ParsePdf parentPdfParser)
     {
         this.pdfParserToReportOn = parentPdfParser;
     }
 
+    /**
+     * Forces the running status output to stop,
+     * as the process it is reporting on is presumed to have finished
+     */
     public void finishProcess()
     {
         finishedAll = true;
@@ -28,8 +40,5 @@ public class ImageLoadingStatusShower implements Runnable{
             }
         }
         System.out.println("100% of images loaded");
-        System.out.println("loaded all images");
-
-
     }
 }

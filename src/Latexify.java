@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Stack;
 import java.util.regex.Pattern;
 
@@ -6,19 +7,19 @@ import java.util.regex.Pattern;
  * Converts an input String that has been read from  a pdf into a latex-like format
  */
 public class Latexify {
-    private static Stack<String> nestedBulletPointStyleStack = new Stack<String>();
+    private final static Stack<String> nestedBulletPointStyleStack = new Stack<String>();
     private final static String[] CHARACTERS_TO_BACKSLASH = {"_", "&" , "%" , "$" , "#" , "{" , "}" , "~" , "^"};  //charcters which are interpreted as special/modifier characters in latex, and so must be prepended by a backslash when converted
-    private static int currentPage = 0;
-    private final static  String TEXT_TO_ADD_NEW_PAGE_IN_LATEX = "\\clearpage\n";
-    private final static String BEGIN_DOC_PLACEHOLDER = "fsahfvmaekl343nm!";
+    private static int currentPage = 0; //the page number (of the input pdf), whose contents are currently being processed
+    private final static  String TEXT_TO_ADD_NEW_PAGE_IN_LATEX = "\\clearpage\n";//the text that LaTeX will interpret as a 'new page prompt'
+    private final static String BEGIN_DOC_PLACEHOLDER = "fsahfvmaekl343nm!";//a placeholder/temp for the text that LaTeX will interpret as 'starting the main document body'
 
     //--optional arguments--
-    private static boolean quizMode = false;
-    private static short numStartLinesToRemoveForEachPage = 0;
-    private static String removePatternOnLine = "";
-    private static String removePatternOnPara = "";
+    private static boolean quizMode = false;//true if 'quiz mode' formatting is to be applied to the text; false otherwise
+    private static short numStartLinesToRemoveForEachPage = 0;// the number of lines to remove/ignore, when processing the text for each page of the pdf text input
+    private static short linesToRemoveCount = 0;//used to keep-track of how many of the following lines of text must be ignored/removed
+    private static String removePatternOnLine = "";//the sequence of characters that will be searched for on each line. The line will be removed if it contains that sequence
+    private static String removePatternOnPara = "";//the sequence of characters that will be searched for on each paragraph. The paragraph will be removed if it contains that sequence
     private final static String QUIZ_PAGE_INDICATION_TEXT = "(Q)"; //text added to the start of each quiz page, to indicate that this particular page is a quiz page(i.e. a page asking a question)
-    private static short linesToRemoveCount = 0;
 
     //----Optional argument setting---
     /**
@@ -33,6 +34,11 @@ public class Latexify {
         currentPage = 0;
     }
 
+    /**
+     * Initialises the instance variables relating to any optional argumentes,
+     * with any of the optional arguments that have been passed in
+     * @param args = the structure containing the optional arguments
+     */
     private static void initialiseOptionalArguments(LatexifyOptionalArguments args)
     {
         if (args != null){
@@ -44,6 +50,15 @@ public class Latexify {
     }
     //--- ---
 
+    /**
+     * Converts the text into LaTeX, by converting any placeholders/special characters/modifiers
+     * into their LaTeX equivalent
+     * @param textToConvert = the input text, that is to be Latexified (should be the text read from the pdf, and will act as the 'body' of the LaTeX text)
+     * @param textToAddImages = the text which contains LaTeX text, which is used to add images to the text (each entry corresponds to the page index from the input pdf, whose contents have been read)
+     * @param newPageSeperator = the temporary/placeholder text that is used to represent were a page-break prompt should be placed
+     * @param args = the structure containing the optional arguments
+     * @return the Latexified text
+     */
     public static String convertTextToLatex(String textToConvert, String[] textToAddImages, String newPageSeperator, LatexifyOptionalArguments args)
     {
         initialiseOptionalArguments(args);
@@ -75,18 +90,26 @@ public class Latexify {
         return outputString;
     }
 
+    /**
+     * Used to convert the 'body' or 'document' (as LaTeX calls it) into a Latexified format
+     * @param textBuilder = The structure that is used to store the text that has been Latexified so far (including the LaTex text before and after the 'document' body
+     * @param textToAdd = the text which will be inserted into the 'document', after being Latexified
+     * @param newPageSeperator = the temporary/placeholder text that is used to represent were a page-break prompt should be placed
+     * @param textToAddImages = the text which contains LaTeX text, which is used to add images to the text (each entry corresponds to the page index from the input pdf, whose contents have been read)
+     * @return the latexified document body
+     */
     private static StringBuilder addDocumentBody(StringBuilder textBuilder,String textToAdd, String newPageSeperator, String[] textToAddImages)
     {
         boolean prevLineWasPageBreak = false;
         String previousBulletStyle = "";
 
-
         //optional arguments
         StringBuilder paragraphBuffer = new StringBuilder();
 
-
-
         for (String line : textToAdd.split("\n")){
+            if (lineContainsPattern(line, removePatternOnLine)){
+                //TODO: do not add the line
+            }
             //prepend a backslash to any special characters so that they are literally interpreted in the latex code
             for (String specialChar : CHARACTERS_TO_BACKSLASH){
                 if (line.contains(specialChar)){
@@ -136,12 +159,21 @@ public class Latexify {
                 prevLineWasPageBreak = regLineOutput.previousLineWasPageBreak();
                 previousBulletStyle = regLineOutput.prevBulletStyle();
             }
-
         }
         return textBuilder;
     }
 
-
+    /**
+     * Formats & performs any new page actions/checks for the line, if it contains a page break prompts,
+     * @param line = the line that is being checked for page break prompts / the line that will be updated to use to LaTeX style new page prompts & commands
+     * @param newPageSeperator = the temporary/placeholder text that is used to represent were a page-break prompt should be placed
+     * @param prevLineWasPageBreak = true if the line that was previously processed contained a page-break; false otherwise
+     * @param previousBulletStyle = the set of characters relating to the style of bullet points that was previously used. (empty string if the prev line was not a bullet point)
+     * @param textBuilder = The structure that is used to store the text that has been Latexified so far
+     * @param linesToRemoveCount = the number of lines to be ignored/removed from the text starting after a page break prompt
+     * @param textToAddImages = the text which contains LaTeX text, which is used to add images to the text (each entry corresponds to the page index from the input pdf, whose contents have been read)
+     * @return the updated line, and any possibly changed variable that relate to the text (metadata style variables)
+     */
     private static adjustAnyNewpagesOutput adjustAnyNewpages(String line, String newPageSeperator, boolean prevLineWasPageBreak, String previousBulletStyle, StringBuilder textBuilder, short linesToRemoveCount, String[] textToAddImages)
     {
         if(!line.contains(newPageSeperator)) {
@@ -164,8 +196,9 @@ public class Latexify {
         prevLineWasPageBreak = true;
         linesToRemoveCount = numStartLinesToRemoveForEachPage;
 
-        //add the images to the and of the page
-        String[] splitLine = line.split(TEXT_TO_ADD_NEW_PAGE_IN_LATEX);
+        //add the images to the end of the page
+        String seperatorForTheNewPagePrompt =TEXT_TO_ADD_NEW_PAGE_IN_LATEX ;
+        String[] splitLine = line.split(Pattern.quote(seperatorForTheNewPagePrompt));
         try {
             line = splitLine[0].concat(currentPageImageAddingText).concat(splitLine[1]);
         }
@@ -183,6 +216,14 @@ public class Latexify {
         return new adjustAnyNewpagesOutput(line, true, previousBulletStyle, textBuilder, linesToRemoveCount);
     }
 
+    /**
+     * Output for the adjustAnyNewpages method
+     * @param line = the line that is being checked for page break prompts / the line that will be updated to use to LaTeX style new page prompts & commands
+     * @param prevLineWasPageBreak = true if the line that was previously processed contained a page-break; false otherwise
+     * @param previousBulletStyle  = the set of characters relating to the style of bullet points that was previously used. (empty string if the prev line was not a bullet point)
+     * @param textBuilder = The structure that is used to store the text that has been Latexified so far
+     * @param lineToRemoveCount = the number of lines to be ignored/removed from the text starting after a page break prompt
+     */
     private record adjustAnyNewpagesOutput(String line, boolean prevLineWasPageBreak, String previousBulletStyle, StringBuilder textBuilder, short lineToRemoveCount){}
 
     /**
@@ -191,9 +232,9 @@ public class Latexify {
      * -newpagse
      * -titles / section headings
      * -bullet points
-     * @param prevLineWasPageBreak
+     * @param prevLineWasPageBreak = true if the line that was previously processed contained a page-break; false otherwise
      * @param line
-     * @param textBuilder
+     * @param textBuilder = The structure that is used to store the text that has been Latexified so far
      * @return
      */
     private static RegularDocLineOut addDocLine(boolean prevLineWasPageBreak, String line, StringBuilder textBuilder, String previousBulletStyle)
@@ -238,6 +279,13 @@ public class Latexify {
         return new RegularDocLineOut(textBuilder, prevLineWasPageBreak, previousBulletStyle);
     }
 
+    /**
+     * The output for the  addDocLine method
+     * @param textBuilder
+     * @param previousLineWasPageBreak
+     * @param prevBulletStyle
+     */
+    private record RegularDocLineOut(StringBuilder textBuilder, boolean previousLineWasPageBreak, String prevBulletStyle){}
 
     /**
      * handles the manipulation of the line string, when a bullet point is encountered.
@@ -268,14 +316,13 @@ public class Latexify {
 
     private record BulletPointOperationOut(String modifiedLine, String previousBulletStyle){}
 
-    private record RegularDocLineOut(StringBuilder textBuilder, boolean previousLineWasPageBreak, String prevBulletStyle){}
-
     /**
      * Used to identify patterns of letters/words within a paragraph.
      * if
      * e.g. to remove a page number / recurring text for each page in the document
      * @param paragraphToSearch = the line that is being searched for the pattern
      * @param patternToSearchFor = the pattern of characters that is being searched for
+     * @return
      */
     private static boolean paragraphContainsPattern(String paragraphToSearch, String patternToSearchFor)
     {
@@ -288,6 +335,7 @@ public class Latexify {
      * e.g. to remove a page number / recurring text for each page in the document
      * @param lineToSearch = the line that is being searched for the pattern
      * @param patternToSearchFor = the pattern of characters that is being searched for
+     * @return
      */
     private static boolean lineContainsPattern(String lineToSearch, String patternToSearchFor)
     {
@@ -298,38 +346,81 @@ public class Latexify {
      * Checks if a new paragraph has started.
      * If so, adds the currently contstructed paragraph to the output string, if it is valid
      * the next paragraph is then started.
+     * Note: assumes that paragraphs have an entire blank line between them
      * @param line = the line that is being checked to see if it is the last line of the paragraph
      * @param paragraphBuffer = contains the current paragraph that is being constructed, line-by-line
      * @param textBuilder = contains the output text, that has been constructed thus far
      * @param patternToRemoveLine = the pattern of letters/string, that will invalidate a line, should the line contain it (i.e. the line will be deleted; e.g. if it contains: 'remove me', delete this line)
-     * @param patternToRemoveSentence = the pattern of letters/string, that will invalidate a paragraph, should the paragraph contain it (i.e. the paragraph will be deleted; e.g. if it contains: 'remove me', delete this paragraph)
+     * @param patternToRemoveParagraph = the pattern of letters/string, that will invalidate a paragraph, should the paragraph contain it (i.e. the paragraph will be deleted; e.g. if it contains: 'remove me', delete this paragraph)
      * @return the updated information; the current line that is being investigated, the current paragraph that is being investigated, and the output text.
      */
-    private static ParagraphSearchOut performParagraphChecks(String line, StringBuilder paragraphBuffer, StringBuilder textBuilder, String patternToRemoveLine, String patternToRemoveSentence)
+    private static ParagraphSearchOut performParagraphChecks(String line, StringBuilder paragraphBuffer, StringBuilder textBuilder, String patternToRemoveLine, String patternToRemoveParagraph)
     {
         //handling paragraphs
 
-        //if line contains a newline, then a new paragraph has been reached
-        if(!line.contains("\n")){
+        //if line is blank, then we are between paragraph
+        if(!line.isBlank()){
             return new ParagraphSearchOut(line, paragraphBuffer, textBuilder);
         }
-        //split the line at the newline
-        String[] splitLine = line.split("\n");
-        if (splitLine.length!=2){
-            splitLine = new String[]{"", ""};
-        }
-        String lastLineOfPrevParagraph = splitLine[0];
-        line = splitLine[1];
 
-        //Finish constructing the previous paragraph by adding the last line
-        if(!lineContainsPattern(line, patternToRemoveLine)) {
-            //perform checks
-            paragraphBuffer.append(lastLineOfPrevParagraph);
+        /*
+
+         */
+        String currentParagraphAsText = paragraphBuffer.toString();
+        String[] currentParagraphSplitByNewlines = currentParagraphAsText.split("\n");
+        String[] searchPatternSplitByNewlines = patternToRemoveParagraph.split("\n");
+        int numTotalChecksToVerify = searchPatternSplitByNewlines.length;
+        boolean foundFirstMatch = false;
+        int foundMatchedPatterns = 0;
+        int numWhiteSpacesBeforeFirstSearchQuery = -1; //for a search query (e.g:   findMe!), this is the number of leading whitespaces that the actual search term has (e.g: 3)
+        int startIndexOfFirstMatch = -1; //for the (whitespace trimmed) first search term, this is the index (from within the line being searched), that the first letter of the search term starts at
+        String searchQueryForThisLine;
+        for (String paraLine :currentParagraphSplitByNewlines){
+            searchQueryForThisLine = searchPatternSplitByNewlines[foundMatchedPatterns];
+            if(!foundFirstMatch){
+                numWhiteSpacesBeforeFirstSearchQuery = searchQueryForThisLine.indexOf(searchQueryForThisLine.trim());
+                if(paraLine.contains(searchQueryForThisLine)){
+                    //find the index that it starts at
+                    startIndexOfFirstMatch = paraLine.indexOf(searchQueryForThisLine);
+                    //increment num.found matches
+                    foundMatchedPatterns++;
+                }
+            }
+            else{
+                boolean patternContinues = false;
+                //find the relative start index of this line compared to the last (num whitespaces before text)
+                if (numWhiteSpacesBeforeFirstSearchQuery >=0 && startIndexOfFirstMatch >= 0) {
+                    int numWhiteSpacesBeforeSearchQueryForThisLine = searchQueryForThisLine.indexOf(searchQueryForThisLine.trim());
+                    int shiftRelToFirstSearchQuery = numWhiteSpacesBeforeFirstSearchQuery -numWhiteSpacesBeforeSearchQueryForThisLine;
+                    int requiredStartIndexForThisLine =startIndexOfFirstMatch +shiftRelToFirstSearchQuery;
+
+                    //if the trimmed line contains the corresponding index from  searchPatternSplitByNewlines:
+                    //  && if it starts at index 0 -> foundMatchedPatterns++
+                    if(paraLine.contains(searchQueryForThisLine)){
+                        int startIndexForMatchOnThisLine = paraLine.indexOf(searchQueryForThisLine);
+                        if (startIndexForMatchOnThisLine == requiredStartIndexForThisLine){
+                            foundMatchedPatterns++;
+                            patternContinues = true;
+                            continue;//TODO: this means that the pattern is still continuing; any other result is a fail.
+                        }
+                    }
+                }
+                //if it does not contain anything, then this paragraph does not contain the search term
+                //TODO: return false or something idk..
+                if(!patternContinues){
+                    //
+                }
+            }
+            if(foundMatchedPatterns >= numTotalChecksToVerify){
+                //return true; //TODO: uncomment this at some point/decide what to do when filled the rest in
+            }
         }
+
+        //TODO: work out what to do with this stuff (below)
 
         //add the previous paragraph  to the output string, if it is valid
         String previousParagraph = paragraphBuffer.toString();
-        if(!paragraphContainsPattern(previousParagraph, patternToRemoveSentence)){
+        if(!paragraphContainsPattern(previousParagraph, patternToRemoveParagraph)){
             textBuilder.append(previousParagraph);
         }
         //reset the to start the next paragraph
@@ -340,6 +431,14 @@ public class Latexify {
 
     private record ParagraphSearchOut(String firstLineOfNextParagraph,StringBuilder paragraph, StringBuilder constructedOutText){}
 
+    /**
+     * Applies quiz formatting to the inputted LaTeX-style text.
+     * This includes:
+     * -before each page, adding a 'question' page.
+     *      -which will contain a question, usually to describe <title of the page>
+     * @param textToConvert = The LaTeX style text, which is to be quizified
+     * @return a quizified version of the LaTex text
+     */
     private static String applyQuizFormatting(String textToConvert)
     {
         String PAGE_TITLE_TEXT_INDICATOR_START = "\\section".concat("{");
