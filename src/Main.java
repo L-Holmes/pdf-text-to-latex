@@ -1,9 +1,9 @@
 import util.WriteTextToFileHandle;
 /*
 TODO:
--work out what to do for paragraphs being added seperately to normal lines.:w
 
--for paragraph search, I don't think that an empty line is seen as a '\n'??
+-test for different pdfs
+-test the paragraph and line search thing
 
  */
 class Main
