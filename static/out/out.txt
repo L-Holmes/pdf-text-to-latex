@@ -96,8 +96,8 @@ Describe: Conceptual Schema Definition in SQL (2)
 \end{itemize}
   \item To create schema:
 \begin{itemize}
-  \item CREATE SCHEMA <SCHEMA\_NAME>
-AUTHORISATION <AUTH\_IDENTIFIER>\\
+  \item CREATE SCHEMA  \textless SCHEMA\_NAME \textgreater 
+AUTHORISATION  \textless AUTH\_IDENTIFIER \textgreater \\
 \begin{itemize}
   \item In our example:
 \end{itemize}
@@ -118,14 +118,14 @@ Describe: Conceptual Schema Definition in SQL (3)
   \item To create tables for a schema explicitly:
 \end{itemize}
   \item CREATE TABLE
-<SCHEMA\_NAME>. <TABLE\_NAME> \\
-<TABLE\_DEFINITION>\\
+ \textless SCHEMA\_NAME \textgreater .  \textless TABLE\_NAME \textgreater  \\
+ \textless TABLE\_DEFINITION \textgreater \\
 \begin{itemize}
   \item To create tables for a schema implicitly:
 \end{itemize}
   \item CREATE TABLE
-<TABLE\_NAME>\\
-<TABLE\_DEFINITION>\\
+ \textless TABLE\_NAME \textgreater \\
+ \textless TABLE\_DEFINITION \textgreater \\
   \item Schema name specified in environment is used
 \end{itemize}
 \begin{figure}[H]
@@ -250,8 +250,8 @@ Describe: Views in SQL (2)
 \begin{itemize}
   \item Use the command:
 \end{itemize}
-  \item CREATE VIEW <VIEW\_NAME> AS
-<SQL\_QUERY>\\
+  \item CREATE VIEW  \textless VIEW\_NAME \textgreater  AS
+ \textless SQL\_QUERY \textgreater \\
   \item CREATE VIEW PHYSICS\_STUDENTS AS
 SELECT *\\
 FROM STUDENT\\
@@ -278,7 +278,7 @@ WHERE GENDER = ‘M’\\
 \begin{itemize}
   \item Views can be dropped by using command:
 \end{itemize}
-  \item DROP VIEW <VIEW\_NAME>
+  \item DROP VIEW  \textless VIEW\_NAME \textgreater 
 e.g.\\
 DROP VIEW PHYSICS\_STUDENTS\\
 \end{itemize}
@@ -308,7 +308,7 @@ Describe: Mandatory Access Control
 classification level\\
   \item i.e. top secret, secret, confidential, unclassified
   \item The levels form a strict ordering.
-  \item top secret > secret > confidential> unclassified
+  \item top secret  \textgreater  secret  \textgreater  confidential \textgreater  unclassified
   \item Each subject (users or programs) is given a 
 clearance level.\\
   \item To access an object, a subject requires the 
@@ -537,6 +537,10 @@ Describe: THE END
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page26-image-1.png}
 \end{figure}
+\clearpage
+(Q)
+Describe: THE END
+\clearpage
 \clearpage
 (Q)
 Describe: THE END

@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Stack;
 import java.util.regex.Pattern;
 
@@ -106,62 +105,102 @@ public class Latexify {
         //optional arguments
         StringBuilder paragraphBuffer = new StringBuilder();
 
+        StringBuilder mainTextConstructor;
+        if(!removePatternOnPara.isBlank() && !removePatternOnLine.isBlank()){
+            mainTextConstructor = paragraphBuffer;
+        }
+        else{
+            mainTextConstructor = textBuilder;
+        }
+
         for (String line : textToAdd.split("\n")){
             if (lineContainsPattern(line, removePatternOnLine)){
                 //TODO: do not add the line
             }
-            //prepend a backslash to any special characters so that they are literally interpreted in the latex code
-            for (String specialChar : CHARACTERS_TO_BACKSLASH){
-                if (line.contains(specialChar)){
-                    line = line.replace(specialChar, "\\".concat(specialChar));
-                }
-            }
-            line.replace("<", " \\textless ");
-            line.replace(">", " \\textgreater ");
+
+            //special character adjustments
+            line = performSpecialCharacterAdjustments(line);
 
             //performing paragraph related checks
-            if (!removePatternOnPara.isBlank() && !removePatternOnLine.isBlank()){
+            if (!removePatternOnPara.isBlank() && !removePatternOnLine.isBlank()) {
                 ParagraphSearchOut paragraphData = performParagraphChecks(line, paragraphBuffer, textBuilder, removePatternOnPara, removePatternOnLine);
                 line = paragraphData.firstLineOfNextParagraph();
                 paragraphBuffer = paragraphData.paragraph();
                 textBuilder = paragraphData.constructedOutText();
             }
-
-            //performing new page related checks
-            adjustAnyNewpagesOutput newpageAdjustOut = adjustAnyNewpages(line, newPageSeperator, prevLineWasPageBreak, previousBulletStyle, textBuilder, linesToRemoveCount, textToAddImages);
-            line = newpageAdjustOut.line();
-            prevLineWasPageBreak = newpageAdjustOut.prevLineWasPageBreak();
-            previousBulletStyle = newpageAdjustOut.previousBulletStyle();
-            textBuilder = newpageAdjustOut.textBuilder();
-            linesToRemoveCount = newpageAdjustOut.lineToRemoveCount();
-
-
-            if (linesToRemoveCount >0){
-                //if the user has chosen to ignore the first 'x' lines of each page, here, they are ignored (i.e. not added to the output text)
-                if (linesToRemoveCount == numStartLinesToRemoveForEachPage){
-                    //add the first line
-                    textBuilder.append(line);
-                    textBuilder.append("\\\\ \n");
-                }
-                linesToRemoveCount--;
-            }
-            else{
-                //perform regular line adjustments
-                RegularDocLineOut regLineOutput;
-                if (!removePatternOnPara.isBlank() && !removePatternOnLine.isBlank()){
-                    regLineOutput = addDocLine(prevLineWasPageBreak, line, paragraphBuffer, previousBulletStyle);
-                    paragraphBuffer = regLineOutput.textBuilder();
-                }
-                else{
-                    regLineOutput = addDocLine(prevLineWasPageBreak, line, textBuilder, previousBulletStyle);
-                    textBuilder = regLineOutput.textBuilder();
-                }
-                prevLineWasPageBreak = regLineOutput.previousLineWasPageBreak();
-                previousBulletStyle = regLineOutput.prevBulletStyle();
-            }
+            //perform regular line checks
+            regLineChecksOut regLineOut = performRegularLineChecks(line, newPageSeperator, prevLineWasPageBreak, previousBulletStyle, mainTextConstructor, textToAddImages);
+            line = regLineOut.modifiedLine();
+            mainTextConstructor = regLineOut.textBuffer();
+            prevLineWasPageBreak = regLineOut.prevLineWasPageBreak();
+            previousBulletStyle = regLineOut.prevBulletStyle();
         }
         return textBuilder;
     }
+
+    /**
+     * modifies any characters/group of characters, that
+     * must be changed to be interpreted correctly
+     * when converted to LaTeX code
+     * @param line = the line, whose special characters are being updated
+     * @return the updated line
+     */
+    private static String performSpecialCharacterAdjustments(String line)
+    {
+        //prepend a backslash to any special characters so that they are literally interpreted in the latex code
+        for (String specialChar : CHARACTERS_TO_BACKSLASH){
+            if (line.contains(specialChar)){
+                line = line.replace(specialChar, "\\".concat(specialChar));
+            }
+        }
+        line = line.replace("<", " \\textless ");
+        line = line.replace(">", " \\textgreater ");
+        return line;
+    }
+
+    /**
+     * performs:
+     * -general line adjustments
+     * -new page related checks
+     * -the removement of any lines from the start of each page (if requied)
+     * @param line
+     * @param newPageSeperator
+     * @param prevLineWasPageBreak
+     * @param previousBulletStyle
+     * @param textBuffer
+     * @param textToAddImages
+     * @return
+     */
+    private static regLineChecksOut performRegularLineChecks(String line, String newPageSeperator, boolean prevLineWasPageBreak, String previousBulletStyle, StringBuilder textBuffer, String[] textToAddImages)
+    {
+        //performing new page related checks
+        adjustAnyNewpagesOutput newpageAdjustOut = adjustAnyNewpages(line, newPageSeperator, prevLineWasPageBreak, previousBulletStyle, textBuffer, linesToRemoveCount, textToAddImages);
+        line = newpageAdjustOut.line();
+        prevLineWasPageBreak = newpageAdjustOut.prevLineWasPageBreak();
+        previousBulletStyle = newpageAdjustOut.previousBulletStyle();
+        textBuffer = newpageAdjustOut.textBuilder();
+        linesToRemoveCount = newpageAdjustOut.lineToRemoveCount();
+
+        if (linesToRemoveCount >0){
+            //if the user has chosen to ignore the first 'x' lines of each page, here, they are ignored (i.e. not added to the output text)
+            if (linesToRemoveCount == numStartLinesToRemoveForEachPage){
+                //add the first line
+                textBuffer.append(line);
+                textBuffer.append("\\\\ \n");
+            }
+            linesToRemoveCount--;
+        }
+        else{
+            //perform regular line adjustments
+            RegularDocLineOut regLineOutput = addDocLine(prevLineWasPageBreak, line, textBuffer, previousBulletStyle);
+            textBuffer = regLineOutput.textBuilder();
+            prevLineWasPageBreak = regLineOutput.previousLineWasPageBreak();
+            previousBulletStyle = regLineOutput.prevBulletStyle();
+        }
+        return new regLineChecksOut(line, textBuffer, prevLineWasPageBreak, previousBulletStyle);
+    }
+
+    private record regLineChecksOut(String modifiedLine, StringBuilder textBuffer, boolean prevLineWasPageBreak, String prevBulletStyle){}
 
     /**
      * Formats & performs any new page actions/checks for the line, if it contains a page break prompts,
@@ -191,21 +230,29 @@ public class Latexify {
             currentPageImageAddingText= "";
         }
 
+
+        //add the images to the end of the page
+        System.out.println("line: "+ line);
+        System.out.println("pattern: "+ newPageSeperator);
+        String[] splitLine = line.split(Pattern.quote(newPageSeperator));
+        try {
+            line = splitLine[0].concat(currentPageImageAddingText).concat(newPageSeperator).concat(splitLine[1]);
+        }
+        catch(ArrayIndexOutOfBoundsException e){
+            try{
+                //if the newpage is at the immediate start/end of the sentence
+                line = currentPageImageAddingText.concat(splitLine[0]).concat(newPageSeperator);
+            }
+            catch(ArrayIndexOutOfBoundsException e2){
+                //if the entire line is the newline text
+                line = currentPageImageAddingText.concat(line).concat(newPageSeperator);
+            }
+        }
+
         //add the newpage indications
         line = line.replace(newPageSeperator, TEXT_TO_ADD_NEW_PAGE_IN_LATEX);
         prevLineWasPageBreak = true;
         linesToRemoveCount = numStartLinesToRemoveForEachPage;
-
-        //add the images to the end of the page
-        String seperatorForTheNewPagePrompt =TEXT_TO_ADD_NEW_PAGE_IN_LATEX ;
-        String[] splitLine = line.split(Pattern.quote(seperatorForTheNewPagePrompt));
-        try {
-            line = splitLine[0].concat(currentPageImageAddingText).concat(splitLine[1]);
-        }
-        catch(ArrayIndexOutOfBoundsException e){
-            //if the newpage is at the immediate start/end of the sentence
-            line = currentPageImageAddingText.concat(splitLine[0]);
-        }
 
         //end any bullet points
         if (previousBulletStyle != ""){
