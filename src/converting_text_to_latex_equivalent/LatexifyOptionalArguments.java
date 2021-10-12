@@ -1,10 +1,12 @@
+package converting_text_to_latex_equivalent;
+
 public class LatexifyOptionalArguments {
     private  boolean quizMode = false;
     private  short numStartLinesToRemoveForEachPage = 0;
     private  String removePatternOnLine = "";
     private  String removePatternOnPara = "";
 
-    LatexifyOptionalArguments()
+    public LatexifyOptionalArguments()
     {}
 
     /**

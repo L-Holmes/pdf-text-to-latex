@@ -1,3 +1,5 @@
+package util;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -6,6 +8,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
+/**
+ * Creates a copy of a text file, with the copy sharing the same name and having the .tex file extension
+ */
 public class ConvertOutTextToLatex implements Runnable {
 
     private static String inputTextFileLocation = "";

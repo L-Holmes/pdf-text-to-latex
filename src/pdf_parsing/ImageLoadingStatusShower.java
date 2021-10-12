@@ -1,3 +1,7 @@
+package pdf_parsing;
+
+import pdf_parsing.ParsePdf;
+
 /**
  * Creates an output, detailing how much progress has been made by the process (as a percentage)
  * specifically reports on a pdf parser loading images, and reports a percentage relating to the number of

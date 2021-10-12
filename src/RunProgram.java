@@ -1,7 +1,8 @@
+import converting_text_to_latex_equivalent.Latexify;
+import converting_text_to_latex_equivalent.LatexifyOptionalArguments;
+import pdf_parsing.ParsePdf;
+import util.ConvertOutTextToLatex;
 import util.WriteTextToFileHandle;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * Used to the run the process, which are used to
@@ -32,15 +33,12 @@ public class RunProgram {
 
         String outputLatexPath = replaceFilePathExtensionWithLatexFileExtension(pathToOutputTextFile);
         pdfParser = new ParsePdf(pdfToReadLocation);
-        System.out.println("\n----------------------------\n **PARSED PDF**");
 
         readPdfAndWriteOutputToFile(pdfToReadLocation,pathToOutputTextFile);
-        System.out.println("\n----------------------------\n **READ AND OUTPUTTED TO FILE**");
 
         ConvertOutTextToLatex.setParameters(pathToOutputTextFile, outputLatexPath);
 
         new Thread(new ConvertOutTextToLatex()).start();
-        System.out.println("\n----------------------------\n **CONVERTED THE OUT .TXT FILE TO .TEX**");
     }
 
     public static String replaceFilePathExtensionWithLatexFileExtension(String inputFilePath)
@@ -66,14 +64,38 @@ public class RunProgram {
     private void readPdfAndWriteOutputToFile(String pdfToReadFromPath, String fileToWriteToPath)
     {
         short numLinesToIgnore = 6;
-
         String contentsToWrite = pdfParser.getPdfText(pdfToReadFromPath, newPageSeperatorText);
+
+        /*
+        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%\n Check #1: Is the extracted text correct?");
+        System.out.println("check #1 results: \n [");
+        System.out.println(contentsToWrite);
+        System.out.println("\n]\n");
+         */
+
         String[] textToAddImgs = pdfParser.getPdfImageAddingText(pdfToReadFromPath);
+        /*
+        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%\n Check #2: Is the extracted image adding text correct?");
+        System.out.println("check #2 results: \n [");
+        int pagenum = 0;
+        for(String pageText : textToAddImgs){
+            pagenum++;
+            System.out.println("\npage "+pagenum+")\n"+contentsToWrite);
+        }
+        System.out.println("\n]\n");
+         */
+
         LatexifyOptionalArguments optionalArgs = new LatexifyOptionalArguments();
 
         optionalArgs.setNumStartLinesToRemoveForEachPage(numLinesToIgnore);
         optionalArgs.setQuizMode(true);
         String latexifiedContents = Latexify.convertTextToLatex(contentsToWrite, textToAddImgs, newPageSeperatorText, optionalArgs);
+
+        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%\n Check #3: Is the converted LaTeX text correct?");
+        System.out.println("check #3 results: \n [");
+        System.out.println(latexifiedContents);
+        System.out.println("\n]\n");
+
         WriteTextToFileHandle fileWriter = new WriteTextToFileHandle(fileToWriteToPath, latexifiedContents);
 
         fileWriter.writeDataToFile();

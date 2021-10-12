@@ -1,3 +1,5 @@
+package pdf_parsing;
+
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
