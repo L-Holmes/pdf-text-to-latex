@@ -42,44 +42,50 @@ public class ParsePdf {
     }
 
     /**
-     * @param fileToRead = the filepath to the pdf, that is to have its contents read.
+     * Retrieves the text from all of the pages within the pdf file
+     * @param filePathOfFileBeingRead = the filepath to the pdf, that is to have its contents read.
+     * @param newPageSeperator = symbol/text used to represent where the current page would end (and the next one would begin)
      */
-    public ParsePdfOut getPdfText(String fileToRead, String newPageSeperator)
-    {
-        String[] imgAddingTextForEachPage = new String[0];
-        StringBuilder outText = new StringBuilder();
+    public String getPdfText(String filePathOfFileBeingRead, String newPageSeperator){
+        //
+        PdfTextExtractor textExtractor = new PdfTextExtractor();
+
         try {
-            File inputFile = new File(fileToRead);
-            PDDocument documentToRead = PDDocument.load(inputFile);
-            PDFTextStripper textStripper = new PDFTextStripper();
-            Splitter pageSplitter  = new Splitter();
-            List<PDDocument> pagesOfPdf = pageSplitter.split(documentToRead);
-            Iterator<PDDocument> pageIterator = pagesOfPdf.listIterator();
-            while(pageIterator.hasNext()){
-                PDDocument page = pageIterator.next();
+            PDDocument documentToRead = getPdfDocumentFromFilePath(filePathOfFileBeingRead);
+            return textExtractor.getPdfText(documentToRead, newPageSeperator);
 
-                //getting the text
-                String extractedPageText = textStripper.getText(page);
-                outText.append(extractedPageText);
-
-
-                //adding the end of page marker
-                outText.append(newPageSeperator);
-                page.close();
-            }
-            imgAddingTextForEachPage = getAllPageImages(documentToRead);
-            documentToRead.close();
         } catch (IOException e) {
-            System.out.println("could not load the file to read: '"+fileToRead+"'");
-            //file may be empty
+            System.out.println("could not load the file to read: '"+filePathOfFileBeingRead+"'");
             e.printStackTrace();
+            return null;
         }
-        return new ParsePdfOut(outText.toString(), imgAddingTextForEachPage);
     }
 
+    private PDDocument getPdfDocumentFromFilePath(String fileToReadFilePath) throws IOException {
+        File inputFile = new File(fileToReadFilePath);
+        PDDocument documentToRead = PDDocument.load(inputFile);
+        return documentToRead;
+    }
 
+    public String[] getPdfImageAddingText(String filePathOfFileBeingRead){
+        try {
+            PDDocument documentToRead = getPdfDocumentFromFilePath(filePathOfFileBeingRead);
+            return retrievePdfImageAddingTextForAllPages(documentToRead);
 
-    private String[] getAllPageImages(PDDocument documentToRead)
+        } catch (IOException e) {
+            System.out.println("could not load the file to read: '"+filePathOfFileBeingRead+"'");
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * gets the LaTex text used to add an image to a page (for all pages),
+     * with each index in the array corresponding to the page number from the input pdf.
+     * @param documentToRead the pdf document that is having the images read from all of its pages
+     * @return the LaTeX text used to add images to every pages (ordered by page index)
+     */
+    private String[] retrievePdfImageAddingTextForAllPages(PDDocument documentToRead)
     {
         ArrayList<String> imageAddingTextForEachPage = new ArrayList<String>();
         //getting the images

@@ -5,7 +5,7 @@
 
 #for non-horizontal wording, rotate in finder, then try to quit, and choose 'save'.
 
-echo "Conmpiling the latex with pdflatex:"
+echo "Compiling the latex with pdflatex:"
 cd static
 #cd out
 cd year3_lecture_slides

@@ -67,16 +67,15 @@ public class RunProgram {
     {
         short numLinesToIgnore = 6;
 
-        ParsePdfOut pdfParseOutput = pdfParser.getPdfText(pdfToReadFromPath, newPageSeperatorText);
-        String contentsToWrite = pdfParseOutput.outText();
-        String[] textToAddImgs = pdfParseOutput.imgAddingForEachPage();
+        String contentsToWrite = pdfParser.getPdfText(pdfToReadFromPath, newPageSeperatorText);
+        String[] textToAddImgs = pdfParser.getPdfImageAddingText(pdfToReadFromPath);
         LatexifyOptionalArguments optionalArgs = new LatexifyOptionalArguments();
+
         optionalArgs.setNumStartLinesToRemoveForEachPage(numLinesToIgnore);
         optionalArgs.setQuizMode(true);
         String latexifiedContents = Latexify.convertTextToLatex(contentsToWrite, textToAddImgs, newPageSeperatorText, optionalArgs);
         WriteTextToFileHandle fileWriter = new WriteTextToFileHandle(fileToWriteToPath, latexifiedContents);
-        //TODO: the pdf should have been created by here I think?
-        //or maybe it cannot create the pdf file because it cannot find the folder?
+
         fileWriter.writeDataToFile();
     }
 }

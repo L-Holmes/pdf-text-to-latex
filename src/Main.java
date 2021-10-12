@@ -17,5 +17,10 @@ class Main
 
         System.out.println("\n...starting main...");
         RunProgram runner = new RunProgram(inputPdfLocation, outputTextFileLocation);
+
+        /*
+        TODO:
+        -add more print statements to work out why the pages are not being converted correctly.
+         */
     }
 }
