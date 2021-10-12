@@ -7,10 +7,29 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 public class ConvertOutTextToLatex implements Runnable {
+
+    private static String inputTextFileLocation = "";
+    private static String outputLaTexFileLocation = "";
+
+    public static void setParameters(String newInputTextFileLocation, String newOutputLaTexFileLocation)
+    {
+        inputTextFileLocation = newInputTextFileLocation;
+        outputLaTexFileLocation = newOutputLaTexFileLocation;
+    }
+
+    private static void resetParameters()
+    {
+        inputTextFileLocation = "";
+        outputLaTexFileLocation = "";
+    }
+
     @Override
     public void run() {
-        createLatexCopy();
+        if(inputTextFileLocation == "" ||  outputLaTexFileLocation == "") createLatexCopy();
+        else createLatexCopy(inputTextFileLocation, outputLaTexFileLocation);
         //convertTheTextFileToLatex();
+        System.out.println("resetting parameters");
+        resetParameters();
     }
 
 
@@ -22,6 +41,23 @@ public class ConvertOutTextToLatex implements Runnable {
     {
         Path copied = Paths.get(System.getProperty("user.dir")+"/static/out/out.tex");
         Path originalPath = Paths.get(System.getProperty("user.dir")+"/static/out/out.txt");
+        try {
+            Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
+            System.out.println("successfully created copy of out");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * creates a copy of the text file holding the parsed pdf output.
+     * also changes the extension of the copied file to .tex
+     */
+    private void createLatexCopy(String inputTextFileLocation, String outputLaTexFileLocation)
+    {
+        System.out.println("crating latex copy (with parameters)");
+        Path originalPath = Paths.get(System.getProperty("user.dir")+"/"+inputTextFileLocation);
+        Path copied = Paths.get(System.getProperty("user.dir")+"/"+outputLaTexFileLocation);
         try {
             Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
             System.out.println("successfully created copy of out");

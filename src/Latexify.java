@@ -10,7 +10,7 @@ public class Latexify {
     private final static String[] CHARACTERS_TO_BACKSLASH = {"_", "&" , "%" , "$" , "#" , "{" , "}" , "~" , "^"};  //charcters which are interpreted as special/modifier characters in latex, and so must be prepended by a backslash when converted
     private static int currentPage = 0; //the page number (of the input pdf), whose contents are currently being processed
     private final static  String TEXT_TO_ADD_NEW_PAGE_IN_LATEX = "\\clearpage\n";//the text that LaTeX will interpret as a 'new page prompt'
-    private final static String BEGIN_DOC_PLACEHOLDER = "fsahfvmaekl343nm!";//a placeholder/temp for the text that LaTeX will interpret as 'starting the main document body'
+    private final static String BEGIN_DOC_PLACEHOLDER = "fsahfvmaekl343nm!";//a placeholder/temp for the text that this class will use/interpret as 'starting the main document body'
 
     //--optional arguments--
     private static boolean quizMode = false;//true if 'quiz mode' formatting is to be applied to the text; false otherwise
@@ -369,7 +369,7 @@ public class Latexify {
      * Essentially, paragraph checks require the matching of a string, which may span over multiple lines.
      * This method takes the approach of splitting this 'search pattern' line by line, and checking for
      * the matching of the pattern, on a series of lines, in order for the pattern to be 'found'
-     * @param paragraphBuffer = the line that is being searched for the pattern
+     * @param paragraphBuffer = the paragraph that is being searched for the pattern
      * @param patternToRemoveParagraph = the pattern of characters that is being searched for
      * @return true if the paragraph contains the pattern, false otherwise
      */
@@ -497,8 +497,7 @@ public class Latexify {
         {
             documentBody = "";
         }
-        String separator = TEXT_TO_ADD_NEW_PAGE_IN_LATEX;
-        String[] splitByNewPages = documentBody.split(Pattern.quote(separator));
+        String[] splitByNewPages = documentBody.split(Pattern.quote(TEXT_TO_ADD_NEW_PAGE_IN_LATEX));
 
         StringBuilder quizPage = new StringBuilder();
         String pageTitle = "...";
@@ -507,26 +506,24 @@ public class Latexify {
             //find the page title
             if(page.contains(PAGE_TITLE_TEXT_INDICATOR_START)){
                 String textAfterAndIncludingTitle;
-                String titleTextStartSeperator = PAGE_TITLE_TEXT_INDICATOR_START;
                 try {
-                    textAfterAndIncludingTitle = page.split(Pattern.quote(titleTextStartSeperator))[1];
+                    textAfterAndIncludingTitle = page.split(Pattern.quote(PAGE_TITLE_TEXT_INDICATOR_START))[1];
                 }
                 catch(ArrayIndexOutOfBoundsException e){
-                    textAfterAndIncludingTitle = page.split(Pattern.quote(titleTextStartSeperator))[0];
+                    textAfterAndIncludingTitle = page.split(Pattern.quote(PAGE_TITLE_TEXT_INDICATOR_START))[0];
                 }
-                String titleTextEndSeperator = PAGE_TITLE_TEXT_INDICATOR_END;
                 try {
-                    pageTitle = textAfterAndIncludingTitle.split(Pattern.quote(titleTextEndSeperator))[0];
+                    pageTitle = textAfterAndIncludingTitle.split(Pattern.quote(PAGE_TITLE_TEXT_INDICATOR_END))[0];
                 }
                 catch(ArrayIndexOutOfBoundsException e){
-                    pageTitle = textAfterAndIncludingTitle.split(Pattern.quote(titleTextEndSeperator))[1];
+                    pageTitle = textAfterAndIncludingTitle.split(Pattern.quote(PAGE_TITLE_TEXT_INDICATOR_END))[1];
                 }
             }
             //add quiz page indication text
             quizPage.append(QUIZ_PAGE_INDICATION_TEXT+"\n");
 
             //add the title to the quiz page
-            quizPage.append("Describe: "+pageTitle+"\n");
+            quizPage.append("Describe: ").append(pageTitle).append("\n");
 
             //add the quiz page (question page) to the output
             textAsQuiz.add(quizPage.toString());

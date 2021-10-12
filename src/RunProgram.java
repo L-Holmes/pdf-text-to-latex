@@ -1,5 +1,8 @@
 import util.WriteTextToFileHandle;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 /**
  * Used to the run the process, which are used to
  * take a pdf as an input, and create an approximate corresponding
@@ -21,6 +24,38 @@ public class RunProgram {
         new Thread(new ConvertOutTextToLatex()).start();
     }
 
+    public RunProgram(String pdfToReadLocation, String pathToOutputTextFile)
+    {
+        System.out.println("\n...starting main...");
+        //"static/year3_lecture_slides/SCC361/in/SCC361-Wk1-L1.pdf"
+        //"static/year3_lecture_slides/SCC361/out/SCC361-Wk1-L1-out.txt"
+
+        String outputLatexPath = replaceFilePathExtensionWithLatexFileExtension(pathToOutputTextFile);
+        pdfParser = new ParsePdf(pdfToReadLocation);
+        System.out.println("\n----------------------------\n **PARSED PDF**");
+
+        readPdfAndWriteOutputToFile(pdfToReadLocation,pathToOutputTextFile);
+        System.out.println("\n----------------------------\n **READ AND OUTPUTTED TO FILE**");
+
+        ConvertOutTextToLatex.setParameters(pathToOutputTextFile, outputLatexPath);
+
+        new Thread(new ConvertOutTextToLatex()).start();
+        System.out.println("\n----------------------------\n **CONVERTED THE OUT .TXT FILE TO .TEX**");
+    }
+
+    public static String replaceFilePathExtensionWithLatexFileExtension(String inputFilePath)
+    {
+       //remove after the last dot
+        if (inputFilePath == null || inputFilePath.length() <= 0 ) return null;
+        int endIndex = inputFilePath.lastIndexOf(".");
+        if (endIndex == -1) return null;
+        String asLatex = inputFilePath.substring(0, endIndex);
+        //add .tex
+        asLatex = asLatex.concat(".tex");
+        System.out.println("as latex: "+ asLatex);
+        return asLatex;
+    }
+
     /**
      * Reads the input pdf's contents (text and images),
      * and produces an output LaTeX document, which contains the read
@@ -40,6 +75,8 @@ public class RunProgram {
         optionalArgs.setQuizMode(true);
         String latexifiedContents = Latexify.convertTextToLatex(contentsToWrite, textToAddImgs, newPageSeperatorText, optionalArgs);
         WriteTextToFileHandle fileWriter = new WriteTextToFileHandle(fileToWriteToPath, latexifiedContents);
+        //TODO: the pdf should have been created by here I think?
+        //or maybe it cannot create the pdf file because it cannot find the folder?
         fileWriter.writeDataToFile();
     }
 }

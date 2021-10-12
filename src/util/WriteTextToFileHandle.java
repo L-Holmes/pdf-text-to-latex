@@ -1,6 +1,9 @@
 package util;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * used to write text to a given file location
@@ -22,13 +25,31 @@ public class WriteTextToFileHandle {
     {
         System.out.println("writing data to file: "+fileToWriteToPath);
 
-        File dataFile = new File(System.getProperty("user.dir")+ fileToWriteToPath);
+        //
+        /*
+        Path path = Paths.get(System.getProperty("user.dir")+ fileToWriteToPath);
+        System.out.println(Files.exists(path));
+        Path path2 = Paths.get(fileToWriteToPath);
+        System.out.println(Files.exists(path2));
+        Path path3 = Paths.get("/Users/lindonholmes/Documents/personal_projects/notes_generator/project/static/year3_lecture_slides/SCC361/out/");
+        System.out.println(Files.exists(path3));
+        Path path4 = Paths.get("/Users/lindonholmes/Documents/personal_projects/notes_generator/project/static/year3_lecture_slides/SCC361/");
+        System.out.println(Files.exists(path4));
+         */
+
+        //TODO: there needs to be a slash between the project and the static folders
+
+        //
+
+        File dataFile = new File(System.getProperty("user.dir")+ "/"+ fileToWriteToPath);
         try {
             dataFile.createNewFile();
-            System.out.println("done this");
+            System.out.println("done this; created the file: "+ System.getProperty("user.dir")+ "/"+fileToWriteToPath);
         } catch (IOException e) {
+            System.out.println("could not create the file: "+ System.getProperty("user.dir")+ "/"+ fileToWriteToPath);
             e.printStackTrace();
         }
+        System.out.println("moving on to section 2");
         try {
             FileOutputStream outputStream = new FileOutputStream(dataFile, false);
             OutputStreamWriter outputWriter = new OutputStreamWriter(outputStream, "UTF-8");
