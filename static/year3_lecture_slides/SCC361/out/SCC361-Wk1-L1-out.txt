@@ -37,11 +37,13 @@ Playing this Video\\
   \item In general, it might be slow for some people
   \item Vary the playback speed to suit you preferred pace
   \item In live sessions, you can ask questions at any stage, but the 
+\end{itemize}
 Questions? slides will give you a specific opportunity to ask \\
 questions\\
-  \item While watching, use the Questions? slides as stop points for 
-coffee breaks, notes etc\\
 \end{itemize}
+  \item While watching, use the Questions? slides as stop points for 
+\end{itemize}
+coffee breaks, notes etc\\
 3\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
@@ -53,13 +55,15 @@ Describe: • All our content is expected to meet the UK
 Accessibility\\
 \section{• All our content is expected to meet the UK }
 accessibility requirements\\
-\end{itemize}
+\begin{itemize}
   \item We have done our best to ensure that that is the 
+\end{itemize}
 case with these course materials\\
+\end{itemize}
   \item However, if any course material or part of its content 
+\end{itemize}
 is inaccessible in anyway to any individual or group, \\
 kindly let us know.\\
-\end{itemize}
 4\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
@@ -76,10 +80,10 @@ To check in:\\
   \item Click Check In
   \item Wait for the “You are checked in” confirmation page
   \item Here is a the demo
+\end{itemize}
 Please DO NOT leave a timetabled session without your\\
 attendance being registered\\
 Attendance Check-in\\
-\end{itemize}
 5\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
@@ -120,12 +124,14 @@ Online Sessions on Teams\\
 \section{During the lectures:}
 \end{itemize}
   \item Use  chat  appropriately. Not closely monitored during lectures.
+\end{itemize}
 For live Q\&A sessions:\\
+\begin{itemize}
   \item Raise your hand to ask questions. Lower it afterwards.
   \item When called, turn on your mic (and cam if you wish). Remember to turn them off 
+\end{itemize}
 afterwards.\\
 Post additional questions on the SCC361 Moodle Forum\\
-\end{itemize}
 8\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
@@ -136,10 +142,10 @@ Describe: After the lectures:
 \clearpage
 Online Sessions on Teams\\
 \section{After the lectures:}
-\begin{itemize}
-  \item The recorded content of the live sessions will be made available after the session on the 
-Moodle Space\\
 \end{itemize}
+  \item The recorded content of the live sessions will be made available after the session on the 
+\end{itemize}
+Moodle Space\\
 9\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
@@ -150,17 +156,19 @@ Describe: If you are struggling to watch the videos on Moodle:
 \clearpage
 The lectures can be watched on the Moodle space.\\
 \section{If you are struggling to watch the videos on Moodle:}
-\end{itemize}
+\begin{itemize}
   \item Download the video and caption file (*.vtt) from Moodle
   \item Download the free, open source VLC Media player: 
+\end{itemize}
 https://www.videolan.org/vlc/index.en-GB.html\\
+\end{itemize}
   \item Open video file in VLC and add caption file
+\end{itemize}
 Note:\\
 All learning materials: slides, videos and caption\\
 files are @Lancaster University copyright and are \\
 not to be shared or distributed.\\
 Using Materials Offline\\
-\end{itemize}
 10\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
@@ -176,8 +184,8 @@ Passing off someone else’s work as your own, including:\\
   \item Paying for someone else to do your work
   \item Adapting code by someone else with only a minor modification
   \item Course work is submitted on Moodle and will be checked automatically for plagiarism!
-Plagiarism\\
 \end{itemize}
+Plagiarism\\
 11\\
 \end{itemize}
   \item \begin{figure}[H]
@@ -189,14 +197,16 @@ Describe: • The use of these is governed by existing policies that you are all
 \clearpage
 Online tools will be used to facilitate some aspects of learning e.g. Moodle, Teams, etc.
 \section{• The use of these is governed by existing policies that you are all currently bound by and }
+\end{itemize}
 have agreed to\\
+\begin{itemize}
   \item Academic malpractice and plagiarism still applies online
   \item Direct sharing of code, sharing solutions and/or partial solutions with other students, 
+\end{itemize}
 either privately or in an open chat, is not acceptable\\
 Online Learning Expectations\\
-\end{itemize}
 12\\
-\begin{itemize}
+\end{itemize}
   \item \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
@@ -208,11 +218,13 @@ Don’t forget, these are your fellow students and staff, not some anonymous per
 \section{the Internet}
   \item If you’re not sure if you should post or share something, please ask first
   \item If you see content or a post that you don’t like, in the first instance, message or email 
+\end{itemize}
 the course tutor to alert them to it\\
+\begin{itemize}
   \item We want these tools to be used; they will give you the best online experience!
   \item However, we are asking that you use them sensibly and with respect
-Online Learning Expectations\\
 \end{itemize}
+Online Learning Expectations\\
 13\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
@@ -229,12 +241,14 @@ Active learning:\\
   \item Use recommended books and available online resources
   \item Ask questions, try things yourself, keep notes
   \item Have a study plan, get a study partner
-Integrity:\\
-  \item Honesty, no plagiarism/ result manipulation
-What do we expect from you?\\
 \end{itemize}
-14\\
+Integrity:\\
 \begin{itemize}
+  \item Honesty, no plagiarism/ result manipulation
+\end{itemize}
+What do we expect from you?\\
+14\\
+\end{itemize}
   \item \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
@@ -249,11 +263,11 @@ Lecture slides and videos will be available on Moodle
   \item Provide prompt feedback on formative coursework
   \item In extreme cases, respond to coursework questions outside the labs
   \item We encourage you to maximise the use of lab sessions for all coursework related 
+\end{itemize}
 questions\\
 How can we help?\\
-\end{itemize}
 15\\
-\end{itemize}
+\begin{itemize}
   \item \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
@@ -266,8 +280,8 @@ Use the labs to ask TAs/Tutors for help
   \item Check other available (online) resources
   \item Drop me an email/ ask on Teams chat
   \item There might be delays in replying
-How to get help\\
 \end{itemize}
+How to get help\\
 16\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
@@ -300,7 +314,7 @@ Describe: • Expected Learning Outcomes
 \clearpage
 In this video\\
 \section{• Expected Learning Outcomes}
-\begin{itemize}
+\end{itemize}
   \item Teaching Staff
   \item Lecture Plan
   \item Teaching Structure
@@ -316,7 +330,7 @@ Describe: We will to be able to:
 \clearpage
 Expected Learning Outcomes\\
 \section{We will to be able to:}
-\end{itemize}
+\begin{itemize}
   \item understand AI concepts, applications and trends
   \item understand machine learning terms
   \item train machine learning models for specific tasks
@@ -379,12 +393,14 @@ Describe: Lectures:
 \clearpage
 Teaching Structure\\
 \section{Lectures:}
-\begin{itemize}
+\end{itemize}
   \item Weeks 1-10
   \item Online only
   \item Mondays: 14.00-15.00
   \item Tuesdays: 17.00-18.00
+\end{itemize}
 Labs:\\
+\begin{itemize}
   \item Weeks 1-10
   \item Blended: in-person and online
   \item Wednesdays: 11.00-13.00
@@ -428,11 +444,13 @@ Describe: • CW1 (20marks):
   \item Deadline: 5pm Friday 12th November, 2021
   \item CW2 (20marks):
   \item Details: to be confirmed
+\end{itemize}
 Exam: 60\%\\
+\begin{itemize}
   \item Next semester in 2021
   \item Date: To be confirmed
-Assessment\\
 \end{itemize}
+Assessment\\
 25\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
@@ -465,17 +483,21 @@ Describe: • Wk1: Intro to Artificial Intelligence \& Machine Learning
 \clearpage
 Part 1 (Weeks 1 – 5):\\
 \section{• Wk1: Intro to Artificial Intelligence \& Machine Learning}
-\begin{itemize}
+\end{itemize}
   \item Wk2: What are features and how to extract features from texts, 
+\end{itemize}
 images, etc.\\
+\begin{itemize}
   \item Wk3: Computer Vision and Natural Language Processing
   \item Wk4: Clustering \& Classification
   \item Wk5: Intro to Artificial Neural Networks \& Review of Previous 
+\end{itemize}
 Lectures\\
 Part 2 (Weeks 6 – 10):\\
-  \item Dr Hossein Rahmani (GAs, NBCs, DTCs, DNNs, CNNs)
-Welcome to SCC361\\
 \end{itemize}
+  \item Dr Hossein Rahmani (GAs, NBCs, DTCs, DNNs, CNNs)
+\end{itemize}
+Welcome to SCC361\\
 28\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
@@ -486,15 +508,15 @@ Describe: • Application, history, foundations of AI
 \clearpage
 Artificial Intelligence: An Overview\\
 \section{• Application, history, foundations of AI}
-\end{itemize}
+\begin{itemize}
   \item Definition of AI
   \item Goals of AI
   \item AI and the Society
   \item Benefits
   \item Risk and Challenges
   \item Ethical Issues
-This Week’s Lectures\\
 \end{itemize}
+This Week’s Lectures\\
 29\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
@@ -506,16 +528,20 @@ Describe: • AI and ML, Definitions of ML, How to learn
 Overview of Machine Learning\\
 \section{• AI and ML, Definitions of ML, How to learn}
 Types of Machine Learning\\
-\begin{itemize}
+\end{itemize}
   \item Supervised, unsupervised, semi supervised
+\end{itemize}
 Supervised Learning\\
+\begin{itemize}
   \item Classification and regression
+\end{itemize}
 Unsupervised Learning\\
+\end{itemize}
   \item Clustering and association
+\end{itemize}
 This Week’s Lectures\\
-\end{itemize}
 30\\
-\end{itemize}
+\begin{itemize}
   \item \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
@@ -526,14 +552,16 @@ Describe: Agents 2ed. Poole \& Mackworth 2017
 Artificial Intelligence: Foundations of Computational 
 \section{Agents 2ed. Poole \& Mackworth 2017}
   \item Artificial Intelligence A Modern Approach, Russell \& 
+\end{itemize}
 Norvig, 2016 (chapters 1,2,5,6)\\
+\end{itemize}
   \item Deep Learning, Goodfellow et al. , 2016
   \item Deep Learning with PyTorch, Stevens et al, 2020.
   \item Machine Learning, T. M. Mitchell, 1997
   \item Artificial Intelligence on Wikipedia
   \item Many online resources
-Recommended Reading\\
 \end{itemize}
+Recommended Reading\\
 31\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
@@ -549,13 +577,15 @@ SCC361: Week 1\\
   \item Definition of AI
   \item Goals of AI
   \item AI and Society
+\end{itemize}
 Artificial Intelligence\\
+\end{itemize}
   \item Machine Learning Overview
   \item Types of Machine Learning
   \item Supervised Learning
   \item Unsupervised Learning
-Introduction to Machine Learning\\
 \end{itemize}
+Introduction to Machine Learning\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
@@ -674,7 +704,7 @@ Describe: 45
 AI in Forensic Identification\\
 \section{45}
 https://h-unique.lancaster.ac.uk/\\
-\end{itemize}
+\begin{itemize}
   \item \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
@@ -688,8 +718,8 @@ Web search engines
   \item Machine translation
   \item Question answering
   \item Recommender Systems
-AI in Natural Language Processing\\
 \end{itemize}
+AI in Natural Language Processing\\
 46\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
@@ -700,11 +730,11 @@ Describe: • Siri, Alexa, Cortana, Google Assistant
 \clearpage
 Speech Technologies\\
 \section{• Siri, Alexa, Cortana, Google Assistant}
-\begin{itemize}
+\end{itemize}
   \item Automatic Speech Recognition
   \item Dialogue systems
-AI in Natural Language Processing\\
 \end{itemize}
+AI in Natural Language Processing\\
 47\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
@@ -716,37 +746,51 @@ Describe: 48
 Brief History of AI\\
 \section{48}
 1940-1950: Early Days\\
-\end{itemize}
+\begin{itemize}
   \item 1943: McCulloch \& Pitts: 
+\end{itemize}
 Boolean Circuit Model of \\
 Brain\\
+\end{itemize}
   \item 1950: Turing's “Computing 
+\end{itemize}
 Machinery and \\
 Intelligence”\\
 1950-1970: Excitement\\
+\begin{itemize}
   \item 1950s: Early AI programs: 
+\end{itemize}
 Samuel's checkers \\
 program, Newell \& \\
 Simon's Logic Theorist, \\
 Gelernter's Geometry \\
 Engine\\
+\end{itemize}
   \item 1956: Dartmouth meeting: 
+\end{itemize}
 “Artificial Intelligence” \\
 adopted\\
+\begin{itemize}
   \item 1965: Robinson's complete 
+\end{itemize}
 algorithm for logical \\
 reasoning\\
 1970-1990: Knowledge-\\
 based approaches\\
+\end{itemize}
   \item 1969-79: Early 
+\end{itemize}
 development of \\
 knowledge-based systems\\
+\begin{itemize}
   \item 1980-88: Expert systems
+\end{itemize}
 industry booms\\
+\end{itemize}
   \item 1988-93: Expert systems 
+\end{itemize}
 industry busts: “AI Winter”\\
 Lesson Notes from Nikita Kitaev, University of California, Berkeley\\
-\end{itemize}
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
@@ -761,20 +805,30 @@ Statistical approaches \\
 + subfield  expertise:\\
 \begin{itemize}
   \item Resurgence of probability, 
+\end{itemize}
 focus on uncertainty\\
+\end{itemize}
   \item General increase in technical 
+\end{itemize}
 depth\\
+\begin{itemize}
   \item Agents and machine learning 
+\end{itemize}
 systems… “AI Spring”?\\
 2012 – now: \\
 Excitement:\\
-  \item Big data, big compute, deep 
-neural networks\\
-  \item Some re-unification of 
-subfields\\
-  \item AI used in many industries
-Lesson Notes from Nikita Kitaev, University of California, Berkeley\\
 \end{itemize}
+  \item Big data, big compute, deep 
+\end{itemize}
+neural networks\\
+\begin{itemize}
+  \item Some re-unification of 
+\end{itemize}
+subfields\\
+\end{itemize}
+  \item AI used in many industries
+\end{itemize}
+Lesson Notes from Nikita Kitaev, University of California, Berkeley\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
@@ -812,10 +866,12 @@ Describe: 52
 \clearpage
 The Thinking Machine\\
 \section{52}
-\end{itemize}
+\begin{itemize}
   \item Can machines really think?
   \item Interviews by some of the AI pioneers in the 
+\end{itemize}
 1960s:\\
+\end{itemize}
   \item Jerome Wiesner,
   \item Oliver Selfridge,
   \item Claude Shannon
@@ -845,11 +901,11 @@ in the full and literal  sense.” (Haugeland, \\
 1985)\\
 \begin{itemize}
   \item “[The automation of] activities  that we 
+\end{itemize}
 associate with human  thinking, activities \\
 such as  decision-making, problem \\
 solving,  learning ...” (Bellman, 1978)\\
 What is Artificial Intelligence?\\
-\end{itemize}
 54\\
 Artificial Intelligence: A Modern Approach, 2016, Russell \& Norvig\\
 \begin{figure}[H]
@@ -866,10 +922,10 @@ intelligence when performed by  people.” \\
 (Kurzweil, 1990)\\
 \end{itemize}
   \item “The study of how to make  computers do 
+\end{itemize}
 things at which, at  the moment, people \\
 are better.”  (Rich and Knight, 1991)\\
 What is Artificial Intelligence?\\
-\end{itemize}
 55\\
 Artificial Intelligence: A Modern Approach, 2016, Russell \& Norvig\\
 \begin{figure}[H]
@@ -885,10 +941,10 @@ the use of computational  models.” \\
 (Charniak and  McDermott, 1985)\\
 \begin{itemize}
   \item “The study of the computations  that 
+\end{itemize}
 make it possible to perceive,  reason, and \\
 act.” (Winston, 1992)\\
 What is Artificial Intelligence?\\
-\end{itemize}
 56\\
 Artificial Intelligence: A Modern Approach, 2016, Russell \& Norvig\\
 \begin{figure}[H]
@@ -904,9 +960,9 @@ of the design of intelligent  agents.” \\
 (Poole et al., 1998)\\
 \end{itemize}
   \item “AI ... is concerned with intelligent  
+\end{itemize}
 behavior in artifacts.” (Nilsson, 1998)\\
 What is Artificial Intelligence?\\
-\end{itemize}
 57\\
 Artificial Intelligence: A Modern Approach, 2016, Russell \& Norvig\\
 \begin{figure}[H]
@@ -938,11 +994,13 @@ Systems that think like humans\\
 \begin{itemize}
   \item Cognitive modelling approach
   \item Introspection, psychological  
+\end{itemize}
 experiments, brain imaging\\
+\end{itemize}
   \item Cognitive Science
+\end{itemize}
 Systems that think rationally\\
 Acting Systems that act like humans Systems that act rationally\\
-\end{itemize}
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
@@ -956,18 +1014,22 @@ Artificial Intelligence: A Modern Approach, 2016, Russell \& Norvig\\
 Human Rational\\
 Thinking\\
 Systems that think like humans\\
-\end{itemize}
+\begin{itemize}
   \item Cognitive modelling approach
   \item Introspection, psychological  
+\end{itemize}
 experiments, brain imaging\\
+\end{itemize}
   \item Cognitive Science
+\end{itemize}
 Systems that think rationally\\
+\begin{itemize}
   \item Laws of thought approach
   \item “Logicist” tradition
   \item Mostly rule-based
   \item Logic
-Acting Systems that act like humans Systems that act rationally\\
 \end{itemize}
+Acting Systems that act like humans Systems that act rationally\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
@@ -981,24 +1043,30 @@ Artificial Intelligence: A Modern Approach, 2016, Russell \& Norvig\\
 Human Rational\\
 Thinking\\
 Systems that think like humans\\
-\begin{itemize}
+\end{itemize}
   \item Cognitive modelling approach
   \item Introspection, psychological  
+\end{itemize}
 experiments, brain imaging\\
+\begin{itemize}
   \item Cognitive Science
+\end{itemize}
 Systems that think rationally\\
+\end{itemize}
   \item Laws of thought approach
   \item “Logicist” tradition
   \item Mostly rule-based
   \item Logic
+\end{itemize}
 Acting\\
 Systems that act like humans\\
+\begin{itemize}
   \item The (total) Turing Test
   \item Requires the 6 disciplines
   \item NLP, KR, Reasoning, ML,  
+\end{itemize}
 Computer vision, Robotics\\
 Systems that act rationally\\
-\end{itemize}
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
@@ -1015,23 +1083,33 @@ Systems that think like humans\\
 \end{itemize}
   \item Cognitive modelling approach
   \item Introspection, psychological  
+\end{itemize}
 experiments, brain imaging\\
+\begin{itemize}
   \item Cognitive Science
+\end{itemize}
 Systems that think rationally\\
+\end{itemize}
   \item Laws of thought approach
   \item “Logicist” tradition
   \item Mostly rule-based
   \item Logic
+\end{itemize}
 Acting\\
 Systems that act like humans\\
+\begin{itemize}
   \item The (total) Turing Test
   \item Requires the 6 disciplines
   \item NLP, KR, Reasoning, ML,  
+\end{itemize}
 Computer vision, Robotics\\
 Systems that act rationally\\
+\end{itemize}
   \item The rational agent approach
   \item Autonomous, perceptive,  
+\end{itemize}
 persistent, adapts to change\\
+\begin{itemize}
   \item Creates and pursues goals
 \end{itemize}
 \begin{figure}[H]
@@ -1047,26 +1125,36 @@ Artificial Intelligence: A Modern Approach, 2016, Russell \& Norvig\\
 Human Rational\\
 Thinking\\
 Systems that think like humans\\
-\begin{itemize}
+\end{itemize}
   \item Cognitive modelling approach
   \item Introspection, psychological  
+\end{itemize}
 experiments, brain imaging\\
+\begin{itemize}
   \item Cognitive Science
+\end{itemize}
 Systems that think rationally\\
+\end{itemize}
   \item Laws of thought approach
   \item “Logicist” tradition
   \item Mostly rule-based
   \item Logic
+\end{itemize}
 Acting\\
 Systems that act like humans\\
+\begin{itemize}
   \item The (total) Turing Test
   \item Requires the 6 disciplines
   \item NLP, KR, Reasoning, ML,  
+\end{itemize}
 Computer vision, Robotics\\
 Systems that act rationally\\
+\end{itemize}
   \item The rational agent approach
   \item Autonomous, perceptive,  
+\end{itemize}
 persistent, adapts to change\\
+\begin{itemize}
   \item Creates and pursues goals
 \end{itemize}
 \begin{figure}[H]
@@ -1084,8 +1172,8 @@ An agent acts intelligently if:\\
   \item flexible to changes in environment and goals
   \item learns from experience
   \item makes appropriate choices given perceptual and computational limitations
-What is an Agent?\\
 \end{itemize}
+What is an Agent?\\
 64\\
 Artificial Intelligence: Foundations of Computational Agents, 2017, Poole \& Markworth\\
 \begin{figure}[H]
@@ -1099,17 +1187,19 @@ A computational agent is:\\
 \section{• An agent whose decisions and actions can be explained in terms of  computation.}
 \begin{itemize}
   \item Decision can be broken down into primitive operations that can be  implemented in a 
+\end{itemize}
 physical device.\\
+\end{itemize}
   \item Computations can take many forms
   \item The human brain (“wetware”)
   \item Computers (“hardware”)
   \item Non computational agents:
   \item wind, rain, etc.
-Computational Agent\\
 \end{itemize}
+Computational Agent\\
 65\\
 Artificial Intelligence: Foundations of Computational Agents, 2017, Poole \& Markworth\\
-\end{itemize}
+\begin{itemize}
   \item \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
@@ -1120,16 +1210,39 @@ Describe: best expected outcome.’
 Rational agent acts to ‘achieve the best outcome or, when there is  uncertainty, the 
 \section{best expected outcome.’}
   \item AI focuses on build the general principles of rational agent and components for 
+\end{itemize}
 constructing them\\
+\end{itemize}
   \item Two key advantages of the rational-agent over others:
   \item Amenable to scientific development than approaches on human thoughts and  
+\end{itemize}
 behaviour\\
+\begin{itemize}
   \item It is more general than the “laws of thought” approach
   \item Also deals with limited rationality – acting appropriately with limited computations
-Rational Agent\\
 \end{itemize}
+Rational Agent\\
 66\\
 Artificial Intelligence: A Modern Approach, 2016, Russell \& Norvig\\
+\end{itemize}
+  \item \begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page1-image-1.png}
+\end{figure}
+\clearpage
+(Q)
+Describe: act intelligently - Poole \& Markworth
+\clearpage
+AI is the field that studies the synthesis and analysis of computational agents that 
+\section{act intelligently - Poole \& Markworth}
+  \item An agent acts intelligently if:
+  \item action is appropriate for circumstances and goals
+  \item flexible to changes in environment and goals
+  \item learns from experience
+  \item makes appropriate choices given perceptual and computational  limitations
+\end{itemize}
+Intelligence\\
+67\\
+Artificial Intelligence: Foundations of Computational Agents, 2017, Poole \& Markworth\\
 \begin{itemize}
   \item \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
@@ -1145,27 +1258,8 @@ AI is the field that studies the synthesis and analysis of computational agents 
   \item flexible to changes in environment and goals
   \item learns from experience
   \item makes appropriate choices given perceptual and computational  limitations
+\end{itemize}
 Intelligence\\
-\end{itemize}
-67\\
-Artificial Intelligence: Foundations of Computational Agents, 2017, Poole \& Markworth\\
-\end{itemize}
-  \item \begin{figure}[H]
-\includegraphics[width=0.5\linewidth]{page1-image-1.png}
-\end{figure}
-\clearpage
-(Q)
-Describe: act intelligently - Poole \& Markworth
-\clearpage
-AI is the field that studies the synthesis and analysis of computational agents that 
-\section{act intelligently - Poole \& Markworth}
-  \item An agent acts intelligently if:
-  \item action is appropriate for circumstances and goals
-  \item flexible to changes in environment and goals
-  \item learns from experience
-  \item makes appropriate choices given perceptual and computational  limitations
-Intelligence\\
-\end{itemize}
 68\\
 Artificial Intelligence: Foundations of Computational Agents, 2017, Poole \& Markworth\\
 \begin{figure}[H]
@@ -1200,15 +1294,15 @@ Describe: • Scientific goal – understand the principles of intelligent behav
 \clearpage
 Two types of goals: Scientific and Engineering\\
 \section{• Scientific goal – understand the principles of intelligent behaviour:}
-\begin{itemize}
+\end{itemize}
   \item Analysis of natural and artificial agents
   \item Formulating and testing hypothesis
   \item Designing, building and experimenting with computational agents
   \item Uses a general scientific approach
   \item Focuses on building empirical systems
   \item And not on the final applications that could be deployed to use
-Goals of AI\\
 \end{itemize}
+Goals of AI\\
 71\\
 Artificial Intelligence: Foundations of Computational Agents, 2017, Poole \& Markworth\\
 \begin{figure}[H]
@@ -1220,15 +1314,15 @@ Describe: • Engineering goal – concerned with constructing intelligent agent
 \clearpage
 Two types of goals: Scientific and Engineering\\
 \section{• Engineering goal – concerned with constructing intelligent agents}
-\end{itemize}
+\begin{itemize}
   \item Focuses on the design and synthesis of useful, intelligent artefacts.
   \item Builds agents that act intelligently
   \item Agents that are useful in many real-world applications
-Goals of AI\\
 \end{itemize}
+Goals of AI\\
 72\\
 Artificial Intelligence: Foundations of Computational Agents, 2017, Poole \& Markworth\\
-\begin{itemize}
+\end{itemize}
   \item \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
@@ -1244,10 +1338,10 @@ Workflow/Process automation
   \item Human errors can be reduced
   \item Better predictions \& improved decision making
   \item Predictions of risks, performance targets, tailored product offerings etc
+\end{itemize}
 Business Benefits of AI\\
-\end{itemize}
 73\\
-\end{itemize}
+\begin{itemize}
   \item \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
@@ -1264,10 +1358,10 @@ Healthcare
   \item Agriculture
   \item Real-time data analytics help farmers to maximise their crop yields and  profits
   \item Overall lifestyle
-Social benefits of AI\\
 \end{itemize}
+Social benefits of AI\\
 74\\
-\begin{itemize}
+\end{itemize}
   \item \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
@@ -1285,10 +1379,10 @@ Safety and security
   \item Deep neural models are naturally opaque
   \item Possible job losses
   \item “AI will replace more than 75 million jobs by 2022” – World Economic Forum
+\end{itemize}
 Risks and Challenges of AI\\
-\end{itemize}
 75\\
-\end{itemize}
+\begin{itemize}
   \item \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
@@ -1300,14 +1394,16 @@ Accountability
 \section{• If AI violates ethical rules, who will be responsible?}
   \item Accuracy, bias, privacy and inequality
   \item AI learns from data provided by humans which may encode human biases and  
+\end{itemize}
 prejudices\\
+\end{itemize}
   \item Facial recognition to ‘predict criminals’ sparks row over AI bias – BBC
   \item IBM abandons “biased” facial recognition tech – BBC
   \item Technological social responsibility (TSR)
   \item a conscious alignment between short- and medium-term business goals and  
+\end{itemize}
 longer-term societal ones – McKinsey Quarterly, August, 2019\\
 Ethical Concerns of AI\\
-\end{itemize}
 76\\
 \begin{itemize}
   \item \begin{figure}[H]
@@ -1325,8 +1421,8 @@ Artificial Intelligence: An overview
   \item Benefits
   \item Risk and Challenges
   \item Ethical Issues
-AI Summary\\
 \end{itemize}
+AI Summary\\
 77\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
@@ -1360,16 +1456,20 @@ Describe: • AI and ML, Definitions of ML, How to
 \clearpage
 Overview of Machine Learning
 \section{• AI and ML, Definitions of ML, How to  }
+\end{itemize}
 learn\\
+\begin{itemize}
   \item Types of Machine Learning
   \item Supervised, unsupervised, semi 
+\end{itemize}
 supervised\\
+\end{itemize}
   \item Supervised Learning
   \item Classification and regression
   \item Unsupervised Learning
   \item Clustering and association
-Introduction to Machine Learning\\
 \end{itemize}
+Introduction to Machine Learning\\
 80\\
 \begin{itemize}
   \item \begin{figure}[H]
@@ -1383,12 +1483,14 @@ AI systems were mostly rule-based
 \section{• i.e. depended on hand-crafted rules}
   \item Machine learning drives AI
   \item Learning algorithms create a logical  
+\end{itemize}
 mapping from data to output\\
+\end{itemize}
   \item Deep learning:
   \item a subset of ML with additional layers to  
+\end{itemize}
 learn deeper representations data\\
 AI and Machine Learning\\
-\end{itemize}
 81\\
 Artificial Intelligence\\
 Machine Learning\\
@@ -1405,13 +1507,15 @@ Early definition of machine learning\\
 without being explicitly programmed”\\
 \begin{itemize}
   \item Arthur Samuel (1959)
-\end{itemize}
+\begin{itemize}
   \item ML pioneer that built first “self-learning” program 
+\end{itemize}
 that played checkers by learning  from experience\\
+\end{itemize}
   \item Inverted alpha-beta pruning widely used in decision 
+\end{itemize}
 tree searching\\
 What is Machine Learning?\\
-\end{itemize}
 82\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
@@ -1425,13 +1529,13 @@ Another popular definition:\\
 respect to task T and some performance  measure P, if its \\
 performance on T, as  measured by P, improved with \\
 experience E”\\
-\begin{itemize}
-  \item Tom Mitchell (1997)
 \end{itemize}
+  \item Tom Mitchell (1997)
+\begin{itemize}
   \item Again, the key is learning from experience
   \item Not explicitly programmed
-What is Machine Learning?\\
 \end{itemize}
+What is Machine Learning?\\
 83\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
@@ -1472,8 +1576,8 @@ Describe: • Traditional Programming (Software 1.0)
 Consider the function 𝑦𝑦 = 𝑓𝑓(𝑥𝑥) (e.g. 𝑓𝑓 𝑥𝑥 = 𝑥𝑥 )
 \section{• Traditional Programming (Software 1.0)}
   \item Machine Learning (Software 2.0)
-What is Machine Learning?\\
 \end{itemize}
+What is Machine Learning?\\
 86\\
 Computer\\
 Data ( 𝑥𝑥 )\\
@@ -1494,8 +1598,8 @@ Describe: • Traditional Programming (Software 1.0)
 Consider the function 𝑦𝑦 = 𝑓𝑓(𝑥𝑥) (e.g. 𝑓𝑓 𝑥𝑥 = 𝑥𝑥 )
 \section{• Traditional Programming (Software 1.0)}
   \item Machine Learning (Software 2.0)
-What is Machine Learning?\\
 \end{itemize}
+What is Machine Learning?\\
 87\\
 Computer\\
 Data ( 𝑥𝑥 )\\
@@ -1518,8 +1622,8 @@ Memorization
   \item Limited by
   \item Time to observe facts
   \item Memory to store facts
-How things are learned\\
 \end{itemize}
+How things are learned\\
 88\\
 Declarative knowledge\\
 \begin{itemize}
@@ -1540,8 +1644,8 @@ Memorization
   \item Limited by accuracy of deduction process
   \item Essentially a predictive activity
   \item Assumes that the past predicts the future
-How things are learned\\
 \end{itemize}
+How things are learned\\
 89\\
 Imperative knowledge\\
 Declarative knowledge\\
@@ -1556,13 +1660,15 @@ Supervised Learning\\
 \section{• Classification}
 \end{itemize}
   \item Regression
+\end{itemize}
 Unsupervised Learning\\
+\begin{itemize}
   \item Clustering
   \item Association
-Types of Machine Learning\\
 \end{itemize}
+Types of Machine Learning\\
 90\\
-\begin{itemize}
+\end{itemize}
   \item \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
@@ -1573,15 +1679,19 @@ Describe: particular output.
 The algorithm learns to map an input to a 
 \section{particular output.}
   \item Instances of data are presented along with their 
+\end{itemize}
 correctly labelled output\\
+\begin{itemize}
   \item Similar to a teacher-student scenario
   \item The algorithm learns from experience to predict 
+\end{itemize}
 new unseen data\\
+\end{itemize}
   \item Two broad categories:
   \item Regression
   \item Classification
-Supervised Learning\\
 \end{itemize}
+Supervised Learning\\
 91\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
@@ -1595,7 +1705,7 @@ Supervised Learning\\
 Input labelled data Training process\\
 New unseen dataAlgorithms\\
 Trained Model Output\\
-\end{itemize}
+\begin{itemize}
   \item \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
@@ -1609,11 +1719,11 @@ Learns from labelled data (supervised)
   \item Spam|Ham
   \item Cancer|Not Cancer
   \item Attempts to separate the data into  specific 
+\end{itemize}
 categories (or classes or labels)\\
 Classification\\
-\end{itemize}
 93\\
-\begin{itemize}
+\end{itemize}
   \item \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
@@ -1628,11 +1738,13 @@ Learns from labelled data (supervised)
   \item we want our model to predict 𝑦𝑦𝑖𝑖 given 𝑥𝑥𝑖𝑖
   \item 𝑥𝑥𝑖𝑖 not seen during training
   \item Typically fits some linear or quadratic curve  of 
+\end{itemize}
 the data plot\\
+\begin{itemize}
   \item Linear or logistic regression algorithms are often 
+\end{itemize}
 used\\
 Regression\\
-\end{itemize}
 94\\
 \end{itemize}
   \item \begin{figure}[H]
@@ -1646,15 +1758,19 @@ Input data = training data
 \section{• with labels e.g. spam/ham or stock price at 𝑡𝑡}
   \item In training
   \item the model makes a prediction and is corrected 
+\end{itemize}
 if the prediction is wrong\\
+\begin{itemize}
   \item Training process continues until a desired  
+\end{itemize}
 accuracy is achieved\\
+\end{itemize}
   \item Problem types: Classification and Regression
   \item Algorithms:
   \item Logistic Regression
   \item Back Propagation Neural Network.
-Supervised Learning Algorithms\\
 \end{itemize}
+Supervised Learning Algorithms\\
 95\\
 \begin{itemize}
   \item \begin{figure}[H]
@@ -1666,17 +1782,19 @@ Describe: 1. Predict how many students will enrol in this module in the next 3 y
 \clearpage
 If we wish to learn models to address the following
 \section{1. Predict how many students will enrol in this module in the next 3 years given the }
+\end{itemize}
 past enrolment data\\
 2. Predict whether a student will pass the module given previous years records\\
+\end{itemize}
   \item How should we proceed
+\end{itemize}
 a. Both are regression problems\\
 b. Both are classification problems\\
 c. Problem 1 is regression while Problem 2 is classification\\
 d. Problem 2 is regression while Problem 1 is classification\\
 Quiz: Classification vs Regression\\
-\end{itemize}
 96\\
-\end{itemize}
+\begin{itemize}
   \item \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
@@ -1686,16 +1804,22 @@ Describe: • With unsupervised learning, only the  input
 \clearpage
 Remember the function 𝑦𝑦 = 𝑓𝑓 𝑥𝑥
 \section{• With unsupervised learning, only the  input }
+\end{itemize}
 data, 𝑥𝑥, is available\\
+\end{itemize}
   \item There are no corresponding labels  (classes 
+\end{itemize}
 or categories) i.e. no output  variable, 𝑦𝑦\\
+\begin{itemize}
   \item Aims at modelling the underlying  structure 
+\end{itemize}
 of the data\\
+\end{itemize}
   \item Two main categories
   \item Clustering
   \item Association
-Unsupervised Learning\\
 \end{itemize}
+Unsupervised Learning\\
 97\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
@@ -1718,13 +1842,17 @@ Describe: the inherent groupings in the  data:
 In a clustering problem, we want to  discover 
 \section{the inherent groupings in the  data:}
   \item Eg: grouping customers by purchasing  
+\end{itemize}
 behaviour.\\
+\end{itemize}
   \item In an association rule learning problem,  we 
+\end{itemize}
 want to discover rules that describe  large \\
 portions of your data\\
+\begin{itemize}
   \item E.g. people that buy 𝑿𝑿 also tend to buy 𝒀𝒀
-Clustering and Association\\
 \end{itemize}
+Clustering and Association\\
 99\\
 \end{itemize}
   \item \begin{figure}[H]
@@ -1739,14 +1867,18 @@ Input data in not labelled
   \item In training
   \item Deduces structures present in the input data
   \item Extracting general rules, reducing redundancy or  
+\end{itemize}
 organise data by similarity\\
+\begin{itemize}
   \item Problem types: clustering, dimensionality  reduction 
+\end{itemize}
 and association rule learning\\
+\end{itemize}
   \item Algorithms:
   \item K-Means algorithm
   \item Apriori algorithm.
-Unsupervised Learning Algorithms\\
 \end{itemize}
+Unsupervised Learning Algorithms\\
 10\\
 0\\
 \begin{itemize}
@@ -1759,18 +1891,22 @@ Describe: • when we have a large amount of input data ( 𝑋𝑋 ) but
 \clearpage
 Semi-supervised learning approach refers to:
 \section{• when we have a large amount of input data ( 𝑋𝑋 ) but }
+\end{itemize}
 only some of the data is labelled ( 𝑌𝑌 )\\
+\end{itemize}
   \item e.g. a photo archive where only some of the images  are 
+\end{itemize}
 labelled, (e.g. dog, cat, person) and the majority  are \\
 unlabelled.\\
+\begin{itemize}
   \item Many real world problems adopt this method
   \item It can be expensive or time-consuming to label data
   \item A hybrid design often helps to bridge the gaps
   \item Algorithms:
   \item A flexible combination of supervised and unsupervised 
+\end{itemize}
 algorithms\\
 Semi-supervised Learning\\
-\end{itemize}
 10\\
 1\\
 \begin{figure}[H]
@@ -1784,16 +1920,20 @@ Today’s Lecture\\
 \section{• Overview of Machine Learning}
 \end{itemize}
   \item AI and ML, Definitions of ML, How to  
+\end{itemize}
 learn\\
+\begin{itemize}
   \item Types of Machine Learning
   \item Supervised, unsupervised, semi-
+\end{itemize}
 supervised\\
+\end{itemize}
   \item Supervised Learning
   \item Classification and regression
   \item Unsupervised Learning
   \item Clustering and association
-Machine Learning Summary\\
 \end{itemize}
+Machine Learning Summary\\
 10\\
 2\\
 \begin{figure}[H]
@@ -1827,8 +1967,8 @@ Week 2 Lectures: Features in Machine Learning and Feature Extraction\\
 \begin{itemize}
   \item What are features?
   \item How to extract/represent features from text, images
-Coming up…\\
 \end{itemize}
+Coming up…\\
 10\\
 4\\
 Group Day Time Room\\
@@ -1852,11 +1992,11 @@ Questions?\\
 \end{figure}
 \clearpage
 (Q)
-Describe: 10
+Describe: ...
 \clearpage
 \clearpage
 (Q)
-Describe: 10
+Describe: ...
 \clearpage
 \\
 \end{document}

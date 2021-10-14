@@ -14,21 +14,34 @@ public class LatexifyBulletPointHandler {
      */
     public BulletPointOperationOut handleBulletPointOperation(String line, String bulletPointStyle, String previousBulletStyle)
     {
-        line = "  \\item ".concat(line.replace(bulletPointStyle, ""));
-        if (!previousBulletStyle.equals(bulletPointStyle)){
-            //start a new set of bullet points
-            if (nestedBulletPointStyleStack.isEmpty() || !nestedBulletPointStyleStack.contains(bulletPointStyle)){
-                line = "\\begin{itemize}\n".concat(line);
-                //if starting a new bullet point, and we are indenting into this new style, add to bullet point style stack
-                nestedBulletPointStyleStack.push(bulletPointStyle);
-            }
-            else{
-                //only end the bullet points, if unindenting the bullet points
-                line = "\\end{itemize}\n".concat(line);
-                nestedBulletPointStyleStack.pop();
-            }
+        line = changeTheBulletPointToALatexBulletPoint(line, bulletPointStyle);
+        if(bulletPointStyleHasChanged(bulletPointStyle, previousBulletStyle)) line = handleBulletPointStyleChange(line, bulletPointStyle);
+        return new BulletPointOperationOut(line, bulletPointStyle);
+    }
+
+    private String changeTheBulletPointToALatexBulletPoint(String lineContainingBulletPoint, String bulletPointStyle){
+        return "  \\item ".concat(lineContainingBulletPoint.replace(bulletPointStyle, ""));
+    }
+
+    private boolean bulletPointStyleHasChanged(String bulletPointStyle, String previousBulletStyle)
+    {
+        if (previousBulletStyle.equals(bulletPointStyle)) return false;
+        return true;
+    }
+
+    private String handleBulletPointStyleChange(String line, String bulletPointStyle)
+    {
+        //start a new set of bullet points
+        if (nestedBulletPointStyleStack.isEmpty() || !nestedBulletPointStyleStack.contains(bulletPointStyle)){
+            line = "\\begin{itemize}\n".concat(line);
+            //if starting a new bullet point, and we are indenting into this new style, add to bullet point style stack
+            nestedBulletPointStyleStack.push(bulletPointStyle);
         }
-        previousBulletStyle = bulletPointStyle;
-        return new BulletPointOperationOut(line, previousBulletStyle);
+        else{
+            //only end the bullet points, if unindenting the bullet points
+            line = "\\end{itemize}\n".concat(line);
+            nestedBulletPointStyleStack.pop();
+        }
+        return line;
     }
 }

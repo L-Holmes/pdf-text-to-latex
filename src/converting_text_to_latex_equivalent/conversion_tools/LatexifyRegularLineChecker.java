@@ -20,8 +20,9 @@ public class LatexifyRegularLineChecker {
      */
      public RegularLineCheckOut performRegularLineChecks(String line, String newPageSeperator, boolean prevLineWasPageBreak, String previousBulletStyle, StringBuilder textBuffer, String[] textToAddImages)
     {
-        //performing new page related checks
         LatexifyNewPageAdjustor newPageAdjustor = new LatexifyNewPageAdjustor();
+        LatexifyDocumentLineGetter documentLineGetter = new LatexifyDocumentLineGetter();
+        //performing new page related checks
         NewPageAdjustorOut newpageAdjustOut = newPageAdjustor.adjustAnyNewpages(line, newPageSeperator, prevLineWasPageBreak, previousBulletStyle, textBuffer, linesToRemoveCount, textToAddImages);
         line = newpageAdjustOut.line();
         prevLineWasPageBreak = newpageAdjustOut.prevLineWasPageBreak();
@@ -31,21 +32,29 @@ public class LatexifyRegularLineChecker {
 
         if (linesToRemoveCount >0){
             //if the user has chosen to ignore the first 'x' lines of each page, here, they are ignored (i.e. not added to the output text)
-            if (linesToRemoveCount == numStartLinesToRemoveForEachPage){
-                //add the first line
-                textBuffer.append(line);
-                textBuffer.append("\\\\ \n");
-            }
+            textBuffer = addFirstLineIfNecessary(textBuffer, line);
             linesToRemoveCount--;
         }
         else{
             //perform regular line adjustments
-            LatexifyDocumentLineGetter documentLineGetter = new LatexifyDocumentLineGetter();
             DocumentLineOut regLineOutput = documentLineGetter.addDocLine(prevLineWasPageBreak, line, textBuffer, previousBulletStyle);
             textBuffer = regLineOutput.textBuilder();
             prevLineWasPageBreak = regLineOutput.previousLineWasPageBreak();
             previousBulletStyle = regLineOutput.prevBulletStyle();
         }
-        return new RegularLineCheckOut(line, textBuffer, prevLineWasPageBreak, previousBulletStyle);
+        return new RegularLineCheckOut(textBuffer, prevLineWasPageBreak, previousBulletStyle);
+    }
+
+    private StringBuilder addFirstLineIfNecessary(StringBuilder textBuffer, String line)
+    {
+        if (linesToRemoveCount == numStartLinesToRemoveForEachPage) textBuffer = addFirstLine(textBuffer, line);
+        return textBuffer;
+    }
+
+    private StringBuilder addFirstLine(StringBuilder textBuffer, String line)
+    {
+        textBuffer.append(line);
+        textBuffer.append("\\\\ \n");
+        return textBuffer;
     }
 }

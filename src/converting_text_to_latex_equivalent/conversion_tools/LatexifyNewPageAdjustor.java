@@ -26,46 +26,15 @@ public class LatexifyNewPageAdjustor {
      */
     public NewPageAdjustorOut adjustAnyNewpages(String line, String newPageSeperator, boolean prevLineWasPageBreak, String previousBulletStyle, StringBuilder textBuilder, short linesToRemoveCount, String[] textToAddImages)
     {
-        if(!line.contains(newPageSeperator)) {
-            return new NewPageAdjustorOut(line, prevLineWasPageBreak, previousBulletStyle, textBuilder, linesToRemoveCount);
-        }
+        if(!line.contains(newPageSeperator)) return new NewPageAdjustorOut(line, prevLineWasPageBreak, previousBulletStyle, textBuilder, linesToRemoveCount);
 
         currentPage++;
 
-        //get the image text
-        String  currentPageImageAddingText;
-        try {
-            currentPageImageAddingText= textToAddImages[currentPage-1];
-        }
-        catch(ArrayIndexOutOfBoundsException e){
-            currentPageImageAddingText= "";
-        }
-
-
-        //add the images to the end of the page
-        /*
-        System.out.println("line: "+ line);
-        System.out.println("pattern: "+ newPageSeperator);
-         */
-        String[] splitLine = line.split(Pattern.quote(newPageSeperator));
-        try {
-            line = splitLine[0].concat(currentPageImageAddingText).concat(newPageSeperator).concat(splitLine[1]);
-        }
-        catch(ArrayIndexOutOfBoundsException e){
-            try{
-                //if the newpage is at the immediate start/end of the sentence
-                line = currentPageImageAddingText.concat(splitLine[0]).concat(newPageSeperator);
-            }
-            catch(ArrayIndexOutOfBoundsException e2){
-                //if the entire line is the newline text
-                line = currentPageImageAddingText.concat(line).concat(newPageSeperator);
-            }
-        }
+        //add the images to the end of the previous page
+        line = addImageAddingTextToEndOfPreviousPage(line, newPageSeperator, textToAddImages);
 
         //add the newpage indications
         line = line.replace(newPageSeperator, TEXT_TO_ADD_NEW_PAGE_IN_LATEX);
-        prevLineWasPageBreak = true;
-        linesToRemoveCount = numStartLinesToRemoveForEachPage;
 
         //end any bullet points
         if (previousBulletStyle != ""){
@@ -73,6 +42,41 @@ public class LatexifyNewPageAdjustor {
             previousBulletStyle = "";
         }
 
-        return new NewPageAdjustorOut(line, true, previousBulletStyle, textBuilder, linesToRemoveCount);
+        return new NewPageAdjustorOut(line, true, previousBulletStyle, textBuilder, numStartLinesToRemoveForEachPage);
+    }
+
+    private String getImageAddingText(String[] textToAddImages)
+    {
+        String  currentPageImageAddingText;
+        try {
+            currentPageImageAddingText= textToAddImages[currentPage-1];
+        }
+        catch(ArrayIndexOutOfBoundsException e){
+            currentPageImageAddingText= "";
+        }
+        return currentPageImageAddingText;
+    }
+
+    private String addImageAddingTextToEndOfPreviousPage(String line, String newPageSeperator, String[] textToAddImages)
+    {
+        //get the image text
+        String  currentPageImageAddingText = getImageAddingText(textToAddImages);
+
+
+        String[] lineSplitByNewPage = line.split(Pattern.quote(newPageSeperator));
+        try {
+            line = lineSplitByNewPage[0].concat(currentPageImageAddingText).concat(newPageSeperator).concat(lineSplitByNewPage[1]);
+        }
+        catch(ArrayIndexOutOfBoundsException e){
+            try{
+                //if the newpage is at the immediate start/end of the sentence
+                line = currentPageImageAddingText.concat(lineSplitByNewPage[0]).concat(newPageSeperator);
+            }
+            catch(ArrayIndexOutOfBoundsException e2){
+                //if the entire line is the newline text
+                line = currentPageImageAddingText.concat(line).concat(newPageSeperator);
+            }
+        }
+        return line;
     }
 }

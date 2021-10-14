@@ -35,33 +35,21 @@ public class LatexifyDocumentBodyConvertor {
 
         StringBuilder paragraphBuffer = new StringBuilder();
 
-
-
         StringBuilder mainTextConstructor = getMainTextConstructor(textBuilder, paragraphBuffer);
 
+        textBuilder = latexifyAllLines(textBuilder, textToAdd, newPageSeperator, textToAddImages, prevLineWasPageBreak, previousBulletStyle, mainTextConstructor, paragraphBuffer);
+        return textBuilder;
+    }
 
+    private StringBuilder latexifyAllLines(StringBuilder textBuilder, String textToAdd, String newPageSeperator, String[] textToAddImages, boolean prevLineWasPageBreak, String previousBulletStyle, StringBuilder mainTextConstructor, StringBuilder paragraphBuffer )
+    {
         for (String line : textToAdd.split("\n")){
-            if (patternChecker.lineContainsPattern(line, removePatternOnLine)){
-                //TODO: do not add the line
-            }
-
-            //special character adjustments
-            line = characterAdjustor.performSpecialCharacterAdjustments(line);
-
-            //performing paragraph related checks
-            if (!removePatternOnPara.isBlank() && !removePatternOnLine.isBlank()) {
-                ParagraphSearchOut paragraphData = paragraphChecker.performParagraphChecks(line, paragraphBuffer, textBuilder, removePatternOnPara);
-                line = paragraphData.firstLineOfNextParagraph();
-                paragraphBuffer = paragraphData.paragraph();
-                textBuilder = paragraphData.constructedOutText();
-            }
-
-            //perform regular line checks
-            RegularLineCheckOut regLineOut = regularLineChecker.performRegularLineChecks(line, newPageSeperator, prevLineWasPageBreak, previousBulletStyle, mainTextConstructor, textToAddImages);
-            line = regLineOut.modifiedLine();
-            mainTextConstructor = regLineOut.textBuffer();
-            prevLineWasPageBreak = regLineOut.prevLineWasPageBreak();
-            previousBulletStyle = regLineOut.prevBulletStyle();
+            byLineLatexificationOut thisLineLatexificationOut = performByLineLatexification(line, mainTextConstructor, textBuilder, paragraphBuffer, newPageSeperator, prevLineWasPageBreak, previousBulletStyle, textToAddImages);
+            mainTextConstructor = thisLineLatexificationOut.mainTextConstructor();
+            textBuilder = thisLineLatexificationOut.textBuilder();
+            paragraphBuffer = thisLineLatexificationOut.paragraphBufferr();
+            prevLineWasPageBreak = thisLineLatexificationOut.prevLineWasPageBreak();
+            previousBulletStyle = thisLineLatexificationOut.previousBulletStyle();
         }
         return textBuilder;
     }
@@ -76,4 +64,30 @@ public class LatexifyDocumentBodyConvertor {
         }
     }
 
+    private byLineLatexificationOut performByLineLatexification(String line, StringBuilder mainTextConstructor, StringBuilder textBuilder, StringBuilder paragraphBuffer, String newPageSeperator, boolean prevLineWasPageBreak, String previousBulletStyle, String[] textToAddImages){
+        if (patternChecker.lineContainsPattern(line, removePatternOnLine)){
+            //TODO: do not add the line
+        }
+
+        //special character adjustments
+        line = characterAdjustor.performSpecialCharacterAdjustments(line);
+
+        //performing paragraph related checks
+        if (!removePatternOnPara.isBlank() && !removePatternOnLine.isBlank()) {
+            ParagraphSearchOut paragraphData = paragraphChecker.performParagraphChecks(line, paragraphBuffer, textBuilder, removePatternOnPara);
+            line = paragraphData.firstLineOfNextParagraph();
+            paragraphBuffer = paragraphData.paragraph();
+            textBuilder = paragraphData.constructedOutText();
+        }
+
+        //perform regular line checks
+        RegularLineCheckOut regLineOut = regularLineChecker.performRegularLineChecks(line, newPageSeperator, prevLineWasPageBreak, previousBulletStyle, mainTextConstructor, textToAddImages);
+        mainTextConstructor = regLineOut.textBuffer();
+        prevLineWasPageBreak = regLineOut.prevLineWasPageBreak();
+        previousBulletStyle = regLineOut.prevBulletStyle();
+
+        return new byLineLatexificationOut(mainTextConstructor, textBuilder, paragraphBuffer, prevLineWasPageBreak, previousBulletStyle);
+    }
+
+    private record byLineLatexificationOut(StringBuilder mainTextConstructor, StringBuilder textBuilder, StringBuilder paragraphBufferr, boolean prevLineWasPageBreak, String previousBulletStyle){}
 }

@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
  * Converts an input String that has been read from  a pdf into a latex-like format
  */
 public class Latexify {
-    private final static  String TEXT_TO_ADD_NEW_PAGE_IN_LATEX = "\\clearpage\n";//the text that LaTeX will interpret as a 'new page prompt'
     private final static String BEGIN_DOC_PLACEHOLDER = "fsahfvmaekl343nm!";//a placeholder/temp for the text that this class will use/interpret as 'starting the main document body'
+
 
     //--optional arguments--
     private static boolean quizMode = false;//true if 'quiz mode' formatting is to be applied to the text; false otherwise
@@ -17,7 +17,6 @@ public class Latexify {
     private static short linesToRemoveCount = 0;//used to keep-track of how many of the following lines of text must be ignored/removed
     private static String removePatternOnLine = "";//the sequence of characters that will be searched for on each line. The line will be removed if it contains that sequence
     private static String removePatternOnPara = "";//the sequence of characters that will be searched for on each paragraph. The paragraph will be removed if it contains that sequence
-    private final static String QUIZ_PAGE_INDICATION_TEXT = "(Q)"; //text added to the start of each quiz page, to indicate that this particular page is a quiz page(i.e. a page asking a question)
 
     //----Optional argument setting---
     /**
@@ -63,7 +62,8 @@ public class Latexify {
         //return latexified string
         String outputString = asLatex.toString();
         if(quizMode){
-            outputString = applyQuizFormatting(outputString);
+            LatexifyConvertorToQuiz convertorToQuiz = new LatexifyConvertorToQuiz();
+            outputString = convertorToQuiz.applyQuizFormatting(outputString);
         }
         //add in the actual begin doc text
         outputString = outputString.replace(BEGIN_DOC_PLACEHOLDER, "\\begin{document}\n");
@@ -104,65 +104,5 @@ public class Latexify {
 
 
 
-    /**
-     * Applies quiz formatting to the inputted LaTeX-style text.
-     * This includes:
-     * -before each page, adding a 'question' page.
-     *      -which will contain a question, usually to describe <title of the page>
-     * @param textToConvert = The LaTeX style text, which is to be quizified
-     * @return a quizified version of the LaTex text
-     */
-    private static String applyQuizFormatting(String textToConvert)
-    {
-        String PAGE_TITLE_TEXT_INDICATOR_START = "\\section".concat("{");
-        String PAGE_TITLE_TEXT_INDICATOR_END = "}";
-        ArrayList<String> textAsQuiz = new ArrayList<String>();
-        String[] splitAtDocBodyBeginning = textToConvert.split(BEGIN_DOC_PLACEHOLDER);
-        String documentStart = splitAtDocBodyBeginning[0];
-        String documentBody;
-        try{
-            documentBody = splitAtDocBodyBeginning[1];
-        }
-        catch(ArrayIndexOutOfBoundsException e)
-        {
-            documentBody = "";
-        }
-        String[] splitByNewPages = documentBody.split(Pattern.quote(TEXT_TO_ADD_NEW_PAGE_IN_LATEX));
 
-        StringBuilder quizPage = new StringBuilder();
-        String pageTitle = "...";
-        for (String page : splitByNewPages)
-        {
-            //find the page title
-            if(page.contains(PAGE_TITLE_TEXT_INDICATOR_START)){
-                String textAfterAndIncludingTitle;
-                try {
-                    textAfterAndIncludingTitle = page.split(Pattern.quote(PAGE_TITLE_TEXT_INDICATOR_START))[1];
-                }
-                catch(ArrayIndexOutOfBoundsException e){
-                    textAfterAndIncludingTitle = page.split(Pattern.quote(PAGE_TITLE_TEXT_INDICATOR_START))[0];
-                }
-                try {
-                    pageTitle = textAfterAndIncludingTitle.split(Pattern.quote(PAGE_TITLE_TEXT_INDICATOR_END))[0];
-                }
-                catch(ArrayIndexOutOfBoundsException e){
-                    pageTitle = textAfterAndIncludingTitle.split(Pattern.quote(PAGE_TITLE_TEXT_INDICATOR_END))[1];
-                }
-            }
-            //add quiz page indication text
-            quizPage.append(QUIZ_PAGE_INDICATION_TEXT+"\n");
-
-            //add the title to the quiz page
-            quizPage.append("Describe: ").append(pageTitle).append("\n");
-
-            //add the quiz page (question page) to the output
-            textAsQuiz.add(quizPage.toString());
-            quizPage.setLength(0);
-            //add the regular [answer] page to the output
-            textAsQuiz.add(page);
-            //add the regular [answer] page to the output
-        }
-        //join all pages back together with Latex's new page indicator text
-        return documentStart.concat(BEGIN_DOC_PLACEHOLDER).concat("\n").concat(String.join(TEXT_TO_ADD_NEW_PAGE_IN_LATEX, textAsQuiz));
-    }
 }

@@ -20,7 +20,9 @@ class Main
 
         /*
         TODO:
-        -add more print statements to work out why the pages are not being converted correctly.
+        I have a theory, if ACCESS MAIN POWER GRID is seen, the whole line is removed (I think), so this may be breaking some stuff.
+
+        -finish refactoring the latexify stuff.
 
         -it seems like a lot of the content is being removed after
          going through the latexify process.

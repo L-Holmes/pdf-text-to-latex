@@ -12,12 +12,28 @@ public class LatexifySpecialCharacterAdjustor {
      */
     public String performSpecialCharacterAdjustments(String line)
     {
+        line = backslashAllSpecialCharacters(line);
+        line = replaceEqualityOperators(line);
+        return line;
+    }
+
+    private String backslashAllSpecialCharacters(String line)
+    {
+        for (String specialChar : CHARACTERS_TO_BACKSLASH) line = addBackslashToStartOfSpecialCharacter(line, specialChar);
+        return line;
+    }
+
+    private String addBackslashToStartOfSpecialCharacter(String line, String specialChar)
+    {
         //prepend a backslash to any special characters so that they are literally interpreted in the latex code
-        for (String specialChar : CHARACTERS_TO_BACKSLASH){
-            if (line.contains(specialChar)){
-                line = line.replace(specialChar, "\\".concat(specialChar));
-            }
+        if (line.contains(specialChar)){
+            line = line.replace(specialChar, "\\".concat(specialChar));
         }
+        return line;
+    }
+
+    private String replaceEqualityOperators(String line)
+    {
         line = line.replace("<", " \\textless ");
         line = line.replace(">", " \\textgreater ");
         return line;
