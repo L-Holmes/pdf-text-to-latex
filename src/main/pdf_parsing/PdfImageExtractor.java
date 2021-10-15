@@ -85,32 +85,52 @@ public class PdfImageExtractor {
         //create the output directory
         new File(outputDir).mkdirs();
         //
+        StringBuilder textToAddImgsForThisPage = new StringBuilder();
 
         PDResources pdResources = page.getResources();
         int i = 1;
         Iterable<org.apache.pdfbox.cos.COSName> cosNames =pdResources.getXObjectNames();
         for (COSName cosName : cosNames) {
             try {
-                imageExtractOut extractOut = extractImage(textToAddTheImages, outputDir, i, pdResources, cosName, pageNumber);
-                textToAddTheImages = extractOut.textToAddTheImages();
+                imageExtractOut extractOut = extractImage(textToAddImgsForThisPage, outputDir, i, pdResources, cosName, pageNumber);
+                textToAddImgsForThisPage = extractOut.textToAddTheImages();
                 i = extractOut.i();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+        /////
+        System.out.println("------------text to add images:!!!!!!!!!!!!!!!!!");
+        for(String tex : textToAddTheImages){
+            System.out.println("    -"+tex);
+        }
+
+        /*
+        Instead of adding so that the index correlates to the page,
+        each index appears to be assigned to a single image.
+
+        check how these images are applied (and if it is by index)
+        jump
+
+        yeah, it is accessed by index, so each entry needs to have all the text for one page...
+         */
+        //////////
+        //now add that string to text to add images
+        textToAddTheImages.add(textToAddImgsForThisPage.toString());
+
         return textToAddTheImages;
     }
 
-    private imageExtractOut extractImage(ArrayList<String> textToAddTheImages, String outputDir, int i, PDResources pdResources, COSName cosName, int pageNumber) throws IOException {
+    private imageExtractOut extractImage(StringBuilder textToAddImgsForThisPage, String outputDir, int i, PDResources pdResources, COSName cosName, int pageNumber) throws IOException {
         PDXObject o = pdResources.getXObject(cosName);
-        if(!(o instanceof  PDImageXObject)) return new imageExtractOut(textToAddTheImages, i);
+        if(!(o instanceof  PDImageXObject)) return new imageExtractOut(textToAddImgsForThisPage, i);
 
         String nameOfImgFile = "page".concat(String.valueOf(pageNumber).concat("-image-").concat(String.valueOf(i)).concat(".png"));
         makeImageFileContainingExtractedImage(outputDir, o, nameOfImgFile);
-        textToAddTheImages = addNewImageAddingTextToOverallImageAddingList(textToAddTheImages, nameOfImgFile);
+        textToAddImgsForThisPage = addNewImageAddingTextToOverallImageAddingList(textToAddImgsForThisPage, nameOfImgFile);
         i++;
 
-        return new imageExtractOut(textToAddTheImages, i);
+        return new imageExtractOut(textToAddImgsForThisPage, i);
     }
 
     private void makeImageFileContainingExtractedImage(String outputDir, PDXObject o, String nameOfImgFile) throws IOException {
@@ -119,10 +139,10 @@ public class PdfImageExtractor {
         ImageIO.write(image.getImage(), "png", new File(filename));
     }
 
-    private ArrayList<String> addNewImageAddingTextToOverallImageAddingList(ArrayList<String> textToAddTheImages, String nameOfImgFile)
+    private StringBuilder addNewImageAddingTextToOverallImageAddingList(StringBuilder textToAddTheImages, String nameOfImgFile)
     {
         StringBuilder textToAddTheImage = addTextToAddImageOntoLatexDocument(nameOfImgFile);
-        textToAddTheImages.add(textToAddTheImage.toString());
+        textToAddTheImages.append(textToAddTheImage.toString());
         return textToAddTheImages;
     }
 
@@ -135,7 +155,7 @@ public class PdfImageExtractor {
         return textToAddTheImage;
     }
 
-    private record imageExtractOut(ArrayList<String> textToAddTheImages, int i){}
+    private record imageExtractOut(StringBuilder textToAddTheImages, int i){}
 
     public synchronized int getImageLoadingPercentage()
     {

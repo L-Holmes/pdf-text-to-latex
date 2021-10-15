@@ -10,6 +10,17 @@ TODO:
  */
 class Main
 {
+    /*
+    steps for notes:
+    -enter the pdf location
+    -run program
+    -create pdf output
+    -check pdf output against original for issues with this app
+        - adjust code if necessary
+    -compare latex file with output pdf, adjusting where necessary
+    -save latex file as final version.
+    -create pdf output.
+     */
     public static void main(String[] args)
     {
         //String inputPdfLocation = "static/year3_lecture_slides/SCC361/in/SCC361-Wk1-L1.pdf";
@@ -23,9 +34,11 @@ class Main
         TODO:
         latest issues:
 
-        -same picture seems to be shown for all pages
-
          -seems to be 1 or 2 additional blank questions at the end
+
+         new issue:
+         it seems like the first few images are being repeated, rather than the actual images related to a specific page
+         possibly not all of the images are being displayed either.
 
          */
 
@@ -34,6 +47,5 @@ class Main
         - make the process of entering a new file easier
             * currently have to change both files in the main code, and in the pdflatex shell script
          */
-
     }
 }

@@ -5,6 +5,9 @@ public class LatexifyRegularLineChecker {
     private short linesToRemoveCount = 0;//used to keep-track of how many of the following lines of text must be ignored/removed
     private short numStartLinesToRemoveForEachPage = 0;// the number of lines to remove/ignore, when processing the text for each page of the pdf text input
 
+    LatexifyNewPageAdjustor newPageAdjustor = new LatexifyNewPageAdjustor();
+    LatexifyDocumentLineGetter documentLineGetter = new LatexifyDocumentLineGetter();
+
     /**
      * performs:
      * -general line adjustments
@@ -20,8 +23,6 @@ public class LatexifyRegularLineChecker {
      */
      public RegularLineCheckOut performRegularLineChecks(String line, String newPageSeperator, boolean prevLineWasPageBreak, String previousBulletStyle, StringBuilder textBuffer, String[] textToAddImages)
     {
-        LatexifyNewPageAdjustor newPageAdjustor = new LatexifyNewPageAdjustor();
-        LatexifyDocumentLineGetter documentLineGetter = new LatexifyDocumentLineGetter();
         //performing new page related checks
         NewPageAdjustorOut newpageAdjustOut = newPageAdjustor.adjustAnyNewpages(line, newPageSeperator, prevLineWasPageBreak, previousBulletStyle, textBuffer, linesToRemoveCount, textToAddImages);
         line = newpageAdjustOut.line();

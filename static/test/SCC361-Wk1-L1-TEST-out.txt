@@ -33,6 +33,33 @@ Overview of Machine Learning\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page1-image-2.png}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page1-image-3.png}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page1-image-4.png}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page1-image-5.png}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page1-image-6.png}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page1-image-7.png}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page1-image-8.png}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page1-image-9.png}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page1-image-10.png}
+\end{figure}
 \clearpage
 (Q)
 Describe: Playing this Video
@@ -54,6 +81,12 @@ coffee breaks, notes etc\\
 3\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page1-image-2.png}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page1-image-3.png}
 \end{figure}
 \clearpage
 (Q)
@@ -78,6 +111,12 @@ kindly let us know.\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page1-image-2.png}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page1-image-3.png}
+\end{figure}
 \clearpage
 (Q)
 Describe: Be sure to check in to all timetabled sessions using 
@@ -99,6 +138,12 @@ Attendance Check-in\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page1-image-2.png}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page1-image-3.png}
+\end{figure}
 \clearpage
 (Q)
 Describe: Online Sessions on Teams
@@ -114,6 +159,12 @@ Before the session:\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page1-image-2.png}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page1-image-3.png}
+\end{figure}
 \clearpage
 (Q)
 Describe: Online Sessions on Teams
@@ -128,6 +179,12 @@ During the lectures:\\
 7\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page1-image-2.png}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page1-image-3.png}
 \end{figure}
 \clearpage
 (Q)
@@ -150,6 +207,12 @@ Post additional questions on the SCC361 Moodle Forum\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page1-image-2.png}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page1-image-3.png}
+\end{figure}
 \clearpage
 (Q)
 Describe: Online Sessions on Teams
@@ -164,6 +227,12 @@ Moodle Space\\
 9\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page1-image-2.png}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page1-image-3.png}
 \end{figure}
 \clearpage
 (Q)
@@ -188,6 +257,15 @@ Using Materials Offline\\
 10\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page1-image-2.png}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page1-image-3.png}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.5\linewidth]{page1-image-4.png}
 \end{figure}
 \clearpage
 (Q)

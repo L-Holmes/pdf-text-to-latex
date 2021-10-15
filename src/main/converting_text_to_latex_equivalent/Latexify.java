@@ -77,6 +77,15 @@ public class Latexify {
         StringBuilder textToCreateDocument = new StringBuilder();
         textToCreateDocument = addRequiredPageToStartOfDocument(textToCreateDocument);
 
+        ////////
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@ latexify start text to add imgs@@@@@@@@@@@@@@@@@@@@@@@@");
+        int i = 0;
+        for(String entry : textToAddImages){
+            System.out.println("entry #"+i+" = :"+entry+":");
+            i++;
+        }
+        System.out.println("@@@@@@@@@@@@@@@");
+        ////////
 
 
         LatexifyDocumentBodyConvertor documentBodyToLatexifiedVersionGetter = new LatexifyDocumentBodyConvertor();

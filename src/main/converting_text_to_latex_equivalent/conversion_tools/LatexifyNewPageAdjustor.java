@@ -84,9 +84,15 @@ public class LatexifyNewPageAdjustor {
 
     private String getImageAddingText(String[] textToAddImages)
     {
+        //jump
         String  currentPageImageAddingText;
         try {
             currentPageImageAddingText= textToAddImages[currentPage-1];
+
+            System.out.println("£££££££££££££££££££££££ text to add images for this page:££££££££££££££££3");
+            System.out.println(" (at page #"+ (currentPage-1) + ")");
+            System.out.println(currentPageImageAddingText);
+            System.out.println("££££££££££££££££££££££3");
         }
         catch(ArrayIndexOutOfBoundsException e){
             currentPageImageAddingText= "";
