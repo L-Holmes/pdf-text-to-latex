@@ -26,17 +26,20 @@ class Main
         -it seems like a lot of the content is being removed after
          going through the latexify process.
 
-         todo remove old print statements
-         TODO: ADD THE PRINT STATEMENTS
-         TODO: CHECK THAT NEW MAIN POWER GRID THING
+        latest issues:
+        -The page breaks don't appear to be working
+            * check page breaks.
+            * check pages are ended correctly
+            * maybe investigate the other one that was working and look for a difference
+            * if necessary, try other page break techniques
+        -When a bullet point goes onto multiple lines, the following lines aren't bullet pointed.
+         But then, when the next bullet point is handled, it isn't made a bullet point
+         -Sometimes the bullet points are not detected at all -- maybe previous bullet points were not ended correctly???
+            * Check that the bullet points are being started and ended correctly (I suspect that they are not)
 
-         TODO: (1) create a test for latexify
-               were I can enter custom text
-               (2) copy the first 5 pages, of the original text output that was fetched
-               (3) enter this text as the input to the latexify test, and add lots of print statements to
-                   see what is going on.
+         -Only the first page appears to be quizified
+            * fix this
 
-        -page titles are not being picked up
          */
 
     }

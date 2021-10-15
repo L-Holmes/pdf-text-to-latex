@@ -8,8 +8,6 @@
 echo "Compiling the latex with pdflatex:"
 cd static
 #cd out
-cd year3_lecture_slides
-cd SCC361
-cd out
-pdflatex -interaction=nonstopmode SCC361-Wk1-L1-out.tex
+cd test
+pdflatex -interaction=nonstopmode SCC361-Wk1-L1-TEST-out.tex
 echo "...Finished converting to latex to a pdf"

@@ -7,7 +7,7 @@
 \begin{document}
 
 (Q)
-Describe: SCC361: Artificial Intelligence
+Describe: ...
 \clearpage
 
 SCC361: Artificial Intelligence\\
@@ -19,6 +19,10 @@ Office: InfoLab21 C40 Email: b.williams6@lancaster.ac.uk\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
+\clearpage
+(Q)
+Describe: SCC361: Artificial Intelligence
+\clearpage
 \section{SCC361: Artificial Intelligence}
 \\
 2\\
@@ -29,6 +33,10 @@ Overview of Machine Learning\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
+\clearpage
+(Q)
+Describe: Playing this Video
+\clearpage
 \section{Playing this Video}
 \\
 \begin{itemize}
@@ -47,6 +55,10 @@ coffee breaks, notes etc\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
+\clearpage
+(Q)
+Describe: Accessibility
+\clearpage
 \section{Accessibility}
 \\
 \begin{itemize}
@@ -66,6 +78,10 @@ kindly let us know.\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
+\clearpage
+(Q)
+Describe: Be sure to check in to all timetabled sessions using 
+\clearpage
 \section{Be sure to check in to all timetabled sessions using }
 \\
 Attendance Check-in\\
@@ -83,6 +99,10 @@ Attendance Check-in\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
+\clearpage
+(Q)
+Describe: Online Sessions on Teams
+\clearpage
 \section{Online Sessions on Teams}
 \\
 Before the session:\\
@@ -94,6 +114,10 @@ Before the session:\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
+\clearpage
+(Q)
+Describe: Online Sessions on Teams
+\clearpage
 \section{Online Sessions on Teams}
 \\
 During the lectures:\\
@@ -105,6 +129,10 @@ During the lectures:\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
+\clearpage
+(Q)
+Describe: Online Sessions on Teams
+\clearpage
 \section{Online Sessions on Teams}
 \\
 During the lectures:\\
@@ -122,6 +150,10 @@ Post additional questions on the SCC361 Moodle Forum\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
+\clearpage
+(Q)
+Describe: Online Sessions on Teams
+\clearpage
 \section{Online Sessions on Teams}
 \\
 After the lectures:\\
@@ -133,6 +165,10 @@ Moodle Space\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page1-image-1.png}
 \end{figure}
+\clearpage
+(Q)
+Describe: The lectures can be watched on the Moodle space.
+\clearpage
 \section{The lectures can be watched on the Moodle space.}
 \\
 If you are struggling to watch the videos on Moodle:\\

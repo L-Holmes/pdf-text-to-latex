@@ -69,7 +69,7 @@ public class LatexifyNewPageAdjustor {
 
             String nextPageTitleText = splitByNewPageText[1];
             nextPageTitleText = makeALatexHeading(nextPageTitleText);
-            String adjustedTitlizedLine = splitByNewPageText[0].concat(nextPageTitleText);
+            String adjustedTitlizedLine = splitByNewPageText[0].concat(TEXT_TO_ADD_NEW_PAGE_IN_LATEX).concat(nextPageTitleText);
             return new nextPageTitlizationOutput(false, adjustedTitlizedLine);
         }
         return new nextPageTitlizationOutput(true, lineWithNewPageIndication);
