@@ -23,7 +23,6 @@ class Main
         TODO:
         latest issues:
 
-        -image loader needs refactoring
         -same picture seems to be shown for all pages
 
          -seems to be 1 or 2 additional blank questions at the end

@@ -28,24 +28,23 @@ public class PdfImageExtractor {
     public String[] retrievePdfImageAddingTextForAllPages(PDDocument documentToRead, String outputFolderLocation)
     {
         ArrayList<String> imageAddingTextForEachPage = new ArrayList<String>();
-        //getting the images
-        Iterator<PDPage> iteratorOfPages = documentToRead.getPages().iterator();
-        int pageNum = 0;
-        numPages = documentToRead.getNumberOfPages();
         pagesProcessed = 0;
-        //start status shower
+        Iterator<PDPage> iteratorOfPages = documentToRead.getPages().iterator();
+        numPages = documentToRead.getNumberOfPages();
+
+        imageAddingTextForEachPage = processAllPagesAndOutputStatusWhilstDoingSo(imageAddingTextForEachPage, iteratorOfPages, outputFolderLocation);
+
+        return imageAddingTextForEachPage.toArray(new String[0]);
+    }
+
+    private ArrayList<String> processAllPagesAndOutputStatusWhilstDoingSo(ArrayList<String> imageAddingTextForEachPage, Iterator<PDPage> iteratorOfPages, String outputFolderLocation)
+    {
         ImageLoadingStatusShower statusShower =new ImageLoadingStatusShower(this);
+
+        //start status shower
         Thread statusThread = new Thread(statusShower);
         statusThread.start();
-
-        System.out.println("Loading images ...");
-
-        while (iteratorOfPages.hasNext()){
-            pageNum++;
-            pagesProcessed++;
-            PDPage singlePage = iteratorOfPages.next();
-            imageAddingTextForEachPage = getImagesFromPage(singlePage, pageNum, imageAddingTextForEachPage, outputFolderLocation);
-        }
+        imageAddingTextForEachPage = processAllPages(iteratorOfPages, imageAddingTextForEachPage, outputFolderLocation);
         statusShower.finishProcess();
         try {
             statusThread.join();
@@ -53,8 +52,31 @@ public class PdfImageExtractor {
             e.printStackTrace();
         }
 
-        return imageAddingTextForEachPage.toArray(new String[0]);
+        return imageAddingTextForEachPage;
     }
+
+    private ArrayList<String> processAllPages(Iterator<PDPage> iteratorOfPages, ArrayList<String> imageAddingTextForEachPage, String outputFolderLocation)
+    {
+        int pageNum = 0;
+        System.out.println("Loading images ...");
+        while (iteratorOfPages.hasNext()){
+            allPagesProcessingOutput pagesProcessingOutput = processAllImagesInPage(iteratorOfPages, imageAddingTextForEachPage, pageNum, outputFolderLocation);
+            imageAddingTextForEachPage = pagesProcessingOutput.imageAddingTextForEachPage();
+            pagesProcessed = pagesProcessingOutput.pagesProcessed();
+        }
+        return imageAddingTextForEachPage;
+    }
+
+    private allPagesProcessingOutput processAllImagesInPage(Iterator<PDPage> iteratorOfPages, ArrayList<String> imageAddingTextForEachPage, int pageNum, String outputFolderLocation)
+    {
+        pageNum++;
+        pagesProcessed++;
+        PDPage singlePage = iteratorOfPages.next();
+        imageAddingTextForEachPage = getImagesFromPage(singlePage, pageNum, imageAddingTextForEachPage, outputFolderLocation);
+        return new allPagesProcessingOutput(imageAddingTextForEachPage, pagesProcessed);
+    }
+
+    private record allPagesProcessingOutput(ArrayList<String> imageAddingTextForEachPage, int pagesProcessed){}
 
     private ArrayList<String> getImagesFromPage(PDPage page, int pageNumber, ArrayList<String> textToAddTheImages, String outputFolderLocation)
     {
@@ -69,26 +91,51 @@ public class PdfImageExtractor {
         Iterable<org.apache.pdfbox.cos.COSName> cosNames =pdResources.getXObjectNames();
         for (COSName cosName : cosNames) {
             try {
-                PDXObject o = pdResources.getXObject(cosName);
-                if (o instanceof PDImageXObject) {
-                    PDImageXObject image = (PDImageXObject) o;
-                    String nameOfImgFile = "page".concat(String.valueOf(pageNumber).concat("-image-").concat(String.valueOf(i)).concat(".png"));
-                    String filename = outputDir.concat(nameOfImgFile);
-                    ImageIO.write(image.getImage(), "png", new File(filename));
-                    i++;
-                    //add the text that adds the image into the latex document
-                    StringBuilder textToAddTheImage = new StringBuilder();
-                    textToAddTheImage.append("\\begin{figure}[H]\n");
-                    textToAddTheImage.append("\\includegraphics[width=0.5\\linewidth]{"+nameOfImgFile+"}\n");
-                    textToAddTheImage.append("\\end{figure}\n");
-                    textToAddTheImages.add(textToAddTheImage.toString());
-                }
+                imageExtractOut extractOut = extractImage(textToAddTheImages, outputDir, i, pdResources, cosName, pageNumber);
+                textToAddTheImages = extractOut.textToAddTheImages();
+                i = extractOut.i();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
         return textToAddTheImages;
     }
+
+    private imageExtractOut extractImage(ArrayList<String> textToAddTheImages, String outputDir, int i, PDResources pdResources, COSName cosName, int pageNumber) throws IOException {
+        PDXObject o = pdResources.getXObject(cosName);
+        if(!(o instanceof  PDImageXObject)) return new imageExtractOut(textToAddTheImages, i);
+
+        String nameOfImgFile = "page".concat(String.valueOf(pageNumber).concat("-image-").concat(String.valueOf(i)).concat(".png"));
+        makeImageFileContainingExtractedImage(outputDir, o, nameOfImgFile);
+        textToAddTheImages = addNewImageAddingTextToOverallImageAddingList(textToAddTheImages, nameOfImgFile);
+        i++;
+
+        return new imageExtractOut(textToAddTheImages, i);
+    }
+
+    private void makeImageFileContainingExtractedImage(String outputDir, PDXObject o, String nameOfImgFile) throws IOException {
+        PDImageXObject image = (PDImageXObject) o;
+        String filename = outputDir.concat(nameOfImgFile);
+        ImageIO.write(image.getImage(), "png", new File(filename));
+    }
+
+    private ArrayList<String> addNewImageAddingTextToOverallImageAddingList(ArrayList<String> textToAddTheImages, String nameOfImgFile)
+    {
+        StringBuilder textToAddTheImage = addTextToAddImageOntoLatexDocument(nameOfImgFile);
+        textToAddTheImages.add(textToAddTheImage.toString());
+        return textToAddTheImages;
+    }
+
+    private StringBuilder addTextToAddImageOntoLatexDocument(String nameOfImgFile)
+    {
+        StringBuilder textToAddTheImage = new StringBuilder();
+        textToAddTheImage.append("\\begin{figure}[H]\n");
+        textToAddTheImage.append("\\includegraphics[width=0.5\\linewidth]{"+nameOfImgFile+"}\n");
+        textToAddTheImage.append("\\end{figure}\n");
+        return textToAddTheImage;
+    }
+
+    private record imageExtractOut(ArrayList<String> textToAddTheImages, int i){}
 
     public synchronized int getImageLoadingPercentage()
     {
