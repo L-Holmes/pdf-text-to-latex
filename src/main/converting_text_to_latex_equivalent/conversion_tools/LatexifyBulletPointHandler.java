@@ -55,4 +55,24 @@ public class LatexifyBulletPointHandler {
         }
         return line;
     }
+
+    /**
+     *
+     * @return true if there are bullet points that have not been ended; false if there are no bullet points to end
+     */
+    protected boolean hasNestedBulletsThatHaveNotBeenEnded()
+    {
+        System.out.println("bullet point stack is empty????????????"+ nestedBulletPointStyleStack.isEmpty());
+        return !(nestedBulletPointStyleStack.isEmpty());
+    }
+
+    /**
+     * Removes the top level of nested bullet points from the
+     * nested bullet point stack (used to keep track of the levels of nested bullet points)
+     */
+    protected void removeTopNestedBulletPoint()
+    {
+        nestedBulletPointStyleStack.pop();
+    }
+
 }

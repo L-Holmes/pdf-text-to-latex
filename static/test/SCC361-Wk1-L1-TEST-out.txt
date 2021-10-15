@@ -47,7 +47,7 @@ Describe: Playing this Video
 \end{itemize}
 Questions? slides will give you a specific opportunity to ask \\
 questions\\
-\end{itemize}
+\begin{itemize}
   \item While watching, use the Questions? slides as stop points for 
 \end{itemize}
 coffee breaks, notes etc\\
@@ -65,7 +65,7 @@ Describe: Accessibility
   \item All our content is expected to meet the UK 
 \end{itemize}
 accessibility requirements\\
-\end{itemize}
+\begin{itemize}
   \item We have done our best to ensure that that is the 
 \end{itemize}
 case with these course materials\\
@@ -86,7 +86,7 @@ Describe: Be sure to check in to all timetabled sessions using
 \\
 Attendance Check-in\\
 To check in:\\
-\end{itemize}
+\begin{itemize}
   \item Check the Attendance Hub in iLancaster
   \item Click Check In
   \item Wait for the “You are checked in” confirmation page
@@ -121,7 +121,7 @@ Describe: Online Sessions on Teams
 \section{Online Sessions on Teams}
 \\
 During the lectures:\\
-\end{itemize}
+\begin{itemize}
   \item Turn your webcam off
   \item Turn your microphone off
 \end{itemize}
@@ -140,7 +140,7 @@ During the lectures:\\
   \item Use  chat  appropriately. Not closely monitored during lectures.
 \end{itemize}
 For live Q\&A sessions:\\
-\end{itemize}
+\begin{itemize}
   \item Raise your hand to ask questions. Lower it afterwards.
   \item When called, turn on your mic (and cam if you wish). Remember to turn them off 
 \end{itemize}
@@ -172,7 +172,7 @@ Describe: The lectures can be watched on the Moodle space.
 \section{The lectures can be watched on the Moodle space.}
 \\
 If you are struggling to watch the videos on Moodle:\\
-\end{itemize}
+\begin{itemize}
   \item Download the video and caption file (*.vtt) from Moodle
   \item Download the free, open source VLC Media player: 
 \end{itemize}

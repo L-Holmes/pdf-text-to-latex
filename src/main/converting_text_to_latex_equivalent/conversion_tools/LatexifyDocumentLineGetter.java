@@ -36,6 +36,7 @@ public class LatexifyDocumentLineGetter {
 
         //converting bullet points into latex bullet points
         LatexifyBulletPointHandler bulletPointHandler = new LatexifyBulletPointHandler();
+        //TODO: DOES THIS NEED TO BE EXTERNAL (ABOVE), TO KEEP TRACK OF THE NESTED BULLET POINTS PROPERLY?
 
         String bulletPointTypeUsed = getTheBulletPointTypeUsed(line);
         if(bulletPointTypeUsed != null){
@@ -45,10 +46,11 @@ public class LatexifyDocumentLineGetter {
             addNewline = false;
         }
         else{
-            //if the previous line had bullet points, that need to be ended.
-            BulletPointOperationOut endBulletPointsOut = endPreviousBulletPoints(line, previousBulletStyle);
+            //if the previous line had bullet points,they need to be ended.
+            BulletPointOperationOut endBulletPointsOut = endPreviousBulletPoints(line, previousBulletStyle, bulletPointHandler);
             line = endBulletPointsOut.modifiedLine();
             previousBulletStyle = endBulletPointsOut.previousBulletStyle();
+
         }
 
         //adding a regular line to a page
@@ -57,10 +59,18 @@ public class LatexifyDocumentLineGetter {
         return new DocumentLineOut(textBuilder, prevLineWasPageBreak, previousBulletStyle);
     }
 
-    private BulletPointOperationOut endPreviousBulletPoints(String line, String previousBulletStyle)
+    private BulletPointOperationOut endPreviousBulletPoints(String line, String previousBulletStyle, LatexifyBulletPointHandler bulletPointHandler)
     {
-        if (previousBulletStyle != ""){
-            line = "\\end{itemize}\n".concat(line);
+        if (previousBulletStyle != "") {
+            //since there is no bullet points now, ensure that the previous bullet points have been fully emptied
+
+            String endingText = "";
+            while (bulletPointHandler.hasNestedBulletsThatHaveNotBeenEnded()) {
+                bulletPointHandler.removeTopNestedBulletPoint();
+                endingText = endingText.concat("\\end{itemize}\n");
+            }
+            line = endingText.concat(line);
+
         }
         previousBulletStyle = "";
         return new BulletPointOperationOut(line, previousBulletStyle);
