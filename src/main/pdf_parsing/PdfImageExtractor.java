@@ -63,6 +63,7 @@ public class PdfImageExtractor {
             allPagesProcessingOutput pagesProcessingOutput = processAllImagesInPage(iteratorOfPages, imageAddingTextForEachPage, pageNum, outputFolderLocation);
             imageAddingTextForEachPage = pagesProcessingOutput.imageAddingTextForEachPage();
             pagesProcessed = pagesProcessingOutput.pagesProcessed();
+            pageNum = pagesProcessingOutput.pageNum();
         }
         return imageAddingTextForEachPage;
     }
@@ -73,10 +74,10 @@ public class PdfImageExtractor {
         pagesProcessed++;
         PDPage singlePage = iteratorOfPages.next();
         imageAddingTextForEachPage = getImagesFromPage(singlePage, pageNum, imageAddingTextForEachPage, outputFolderLocation);
-        return new allPagesProcessingOutput(imageAddingTextForEachPage, pagesProcessed);
+        return new allPagesProcessingOutput(imageAddingTextForEachPage, pagesProcessed, pageNum);
     }
 
-    private record allPagesProcessingOutput(ArrayList<String> imageAddingTextForEachPage, int pagesProcessed){}
+    private record allPagesProcessingOutput(ArrayList<String> imageAddingTextForEachPage, int pagesProcessed, int pageNum){}
 
     private ArrayList<String> getImagesFromPage(PDPage page, int pageNumber, ArrayList<String> textToAddTheImages, String outputFolderLocation)
     {

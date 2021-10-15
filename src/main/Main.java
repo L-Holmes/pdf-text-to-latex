@@ -35,11 +35,6 @@ class Main
         latest issues:
 
          -seems to be 1 or 2 additional blank questions at the end
-
-         new issue:
-         it seems like the first few images are being repeated, rather than the actual images related to a specific page
-         possibly not all of the images are being displayed either.
-
          */
 
         /*
