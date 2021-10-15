@@ -23,9 +23,17 @@ class Main
         TODO:
         latest issues:
 
+        -image loader needs refactoring
+        -same picture seems to be shown for all pages
 
-         -pictures not showing
+         -seems to be 1 or 2 additional blank questions at the end
 
+         */
+
+        /*
+        TODO (OTHER)
+        - make the process of entering a new file easier
+            * currently have to change both files in the main code, and in the pdflatex shell script
          */
 
     }

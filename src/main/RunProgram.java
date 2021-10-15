@@ -22,7 +22,7 @@ public class RunProgram {
     {
         System.out.println("\n...starting main...");
         String pdfLocation = "static/in.pdf";
-        pdfParser = new ParsePdf(pdfLocation);
+        pdfParser = new ParsePdf();
         readPdfAndWriteOutputToFile(pdfLocation,"/static/out/out.txt");
         new Thread(new ConvertOutTextToLatex()).start();
     }
@@ -34,7 +34,7 @@ public class RunProgram {
         //"static/year3_lecture_slides/SCC361/out/SCC361-Wk1-L1-out.txt"
 
         String outputLatexPath = replaceFilePathExtensionWithLatexFileExtension(pathToOutputTextFile);
-        pdfParser = new ParsePdf(pdfToReadLocation);
+        pdfParser = new ParsePdf();
 
         readPdfAndWriteOutputToFile(pdfToReadLocation,pathToOutputTextFile);
 
@@ -55,19 +55,32 @@ public class RunProgram {
         return asLatex;
     }
 
+    public static String replaceFileWithImagesFolder(String inputFilePath)
+    {
+        //remove after the last dot
+        if (inputFilePath == null || inputFilePath.length() <= 0 ) return null;
+        int endIndex = inputFilePath.lastIndexOf("/");
+        if (endIndex == -1) return null;
+        String asLatex = inputFilePath.substring(0, endIndex);
+        //add .tex
+        asLatex = asLatex.concat("/images/");
+        return asLatex;
+    }
+
     /**
      * Reads the input pdf's contents (text and images),
      * and produces an output LaTeX document, which contains the read
      * text and images.
      * @param pdfToReadFromPath = the file path to the pdf that is being read from
-     * @param fileToWriteToPath = the file path to the output file that will be produced
+     * @param textFileToWriteToPath = the file path to the output text file that will be produced
      */
-    private void readPdfAndWriteOutputToFile(String pdfToReadFromPath, String fileToWriteToPath)
+    private void readPdfAndWriteOutputToFile(String pdfToReadFromPath, String textFileToWriteToPath)
     {
         short numLinesToIgnore = 6;
         String contentsToWrite = pdfParser.getPdfText(pdfToReadFromPath, newPageSeperatorText);
 
-        String[] textToAddImgs = pdfParser.getPdfImageAddingText(pdfToReadFromPath);
+        String imagesOutputFolder = replaceFileWithImagesFolder(textFileToWriteToPath);
+        String[] textToAddImgs = pdfParser.getPdfImageAddingText(pdfToReadFromPath, imagesOutputFolder);
 
         LatexifyOptionalArguments optionalArgs = new LatexifyOptionalArguments();
 
@@ -75,7 +88,7 @@ public class RunProgram {
         optionalArgs.setQuizMode(true);
         String latexifiedContents = Latexify.convertTextToLatex(contentsToWrite, textToAddImgs, newPageSeperatorText, optionalArgs);
 
-        WriteTextToFileHandle fileWriter = new WriteTextToFileHandle(fileToWriteToPath, latexifiedContents);
+        WriteTextToFileHandle fileWriter = new WriteTextToFileHandle(textFileToWriteToPath, latexifiedContents);
 
         fileWriter.writeDataToFile();
     }

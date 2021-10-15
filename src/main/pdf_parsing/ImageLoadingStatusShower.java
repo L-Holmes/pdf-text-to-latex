@@ -8,13 +8,13 @@ import main.pdf_parsing.ParsePdf;
  * pages that have been processed.
  */
 public class ImageLoadingStatusShower implements Runnable{
-    ParsePdf pdfParserToReportOn;       //the parser, that is fetching images from a pdf, whose status is being reported on
+    PdfImageExtractor pdfParserToReportOn;       //the parser, that is fetching images from a pdf, whose status is being reported on
     private boolean finishedAll = false;//true if the process being reported on has finished its execution
 
     /**
      * @param parentPdfParser = the parser, that is fetching images from a pdf, whose status is being reported on
      */
-    public ImageLoadingStatusShower(ParsePdf parentPdfParser)
+    public ImageLoadingStatusShower(PdfImageExtractor parentPdfParser)
     {
         this.pdfParserToReportOn = parentPdfParser;
     }
