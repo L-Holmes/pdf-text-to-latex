@@ -1,6 +1,16 @@
 package main;
 
 import main.util.WriteTextToFileHandle;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import org.apache.commons.exec.CommandLine;
+import org.apache.commons.exec.DefaultExecutor;
+import org.apache.commons.exec.ExecuteException;
+
 /*
 TODO:
 
@@ -30,17 +40,76 @@ class Main
 
         RunProgram runner = new RunProgram(inputPdfLocation, outputTextFileLocation);
 
+        //compile latex into pdf
+        Main m = new Main();
+        try {
+            m.executeScript();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+
         /*
         TODO:
-        latest issues:
 
          -seems to be 1 or 2 additional blank questions at the end
+
+         steps now:
+         -try to implement that easier way to choose a pdf.
+         -try with the full pdf
+         -try with all of the pdfs from this week
+
+         entering pdf ideas:
+         -could choose using a gui
+         -get the file entered.
+         -generate the output pdf location (exact same but with '-out.txt' on end instead of '.pdf'
+         -pass the same into the executeScript method
          */
 
         /*
         TODO (OTHER)
         - make the process of entering a new file easier
             * currently have to change both files in the main code, and in the pdflatex shell script
+
+        - maybe remove repeat pictures for each page?
+            * could maybe check if an image exists before creating a new image png file
+
+        - Possibly put pictures side by side?
+        - possibly remove page numbers
+            - check for standalone numbers
+            - that are also = previous page number + 1.
+            - then remove that line
          */
     }
+
+    //https://stackoverflow.com/questions/49558546/run-shell-script-from-java-code
+    //accessed: 16/10/21
+    public void executeScript() throws IOException, InterruptedException {
+        File wd = new File(System.getProperty("user.dir") + "/");
+
+        String command = "./convert2texAndCompile.sh";
+        String[] cmd = { command,  "static/test" , "SCC361-Wk1-L1-TEST-out.tex"};
+
+        Process p = Runtime.getRuntime().exec(cmd, null, wd);
+
+        p.waitFor();
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+        BufferedReader errorReader = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+
+
+        String line = "";
+        while ((line = reader.readLine()) != null) {
+            System.out.println(line);
+        }
+
+        line = "";
+        while ((line = errorReader.readLine()) != null) {
+            System.out.println(line);
+        }
+    }
+
 }

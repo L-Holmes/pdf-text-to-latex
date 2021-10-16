@@ -6,8 +6,6 @@
 #for non-horizontal wording, rotate in finder, then try to quit, and choose 'save'.
 
 echo "Compiling the latex with pdflatex:"
-cd static
-#cd out
-cd test
-pdflatex -interaction=nonstopmode SCC361-Wk1-L1-TEST-out.tex
+cd $1
+pdflatex -interaction=nonstopmode $2
 echo "...Finished converting to latex to a pdf"
