@@ -34,49 +34,16 @@ class Main
      */
     public static void main(String[] args)
     {
-        String inputPdfLocation = new FileSelector().selectPdfFile();
-        String inputPdfFromProjectRootLocation = inputPdfLocation.substring(inputPdfLocation.indexOf(".")+2);//+2 removes the "./" at the start
-
-        String inputWithDashOutAdded = inputPdfFromProjectRootLocation.substring(0, inputPdfFromProjectRootLocation.lastIndexOf(".")) + "-out"+ inputPdfFromProjectRootLocation.substring(inputPdfFromProjectRootLocation.lastIndexOf("."));
-        String outputTextFileFromProjectRootLocation = replaceFilePathExtensionWithTextFileExtension(inputWithDashOutAdded);
-
-
-        /*
-        //String inputPdfLocation = "static/year3_lecture_slides/SCC361/in/SCC361-Wk1-L1.pdf";
-        //String outputTextFileLocation = "static/year3_lecture_slides/SCC361/out/SCC361-Wk1-L1-out.txt";
-
-        String inputPdfLocation = "static/test/SCC361-Wk1-L1-TEST.pdf";
-        String outputTextFileLocation = "static/test/SCC361-Wk1-L1-TEST-out.txt";
-        */
-
-        RunProgram runner = new RunProgram(inputPdfFromProjectRootLocation, outputTextFileFromProjectRootLocation);
-
-        //compile latex into pdf
-        Main m = new Main();
-        try {
-            m.executeScript();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
+        Main inst = new Main();
+        inst.generateOutputQuiz();
 
         /*
         TODO:
 
-         -seems to be 1 or 2 additional blank questions at the end
-
          steps now:
-         -try to implement that easier way to choose a pdf.
          -try with the full pdf
          -try with all of the pdfs from this week
 
-         entering pdf ideas:
-         -could choose using a gui
-         -get the file entered.
-         -generate the output pdf location (exact same but with '-out.txt' on end instead of '.pdf'
-         -pass the same into the executeScript method
          */
 
         /*
@@ -92,16 +59,45 @@ class Main
             - check for standalone numbers
             - that are also = previous page number + 1.
             - then remove that line
+        - is there still the 2 empty slides at the end?
          */
+    }
+
+    public void generateOutputQuiz()
+    {
+        String inputPdfLocation = new FileSelector().selectPdfFile();
+        String inputPdfFromProjectRootLocation = inputPdfLocation.substring(inputPdfLocation.indexOf(".")+2);//+2 removes the "./" at the start
+
+        String inputWithDashOutAdded = inputPdfFromProjectRootLocation.substring(0, inputPdfFromProjectRootLocation.lastIndexOf(".")) + "-out"+ inputPdfFromProjectRootLocation.substring(inputPdfFromProjectRootLocation.lastIndexOf("."));
+        String outputTextFileFromProjectRootLocation = replaceFilePathExtensionWithTextFileExtension(inputWithDashOutAdded);
+
+        RunProgram runner = new RunProgram(inputPdfFromProjectRootLocation, outputTextFileFromProjectRootLocation);
+
+        //compile latex into pdf
+        Main m = new Main();
+        try {
+            m.executeScript(outputTextFileFromProjectRootLocation);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     //https://stackoverflow.com/questions/49558546/run-shell-script-from-java-code
     //accessed: 16/10/21
-    public void executeScript() throws IOException, InterruptedException {
+    public void executeScript(String outputTextFileFromProjectRootLocation) throws IOException, InterruptedException {
         File wd = new File(System.getProperty("user.dir") + "/");
 
         String command = "./convert2texAndCompile.sh";
-        String[] cmd = { command,  "static/test" , "SCC361-Wk1-L1-TEST-out.tex"};
+
+        int lastSlashIndexInInputFilePath = outputTextFileFromProjectRootLocation.lastIndexOf("/");
+        String folderLocation = outputTextFileFromProjectRootLocation.substring(0, lastSlashIndexInInputFilePath);
+        String nameOfOutputLatexFileToCompile = RunProgram.replaceFilePathExtensionWithLatexFileExtension(outputTextFileFromProjectRootLocation.substring(lastSlashIndexInInputFilePath + 1)); // +1 removes the "/" at the start
+
+
+        //String[] cmd = { command,  "static/test" , "SCC361-Wk1-L1-TEST-out.tex"};
+        String[] cmd = { command,  folderLocation , nameOfOutputLatexFileToCompile};
 
         Process p = Runtime.getRuntime().exec(cmd, null, wd);
 
