@@ -1,5 +1,6 @@
 package main;
 
+import main.file_choosing.FileSelector;
 import main.util.WriteTextToFileHandle;
 
 import java.io.BufferedReader;
@@ -33,12 +34,22 @@ class Main
      */
     public static void main(String[] args)
     {
+        String inputPdfLocation = new FileSelector().selectPdfFile();
+        String inputPdfFromProjectRootLocation = inputPdfLocation.substring(inputPdfLocation.indexOf(".")+2);//+2 removes the "./" at the start
+
+        String inputWithDashOutAdded = inputPdfFromProjectRootLocation.substring(0, inputPdfFromProjectRootLocation.lastIndexOf(".")) + "-out"+ inputPdfFromProjectRootLocation.substring(inputPdfFromProjectRootLocation.lastIndexOf("."));
+        String outputTextFileFromProjectRootLocation = replaceFilePathExtensionWithTextFileExtension(inputWithDashOutAdded);
+
+
+        /*
         //String inputPdfLocation = "static/year3_lecture_slides/SCC361/in/SCC361-Wk1-L1.pdf";
         //String outputTextFileLocation = "static/year3_lecture_slides/SCC361/out/SCC361-Wk1-L1-out.txt";
+
         String inputPdfLocation = "static/test/SCC361-Wk1-L1-TEST.pdf";
         String outputTextFileLocation = "static/test/SCC361-Wk1-L1-TEST-out.txt";
+        */
 
-        RunProgram runner = new RunProgram(inputPdfLocation, outputTextFileLocation);
+        RunProgram runner = new RunProgram(inputPdfFromProjectRootLocation, outputTextFileFromProjectRootLocation);
 
         //compile latex into pdf
         Main m = new Main();
@@ -49,7 +60,6 @@ class Main
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
 
 
         /*
@@ -110,6 +120,18 @@ class Main
         while ((line = errorReader.readLine()) != null) {
             System.out.println(line);
         }
+    }
+
+    public static String replaceFilePathExtensionWithTextFileExtension(String inputFilePath)
+    {
+        //remove after the last dot
+        if (inputFilePath == null || inputFilePath.length() <= 0 ) return null;
+        int endIndex = inputFilePath.lastIndexOf(".");
+        if (endIndex == -1) return null;
+        String asLatex = inputFilePath.substring(0, endIndex);
+        //add .tex
+        asLatex = asLatex.concat(".txt");
+        return asLatex;
     }
 
 }
