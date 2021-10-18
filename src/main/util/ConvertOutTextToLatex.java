@@ -30,10 +30,18 @@ public class ConvertOutTextToLatex implements Runnable {
 
     @Override
     public void run() {
-        if(inputTextFileLocation == "" ||  outputLaTexFileLocation == "") createLatexCopy();
-        else createLatexCopy(inputTextFileLocation, outputLaTexFileLocation);
+        if(inputTextFileLocation == "" ||  outputLaTexFileLocation == "") {
+            createLatexCopy();
+            System.out.println("created latex copy (1)");
+        }
+        else {
+            System.out.println("created latex copy (2)");
+            createLatexCopy(inputTextFileLocation, outputLaTexFileLocation);
+        }
         //convertTheTextFileToLatex();
+        System.out.println("resetting params...");
         resetParameters();
+        System.out.println("successfully reset the params");
     }
 
 
@@ -58,11 +66,13 @@ public class ConvertOutTextToLatex implements Runnable {
      */
     private void createLatexCopy(String inputTextFileLocation, String outputLaTexFileLocation)
     {
-        System.out.println("crating latex copy (with parameters)");
+        System.out.println("creating latex copy (with parameters)");
         Path originalPath = Paths.get(System.getProperty("user.dir")+"/"+inputTextFileLocation);
         Path copied = Paths.get(System.getProperty("user.dir")+"/"+outputLaTexFileLocation);
         try {
+            System.out.println("here, about to copy...");
             Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
+            System.out.println("copied successfully");
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -11,10 +11,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.apache.commons.exec.CommandLine;
-import org.apache.commons.exec.DefaultExecutor;
-import org.apache.commons.exec.ExecuteException;
-
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 /*
@@ -67,6 +63,7 @@ class Main
             - that are also = previous page number + 1.
             - then remove that line
         - is there still the 2 empty slides at the end?
+        - automatically add bullet points if there was none in the first place
          */
     }
 
@@ -79,10 +76,12 @@ class Main
         String outputTextFileFromProjectRootLocation = replaceFilePathExtensionWithTextFileExtension(inputWithDashOutAdded);
 
         RunProgram runner = new RunProgram(inputPdfFromProjectRootLocation, outputTextFileFromProjectRootLocation);
+        System.out.println("finished running...");
 
         //compile latex into pdf
         Main m = new Main();
         try {
+            System.out.println("aboot to compile!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             m.executeScript(outputTextFileFromProjectRootLocation);
         } catch (IOException e) {
             e.printStackTrace();
@@ -90,6 +89,7 @@ class Main
             e.printStackTrace();
         }
 
+        System.out.println("compiled into latex!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
 
 
         organiseOutputIntoFolders(inputPdfFromProjectRootLocation, outputTextFileFromProjectRootLocation);
@@ -112,8 +112,8 @@ class Main
         String[] cmd = { command,  folderLocation , nameOfOutputLatexFileToCompile};
 
         Process p = Runtime.getRuntime().exec(cmd, null, wd);
-
-        p.waitFor();
+        System.out.println("helf through.?!");
+        //TODO: gets stuck here for some reason???????????????????????????????????????
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
         BufferedReader errorReader = new BufferedReader(new InputStreamReader(p.getErrorStream()));
@@ -128,6 +128,8 @@ class Main
         while ((line = errorReader.readLine()) != null) {
             System.out.println(line);
         }
+
+        p.waitFor();//TODO: MAYBE PUT THIS AT END?????????
     }
 
     public static String replaceFilePathExtensionWithTextFileExtension(String inputFilePath)

@@ -25,6 +25,7 @@ public class RunProgram {
         pdfParser = new ParsePdf();
         readPdfAndWriteOutputToFile(pdfLocation,"/static/out/out.txt");
         new Thread(new ConvertOutTextToLatex()).start();
+        System.out.println("finished running #1");
     }
 
     public RunProgram(String pdfToReadLocation, String pathToOutputTextFile)
@@ -41,6 +42,7 @@ public class RunProgram {
         ConvertOutTextToLatex.setParameters(pathToOutputTextFile, outputLatexPath);
 
         new Thread(new ConvertOutTextToLatex()).start();
+        System.out.println("finished running #2");
     }
 
     public static String replaceFilePathExtensionWithLatexFileExtension(String inputFilePath)
