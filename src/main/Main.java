@@ -7,10 +7,15 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.ExecuteException;
+
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 /*
 TODO:
@@ -41,6 +46,8 @@ class Main
         TODO:
 
          steps now:
+         -make folder called generated outp;ut that holds all of the files
+            -maybe make a seperate folder containng just the latex and output pdf?
          -try with the full pdf
          -try with all of the pdfs from this week
 
@@ -82,6 +89,11 @@ class Main
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+
+
+        organiseOutputIntoFolders(inputPdfFromProjectRootLocation, outputTextFileFromProjectRootLocation);
+
     }
 
     //https://stackoverflow.com/questions/49558546/run-shell-script-from-java-code
@@ -128,6 +140,98 @@ class Main
         //add .tex
         asLatex = asLatex.concat(".txt");
         return asLatex;
+    }
+
+    private void organiseOutputIntoFolders(String inputFilePath, String outputFilePath) {
+        String userDir = System.getProperty("user.dir");
+        //mkdir generated-output-[name]
+        String inputFileName = inputFilePath.substring(inputFilePath.lastIndexOf("/"));
+        String inputFileNameWithoutExtension = inputFileName.substring(1, inputFileName.lastIndexOf(".")); //+1 to remove leading "/"
+        String folderTheOutputFilesAreIn = outputFilePath.substring(0, outputFilePath.lastIndexOf("/"));
+        String outputFolderName = "/generated-output-".concat(inputFileNameWithoutExtension);
+        String outputFilesFolderFullPath =userDir.concat("/".concat(folderTheOutputFilesAreIn));
+        String outputDir = outputFilesFolderFullPath.concat(outputFolderName);
+        new File(outputDir).mkdirs();
+
+        String outputFileWithoutExtensionFullPath = outputFilesFolderFullPath.concat("/").concat(inputFileNameWithoutExtension);
+
+        //move the tex and pdf to generated-output
+        String pdfFileSource = outputFileWithoutExtensionFullPath.concat("-out.pdf");
+        String latexFileSource = outputFileWithoutExtensionFullPath.concat("-out.tex");
+
+        String pdfFullFilePathName = outputDir.concat(pdfFileSource.substring(pdfFileSource.lastIndexOf("/")));
+        String latexFullFilePathName = outputDir.concat(latexFileSource.substring(latexFileSource.lastIndexOf("/")));
+
+        Path pdfSourcePath = Paths.get(pdfFileSource);
+        Path pdfNewPath = Paths.get(pdfFullFilePathName);
+
+        Path latexSourcePath = Paths.get(latexFileSource);
+        Path latexNewPath = Paths.get(latexFullFilePathName);
+
+        try {
+            Files.move(pdfSourcePath, pdfNewPath, REPLACE_EXISTING);
+        } catch (IOException e) {
+            System.out.println("pdf output file already moved or doesn't exist");
+        }
+
+        try {
+            Files.move(latexSourcePath, latexNewPath, REPLACE_EXISTING);
+        } catch (IOException e) {
+            System.out.println("latex file already moved or doesn't exist");
+        }
+
+        //mkdir other,
+        String otherDir = outputDir.concat("/other");
+        new File(otherDir).mkdirs();
+
+        //move the aux, log, txt to other
+
+        String logFileSource = outputFileWithoutExtensionFullPath.concat("-out.log");
+        String textFileSource = outputFileWithoutExtensionFullPath.concat("-out.txt");
+        String auxFileSource = outputFileWithoutExtensionFullPath.concat("-out.aux");
+
+        String logFullFilePathName = otherDir.concat(logFileSource.substring(logFileSource.lastIndexOf("/")));
+        String textFullFilePathName = otherDir.concat(textFileSource.substring(textFileSource.lastIndexOf("/")));
+        String auxFullFilePathName = otherDir.concat(auxFileSource.substring(auxFileSource.lastIndexOf("/")));
+
+        Path logSourcePath = Paths.get(logFileSource);
+        Path logNewPath = Paths.get(logFullFilePathName);
+
+        Path textSourcePath = Paths.get(textFileSource);
+        Path textNewPath = Paths.get(textFullFilePathName);
+
+
+        Path auxSourcePath = Paths.get(auxFileSource);
+        Path auxNewPath = Paths.get(auxFullFilePathName);
+
+        try {
+            Files.move(logSourcePath, logNewPath, REPLACE_EXISTING);
+        } catch (IOException e) {
+            System.out.println("log file already moved or doesn't exist");
+        }
+        try {
+            Files.move(textSourcePath, textNewPath, REPLACE_EXISTING);
+        } catch (IOException e) {
+            System.out.println("text file already moved or doesn't exist");
+        }
+        try {
+            Files.move(auxSourcePath, auxNewPath, REPLACE_EXISTING);
+        } catch (IOException e) {
+            System.out.println("aux file already moved or doesn't exist");
+        }
+
+        //move the images folder
+        String imagesFolderLocation = outputFilesFolderFullPath.concat("/images");
+        String newImagesFolderDestination = outputDir.concat("/images");
+
+        Path imageFolderPath = Paths.get(imagesFolderLocation);
+        Path newImageFolderDestinationPath = Paths.get(newImagesFolderDestination);
+
+        try {
+            Files.move(imageFolderPath, newImageFolderDestinationPath, REPLACE_EXISTING);
+        } catch (IOException e) {
+            System.out.println("images folder already moved or doesn't exist");
+        }
     }
 
 }

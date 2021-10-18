@@ -75,7 +75,6 @@ public class ConvertOutTextToLatex implements Runnable {
         //accessed: 24/03/2021
         try {
             String target = new String(System.getProperty("user.dir")+"/zsh convert2texAndCompile.sh");
-// String target = new String("mkdir stackOver");
             Runtime rt = Runtime.getRuntime();
             Process proc = rt.exec(target);
             proc.waitFor();
