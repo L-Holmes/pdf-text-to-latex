@@ -21,21 +21,28 @@ Describe: Overview of the Session
 \clearpage
 \section{Overview of the Session}
 \\
-■Two Generals problem\\
-■Byzantine Generals problem\\
-■Fallacies of distributed computing\\
-■Middleware\\
+\begin{itemize}
+  \item Two Generals problem
+  \item Byzantine Generals problem
+  \item Fallacies of distributed computing
+  \item Middleware
+\end{itemize}
 \clearpage
 (Q)
 Describe: Two Generals Problem
 \clearpage
 \section{Two Generals Problem}
 \\
-■ Complication in distributed consensus\\
-➔ Two generals, each leading an army, want to capture a city. The \\
+\end{itemize}
+  \item  Complication in distributed consensus
+\begin{itemize}
+  \item  Two generals, each leading an army, want to capture a city. The 
+\end{itemize}
 attack is only successful if both armies attack together\\
-➔ Coordination is vital\\
-➔ Generals need to reach consensus in order\\
+\begin{itemize}
+  \item  Coordination is vital
+  \item  Generals need to reach consensus in order
+\end{itemize}
 to succeed in conquering the city.\\
 Belisarius\\
 Narses\\
@@ -58,8 +65,12 @@ Describe: Two Generals Problem
 \clearpage
 \section{Two Generals Problem}
 \\
-■ Complication in distributed consensus\\
-➔ Two generals, each leading an army, want to capture a city. The \\
+\begin{itemize}
+  \item  Complication in distributed consensus
+\begin{itemize}
+  \item  Two generals, each leading an army, want to capture a city. The 
+\end{itemize}
+\end{itemize}
 attack is only successful if both armies attack together\\
 Belisarius\\
 Narses\\
@@ -87,9 +98,13 @@ Describe: Two Generals Problem
 \clearpage
 \section{Two Generals Problem}
 \\
-■ Important challenges\\
-➔ Faulty network\\
-➔ Receipt of Acknowledgement is necessary\\
+\begin{itemize}
+  \item  Important challenges
+\begin{itemize}
+  \item  Faulty network
+  \item  Receipt of Acknowledgement is necessary
+\end{itemize}
+\end{itemize}
 General1 General2\\
 Attack on Oct 14 ?\\
 Acknowledged!\\
@@ -103,17 +118,19 @@ Describe: How the generals should
 \section{How the generals should }
 \\
 decide?\\
-■ Is it possible to come up with an algorithm that works all the time ? \\
-■ Answer is no.\\
-■ Possible approaches (none of them fully works): \\
-■ Approach 1\\
-■ General1 sends a lot of messages at once, and then attacks\\
-■ Problem: if all the messengers are captured, army1 is defeated\\
-■ Approach 2\\
-■ General1 attacks only if an ACK is received from General 2\\
-■ Now general2 will be captured if its response is intercepted or delayed\\
-■ Problem: General2 has no idea if his ACK is received by General1\\
-■ In the two generals problem, we assume a faulty network but processes \\
+\begin{itemize}
+  \item  Is it possible to come up with an algorithm that works all the time ? 
+  \item  Answer is no.
+  \item  Possible approaches (none of them fully works): 
+  \item  Approach 1
+  \item  General1 sends a lot of messages at once, and then attacks
+  \item  Problem: if all the messengers are captured, army1 is defeated
+  \item  Approach 2
+  \item  General1 attacks only if an ACK is received from General 2
+  \item  Now general2 will be captured if its response is intercepted or delayed
+  \item  Problem: General2 has no idea if his ACK is received by General1
+  \item  In the two generals problem, we assume a faulty network but processes 
+\end{itemize}
 (i.e., generals) are not faulty. \\
 \clearpage
 (Q)
@@ -121,20 +138,30 @@ Describe: FLP Impossibility Result
 \clearpage
 \section{FLP Impossibility Result}
 \\
-■ FLP impossibility result\\
-■ Fischer, Lynch, and Patterson, Impossibility of Distributed Consensus with One Faulty \\
+\begin{itemize}
+  \item  FLP impossibility result
+  \item  Fischer, Lynch, and Patterson, Impossibility of Distributed Consensus with One Faulty 
+\end{itemize}
 Process, 1985\\
-■ Asynchronous systems:\\
-■ No bounds on message delivery time and process execution time\\
-■ Clock drifts are also unbounded\\
-■ When there is no upper bound on the time a process takes to complete its work and \\
+\begin{itemize}
+  \item  Asynchronous systems:
+  \item  No bounds on message delivery time and process execution time
+  \item  Clock drifts are also unbounded
+  \item  When there is no upper bound on the time a process takes to complete its work and 
+\end{itemize}
 respond, it’s impossible to make the distinction between a process that is crashed and one \\
 that is working (but taking very long to respond). \\
-■ FLP shows that there is no guarantee for distributed processes to reach consensus in an \\
+\begin{itemize}
+  \item  FLP shows that there is no guarantee for distributed processes to reach consensus in an 
+\end{itemize}
 asynchronous environment, where it’s possible for at least one process to crash. \\
-■ Equivalently, it’s not always possible to detect failure in an asynchronous system with \\
+\begin{itemize}
+  \item  Equivalently, it’s not always possible to detect failure in an asynchronous system with 
+\end{itemize}
 nodes crashing.\\
-■ So let’s consider the case where messages are delivered reliably (i.e., network is \\
+\begin{itemize}
+  \item  So let’s consider the case where messages are delivered reliably (i.e., network is 
+\end{itemize}
 not faulty) next. \\
 \clearpage
 (Q)
@@ -215,7 +242,9 @@ Describe: Byzantine Generals Problem
 \clearpage
 \section{Byzantine Generals Problem}
 \\
-■ 3 processes, commanding general is disloyal\\
+\begin{itemize}
+  \item  3 processes, commanding general is disloyal
+\end{itemize}
 Lieutenant1 Lieutenant2\\
 Commander\\
 ??\\
@@ -228,7 +257,9 @@ Describe: Byzantine Generals Problem
 \clearpage
 \section{Byzantine Generals Problem}
 \\
-■ 3 processes, commanding general is disloyal\\
+\begin{itemize}
+  \item  3 processes, commanding general is disloyal
+\end{itemize}
 Lieutenant1 Lieutenant2\\
 Commander\\
 Retreat!Attack!\\
@@ -241,7 +272,9 @@ Describe: Byzantine Generals Problem
 \clearpage
 \section{Byzantine Generals Problem}
 \\
-■ What should the loyal lieutenants do to follow a unified course \\
+\begin{itemize}
+  \item  What should the loyal lieutenants do to follow a unified course 
+\end{itemize}
 of action?\\
 Lieutenant1 Lieutenant2\\
 Commander\\
@@ -255,8 +288,10 @@ Describe: Byzantine Generals Problem
 \clearpage
 \section{Byzantine Generals Problem}
 \\
-■ What should lieutenants do ?\\
-■ Lieutenants can communicate with one another and\\
+\begin{itemize}
+  \item  What should lieutenants do ?
+  \item  Lieutenants can communicate with one another and
+\end{itemize}
 compare notes\\
 Lieutenant1 Lieutenant2\\
 Commander\\
@@ -270,8 +305,10 @@ Describe: Byzantine Generals Problem
 \clearpage
 \section{Byzantine Generals Problem}
 \\
-■ Comparing notes (by sending messages to each other)\\
-■ Remember this time network is not faulty \\
+\begin{itemize}
+  \item  Comparing notes (by sending messages to each other)
+  \item  Remember this time network is not faulty 
+\end{itemize}
 Lieutenant1 Lieutenant2\\
 I was told\\
 Attack\\
@@ -288,7 +325,9 @@ Describe: Byzantine Generals Problem
 \clearpage
 \section{Byzantine Generals Problem}
 \\
-■ Lieutenants can’t agree on the commander’s order so they do \\
+\begin{itemize}
+  \item  Lieutenants can’t agree on the commander’s order so they do 
+\end{itemize}
 the default action which is retreat.\\
 Commander\\
 Lieutenant1 Lieutenant2\\
@@ -306,7 +345,9 @@ Describe: Byzantine Generals Problem
 \clearpage
 \section{Byzantine Generals Problem}
 \\
-■ Both scenarios are equivalent from Lieutenant1’s point of view\\
+\begin{itemize}
+  \item  Both scenarios are equivalent from Lieutenant1’s point of view
+\end{itemize}
 Commander\\
 Lieutenant1 Lieutenant2\\
 Retreat!Attack!\\
@@ -337,7 +378,9 @@ Describe: Byzantine Generals Problem
 \clearpage
 \section{Byzantine Generals Problem}
 \\
-■ Both scenarios are equivalent from Lieutenant2’s point of view\\
+\begin{itemize}
+  \item  Both scenarios are equivalent from Lieutenant2’s point of view
+\end{itemize}
 Commander\\
 Lieutenant1 Lieutenant2\\
 Retreat!Attack!\\
@@ -368,10 +411,14 @@ Describe: Byzantine Generals Problem
 \clearpage
 \section{Byzantine Generals Problem}
 \\
-■ With d = 1 traitor, the Byzantine Generals problem is not \\
+\begin{itemize}
+  \item  With d = 1 traitor, the Byzantine Generals problem is not 
+\end{itemize}
 solvable with 3 generals\\
-■ Consensus is not possible\\
-■ You need at least 4 nodes! (see next slide)\\
+\begin{itemize}
+  \item  Consensus is not possible
+  \item  You need at least 4 nodes! (see next slide)
+\end{itemize}
 Commander\\
 Lieutenant1 Lieutenant2\\
 Attack!Attack!\\
@@ -388,11 +435,13 @@ Describe: Byzantine Generals Problem
 \clearpage
 \section{Byzantine Generals Problem}
 \\
-■ With more than 3 participants, the strategy is still the same\\
-■ All lieutenants compare notes with each other\\
-■ Then follow the majority “vote”\\
-■ If the majority was told “Attack”, then attack \\
-■ If the majority was told “Retreat!”, then retreat\\
+\begin{itemize}
+  \item  With more than 3 participants, the strategy is still the same
+  \item  All lieutenants compare notes with each other
+  \item  Then follow the majority “vote”
+  \item  If the majority was told “Attack”, then attack 
+  \item  If the majority was told “Retreat!”, then retreat
+\end{itemize}
 Commander\\
 Lieutenant1 Lieutenant2\\
 Attack!Attack!\\
@@ -409,7 +458,9 @@ Describe: Byzantine Generals Problem
 \clearpage
 \section{Byzantine Generals Problem}
 \\
-■ Communicating notes only work with one traitor\\
+\begin{itemize}
+  \item  Communicating notes only work with one traitor
+\end{itemize}
 Commander\\
 Lieutenant1\\
 Retreat!Attack!\\
@@ -426,8 +477,10 @@ Describe: Byzantine Generals Problem
 \clearpage
 \section{Byzantine Generals Problem}
 \\
-■ Let’s say all lieutenants compare notes as before\\
-■ Each lieutenant sends a message to every other lieutenant and \\
+\begin{itemize}
+  \item  Let’s say all lieutenants compare notes as before
+  \item  Each lieutenant sends a message to every other lieutenant and 
+\end{itemize}
 indicates the order it received\\
 Commander\\
 Lieutenant1\\
@@ -457,8 +510,10 @@ Describe: Byzantine Generals Problem
 \clearpage
 \section{Byzantine Generals Problem}
 \\
-■ Let’s say all lieutenants compare notes as before\\
-■ Each lieutenant sends a message to every other lieutenant and \\
+\begin{itemize}
+  \item  Let’s say all lieutenants compare notes as before
+  \item  Each lieutenant sends a message to every other lieutenant and 
+\end{itemize}
 indicates the order it received\\
 Commander\\
 Lieutenant1\\
@@ -478,7 +533,9 @@ Describe: Byzantine Generals Problem
 \clearpage
 \section{Byzantine Generals Problem}
 \\
-■ How can the traitor lieutenant disrupt the majority vote and \\
+\begin{itemize}
+  \item  How can the traitor lieutenant disrupt the majority vote and 
+\end{itemize}
 cause chaos ?  \\
 Commander\\
 Lieutenant1\\
@@ -508,7 +565,9 @@ Describe: Byzantine Generals Problem
 \clearpage
 \section{Byzantine Generals Problem}
 \\
-■ How can the traitor lieutenant disrupt the majority vote and \\
+\begin{itemize}
+  \item  How can the traitor lieutenant disrupt the majority vote and 
+\end{itemize}
 cause chaos ?  \\
 Commander\\
 Lieutenant1\\
@@ -530,7 +589,9 @@ Describe: Byzantine Generals Problem
 \clearpage
 \section{Byzantine Generals Problem}
 \\
-■ How can the traitor lieutenant disrupt the majority vote and \\
+\begin{itemize}
+  \item  How can the traitor lieutenant disrupt the majority vote and 
+\end{itemize}
 cause chaos ?  \\
 Commander\\
 Lieutenant1\\
@@ -560,9 +621,13 @@ Describe: Byzantine Generals Problem
 \clearpage
 \section{Byzantine Generals Problem}
 \\
-■ The solution to this problem is more rounds of communication \\
+\begin{itemize}
+  \item  The solution to this problem is more rounds of communication 
+\end{itemize}
 between lieutenants!\\
-■ In addition to what they heard from the commander,\\
+\begin{itemize}
+  \item  In addition to what they heard from the commander,
+\end{itemize}
 lieutenants also share what they heard from each other. \\
 Commander\\
 Lieutenant1\\
@@ -584,8 +649,10 @@ Describe: Byzantine Generals Problem
 \clearpage
 \section{Byzantine Generals Problem}
 \\
-■ For lieutenant2:\\
-■ For liutenant5: \\
+\begin{itemize}
+  \item  For lieutenant2:
+  \item  For liutenant5: 
+\end{itemize}
 Commander\\
 Lieutenant1\\
 Retreat!Attack!\\
@@ -610,8 +677,10 @@ Describe: Byzantine Generals Problem
 \clearpage
 \section{Byzantine Generals Problem}
 \\
-■ Then, the lieutenants exchange their vectors with each other\\
-■ Each compose a table, where each row is a vector that is \\
+\begin{itemize}
+  \item  Then, the lieutenants exchange their vectors with each other
+  \item  Each compose a table, where each row is a vector that is 
+\end{itemize}
 exchanged in the previous round\\
 Commander\\
 Lieutenant1\\
@@ -641,13 +710,19 @@ Describe: Byzantine Generals Problem
 \clearpage
 \section{Byzantine Generals Problem}
 \\
-■ Assumption: there is a default \\
+\begin{itemize}
+  \item  Assumption: there is a default 
+\end{itemize}
 action in case loyal lieutenants can \\
 not agree on an action\\
-■ Default = Retreat\\
-■ Then, the lieutenants exchange their \\
+\begin{itemize}
+  \item  Default = Retreat
+  \item  Then, the lieutenants exchange their 
+\end{itemize}
 vectors with each other\\
-■ Lieutenant5:\\
+\begin{itemize}
+  \item  Lieutenant5:
+\end{itemize}
 L1 L2 L3 L4 L5 L6 L7\\
 L1 X X X X X X\\
 L2 A A A R R R\\
@@ -664,22 +739,34 @@ Describe: Summary of Lamport’s Algorithm
 \clearpage
 \section{Summary of Lamport’s Algorithm }
 \\
-■ For d traitors, there has to be more than 3d generals\\
-■ For d faulty nodes, the algorithm requires a total of d+1 rounds of \\
+\begin{itemize}
+  \item  For d traitors, there has to be more than 3d generals
+  \item  For d faulty nodes, the algorithm requires a total of d+1 rounds of 
+\end{itemize}
 communication (d rounds of comparing notes + order from the commander)\\
-■ Lamport’s algorithm provides Byzantine Fault tolerance, given that you \\
+\begin{itemize}
+  \item  Lamport’s algorithm provides Byzantine Fault tolerance, given that you 
+\end{itemize}
 have more than 3d generals (processes)\\
-■ Byzantine fault model: a process can behave arbitrarily (even \\
+\begin{itemize}
+  \item  Byzantine fault model: a process can behave arbitrarily (even 
+\end{itemize}
 maliciously as in the Byzantine Generals problem)\\
-■ There are other fault models such as crash-stop (i.e., a process can \\
+\begin{itemize}
+  \item  There are other fault models such as crash-stop (i.e., a process can 
+\end{itemize}
 stop responding), which are less challenging to deal with than the \\
 Byzantine fault model \\
-■ We will cover fault tolerance in detail during week 5\\
-■ Can we somehow make sure lieutenants don’t forge orders that they didn’t \\
+\begin{itemize}
+  \item  We will cover fault tolerance in detail during week 5
+  \item  Can we somehow make sure lieutenants don’t forge orders that they didn’t 
+\end{itemize}
 receive? \\
-■ Public key cryptography can help with this – signed messages\\
-■ However, traitors can collaborate and share their keys with each other\\
-■ We will cover public key cryptography next week\\
+\begin{itemize}
+  \item  Public key cryptography can help with this – signed messages
+  \item  However, traitors can collaborate and share their keys with each other
+  \item  We will cover public key cryptography next week
+\end{itemize}
 \clearpage
 (Q)
 Describe: Applications of Byzantine 
@@ -687,35 +774,51 @@ Describe: Applications of Byzantine
 \section{Applications of Byzantine }
 \\
 Fault Tolerance\\
-■ Space flight\\
-■ Space shuttle had 4 computers for decision making\\
-■ They used a majoritarian system in case of disagreements\\
-■ Cryptocurrency: there are financial incentives to act maliciously\\
-■ Problems stem from having multiple control systems\\
-➔ e.g. air traffic control, airline bookings, critical manufacturing \\
+\end{itemize}
+  \item  Space flight
+  \item  Space shuttle had 4 computers for decision making
+  \item  They used a majoritarian system in case of disagreements
+  \item  Cryptocurrency: there are financial incentives to act maliciously
+  \item  Problems stem from having multiple control systems
+\begin{itemize}
+  \item  e.g. air traffic control, airline bookings, critical manufacturing 
+\end{itemize}
 processes, stock exchange, etc.\\
-■ Lamport’s algorithm is expensive! – O(n2) messaging overhead \\
+\begin{itemize}
+  \item  Lamport’s algorithm is expensive! – O(n2) messaging overhead 
+\end{itemize}
 each round. \\
-■ Alternative: accept uncertainty, just work around it\\
-➔ e.g. send a predetermined number of messages and assume at \\
+\begin{itemize}
+  \item  Alternative: accept uncertainty, just work around it
+\begin{itemize}
+  \item  e.g. send a predetermined number of messages and assume at 
+\end{itemize}
+\end{itemize}
 least one gets to the destination\\
-➔ Assume at most d=1 or 2  simultaneous bad actors \\
+\begin{itemize}
+  \item  Assume at most d=1 or 2  simultaneous bad actors 
+\end{itemize}
 \clearpage
 (Q)
 Describe: Further complications
 \clearpage
 \section{Further complications}
 \\
-■ Heterogeneity\\
-➔ Access\\
-➔ Platform\\
-➔ Format\\
-➔ Administration\\
-■ Changing nature\\
-➔ Increase/decrease in scale\\
-➔ Churn\\
-➔ Relocation\\
-➔ Failure\\
+\begin{itemize}
+  \item  Heterogeneity
+\end{itemize}
+  \item  Access
+  \item  Platform
+  \item  Format
+  \item  Administration
+\begin{itemize}
+  \item  Changing nature
+\end{itemize}
+  \item  Increase/decrease in scale
+  \item  Churn
+  \item  Relocation
+  \item  Failure
+\end{itemize}
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page32-image-1.png}
 \end{figure}
@@ -725,7 +828,10 @@ Describe: Fallacies of distributed computing
 \clearpage
 \section{Fallacies of distributed computing}
 \\
-■ Asserted by Peter Deutsch (Sun Microsystems)\\
+\begin{itemize}
+  \item  Asserted by Peter Deutsch (Sun Microsystems)
+\end{itemize}
+\end{itemize}
 1. The network is reliable\\
 2. Latency is zero\\
 3. Bandwidth is infinite\\
@@ -767,12 +873,17 @@ Describe: The Take-away Message?
 \clearpage
 \section{The Take-away Message?}
 \\
-■ Challenging\\
-➔Developing good software is difficult\\
-➔Developing good distributed software is even harder\\
-■ To do this you need help!\\
-➔ Very hard to build such systems on bare-bones devices\\
-➔ Strong need for software platforms - \textgreater  Middleware\\
+\begin{itemize}
+  \item  Challenging
+\begin{itemize}
+  \item Developing good software is difficult
+  \item Developing good distributed software is even harder
+\end{itemize}
+  \item  To do this you need help!
+\begin{itemize}
+  \item  Very hard to build such systems on bare-bones devices
+  \item  Strong need for software platforms - \textgreater  Middleware
+\end{itemize}
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page34-image-1.png}
 \end{figure}
@@ -782,9 +893,13 @@ Describe: Middleware
 \clearpage
 \section{Middleware}
 \\
-■ Rationale\\
-➔ Provide a high level programming abstraction\\
-➔ Hide the complexity associated with distributed systems \\
+\end{itemize}
+  \item  Rationale
+\begin{itemize}
+  \item  Provide a high level programming abstraction
+  \item  Hide the complexity associated with distributed systems 
+\end{itemize}
+\end{itemize}
 (including the underlying forms of heterogeneity)\\
 Machine A Machine B Machine C\\
 Network\\
@@ -805,37 +920,62 @@ Describe: Goals of a Middleware Platform
 \section{Goals of a Middleware Platform}
 \\
 Middleware provides protocols to support:\\
-■ Resource sharing\\
-➔ The ability to access and share resources in a distributed environment\\
-➔ Distributed locking\\
-■ Transparency\\
-➔ The ability to view a distributed system as if it were a single computer\\
-➔ Varying dimensions of transparency incl. location, access, migration, etc.\\
-■ Openness\\
-➔ The offering of services according to standard rules (syntax and semantics)\\
-➔ Openness provides support for the key properties of:\\
+\begin{itemize}
+  \item  Resource sharing
+\begin{itemize}
+  \item  The ability to access and share resources in a distributed environment
+  \item  Distributed locking
+\end{itemize}
+  \item  Transparency
+\begin{itemize}
+  \item  The ability to view a distributed system as if it were a single computer
+  \item  Varying dimensions of transparency incl. location, access, migration, etc.
+\end{itemize}
+  \item  Openness
+\begin{itemize}
+  \item  The offering of services according to standard rules (syntax and semantics)
+  \item  Openness provides support for the key properties of:
+\end{itemize}
+\end{itemize}
 0 Portability: ability to run across different platforms\\
 0 Interoperability: having separate parts harmoniously work together\\
-■ Extensibility\\
-➔ The ability to be able to introduce new or modified functionality\\
+\begin{itemize}
+  \item  Extensibility
+\begin{itemize}
+  \item  The ability to be able to introduce new or modified functionality
+\end{itemize}
 \clearpage
 (Q)
 Describe: Goals of a Middleware Platform
 \clearpage
 \section{Goals of a Middleware Platform}
 \\
-■ Scalability: the ability to grow/shrink with respect to\\
-➔ Size\\
+\end{itemize}
+  \item  Scalability: the ability to grow/shrink with respect to
+\begin{itemize}
+  \item  Size
+\end{itemize}
+\end{itemize}
 0 e.g. support massive growth in the number of users of a service\\
-➔ Geography\\
+\begin{itemize}
+  \item  Geography
+\end{itemize}
 0 e.g. supporting systems across continents (dealing with latencies, etc.)\\
-➔ Administration\\
+\begin{itemize}
+  \item  Administration
+\end{itemize}
 0 e.g. supporting systems spanning many different administrative organisations\\
-■ Dependability/ Quality of Service\\
-➔ Security\\
+\begin{itemize}
+  \item  Dependability/ Quality of Service
+\begin{itemize}
+  \item  Security
+\end{itemize}
+\end{itemize}
 0 Providing secure and authenticated channels, access control, key \\
 management, etc.\\
-➔ Fault tolerance\\
+\begin{itemize}
+  \item  Fault tolerance
+\end{itemize}
 0 Providing highly available and resilient distributed applications and services\\
 \clearpage
 (Q)
@@ -843,19 +983,31 @@ Describe: Styles of Middleware
 \clearpage
 \section{Styles of Middleware}
 \\
-■ Client-server platforms\\
-➔ e.g. DCE (Distributed Computing Environment) – first!\\
-■ Distributed object technology\\
-➔ e.g. CORBA, Java RMI\\
-■ Component-based programming\\
-➔ e.g. Fractal, Enterprise Java Beans, OpenCOM\\
-■ Microservice architecture\\
-➔ Loosely coupled, testable services using CI/CD\\
-■ Others styles\\
-➔ Resource discovery platforms (e.g. Jini)\\
-➔ Group communication services (e.g. JGroups)\\
-➔ Publish-subscribe systems (e.g. JMS)\\
-➔ Distributed file systems, distributed transaction services, distributed\\
+\begin{itemize}
+  \item  Client-server platforms
+\begin{itemize}
+  \item  e.g. DCE (Distributed Computing Environment) – first!
+\end{itemize}
+  \item  Distributed object technology
+\begin{itemize}
+  \item  e.g. CORBA, Java RMI
+\end{itemize}
+  \item  Component-based programming
+\begin{itemize}
+  \item  e.g. Fractal, Enterprise Java Beans, OpenCOM
+\end{itemize}
+  \item  Microservice architecture
+\begin{itemize}
+  \item  Loosely coupled, testable services using CI/CD
+\end{itemize}
+  \item  Others styles
+\begin{itemize}
+  \item  Resource discovery platforms (e.g. Jini)
+  \item  Group communication services (e.g. JGroups)
+  \item  Publish-subscribe systems (e.g. JMS)
+  \item  Distributed file systems, distributed transaction services, distributed
+\end{itemize}
+\end{itemize}
 document-based systems, agent-based systems, message-oriented\\
 middleware, P2P technologies, etc.\\
 \clearpage
@@ -865,32 +1017,51 @@ Describe: Expected Learning Outcomes
 \section{Expected Learning Outcomes}
 \\
 At the end of this session, you should:\\
-■ Have an intuition of why realising good distributed systems is \\
+\begin{itemize}
+  \item  Have an intuition of why realising good distributed systems is 
+\end{itemize}
 difficult\\
-➔ Byzantine generals problem as an example\\
-■ Understand what the role of middleware in supporting the \\
+\begin{itemize}
+  \item  Byzantine generals problem as an example
+\begin{itemize}
+  \item  Understand what the role of middleware in supporting the 
+\end{itemize}
+\end{itemize}
 development of distributed applications and services\\
-➔ Goals of middleware systems\\
-➔ Some different styles of middleware\\
+\begin{itemize}
+  \item  Goals of middleware systems
+  \item  Some different styles of middleware
+\end{itemize}
 \clearpage
 (Q)
 Describe: Additional Reading
 \clearpage
 \section{Additional Reading}
 \\
-■ CDKB, chapter 1 section 1.5\\
-➔ also chapter 3 for revision\\
-■ TvS, chapter 1, and sections 8.1-8.2\\
-■ Lamport, Shostak, Pease, “The Byzantine Generals Problem”,\\
+\begin{itemize}
+  \item  CDKB, chapter 1 section 1.5
+\end{itemize}
+  \item  also chapter 3 for revision
+\begin{itemize}
+  \item  TvS, chapter 1, and sections 8.1-8.2
+  \item  Lamport, Shostak, Pease, “The Byzantine Generals Problem”,
+\end{itemize}
+\end{itemize}
 ACM Transactions on Programming Languages and Systems,\\
 July 1982. http://dl.acm.org/citation.cfm?id=357176\\
-■ Fischer, Lynch, Patterson, “Impossibility of Distributed Consensus \\
+\begin{itemize}
+  \item  Fischer, Lynch, Patterson, “Impossibility of Distributed Consensus 
+\end{itemize}
 with One Faulty Process”, Journal of ACM, April 1985. \\
 https://groups.csail.mit.edu/tds/papers/Lynch/jacm85.pdf\\
-■ Lamport, “Paxos made simple”, \\
+\begin{itemize}
+  \item  Lamport, “Paxos made simple”, 
+\end{itemize}
 http://www.cs.utexas.edu/users/lorenzo/corsi/cs380d/past/03F/note \\
 s/paxos-simple.pdf\\
-■ Rotem-Gal-Oz, “Fallacies of Distributed Computing Explained”, \\
+\begin{itemize}
+  \item  Rotem-Gal-Oz, “Fallacies of Distributed Computing Explained”, 
+\end{itemize}
 http://www.rgoarchitects.com/Files/fallacies.pdf (2006).\\
 \clearpage
 (Q)

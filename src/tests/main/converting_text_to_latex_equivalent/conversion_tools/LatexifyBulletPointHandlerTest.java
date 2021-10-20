@@ -1,5 +1,6 @@
 package main.converting_text_to_latex_equivalent.conversion_tools;
 
+import main.util.Bullet_point_hub;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,9 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class LatexifyBulletPointHandlerTest {
     LatexifyBulletPointHandler inst;
 
-    String DASH_BULLET_POINT = "- ";
-    String DOT_BULLET_POINT = "• ";
-
     @BeforeEach
     void setUp() {
         inst = new LatexifyBulletPointHandler();
@@ -24,15 +22,14 @@ public class LatexifyBulletPointHandlerTest {
     void samePrevStyleDot() throws IOException {
         //prep
         String line = "• this is the line";
-        String bulletPointStyle = DOT_BULLET_POINT;
-        String previousBulletPointStyle = DOT_BULLET_POINT;
+        String bulletPointStyle = Bullet_point_hub.DOT_BULLET_POINT;
+        String previousBulletPointStyle = Bullet_point_hub.DOT_BULLET_POINT;
         //result
         BulletPointOperationOut operationOut = inst.handleBulletPointOperation(line, bulletPointStyle, previousBulletPointStyle);
         String modifiedLine = operationOut.modifiedLine();
-        String previousBulletStyle = operationOut.previousBulletStyle();
-        //test
+        String previousBulletStyle = operationOut.previousBulletStyle(); //test
         assertEquals("  \\item this is the line", modifiedLine);
-        assertEquals(DOT_BULLET_POINT,previousBulletStyle);
+        assertEquals(Bullet_point_hub.DOT_BULLET_POINT,previousBulletStyle);
     }
 
     @Test
@@ -40,7 +37,7 @@ public class LatexifyBulletPointHandlerTest {
     void noPrevStyleDot() throws IOException {
         //prep
         String line = "• this is the line";
-        String bulletPointStyle = DOT_BULLET_POINT;
+        String bulletPointStyle = Bullet_point_hub.DOT_BULLET_POINT;
         String previousBulletPointStyle = null;
         //result
         BulletPointOperationOut operationOut = inst.handleBulletPointOperation(line, bulletPointStyle, previousBulletPointStyle);

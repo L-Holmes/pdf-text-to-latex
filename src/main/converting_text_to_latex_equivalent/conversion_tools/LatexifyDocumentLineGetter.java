@@ -1,6 +1,7 @@
 package main.converting_text_to_latex_equivalent.conversion_tools;
 
 import main.converting_text_to_latex_equivalent.Latexify;
+import main.util.Bullet_point_hub;
 
 public class LatexifyDocumentLineGetter {
     //
@@ -91,21 +92,19 @@ public class LatexifyDocumentLineGetter {
     }
 
     private String getTheBulletPointTypeUsed(String line) {
-        String dotBulletPoint = "• ";
-        String dashBulletPoint = "– ";
-        if (containsDotBulletPoint(line)) return dotBulletPoint;
-        else if (containsDashBulletPoint(line)) return dashBulletPoint;
+        String[] allBulletPointStyle = Bullet_point_hub.getAllBulletPoints();
+        for(String bulletPointStyle : allBulletPointStyle){
+            if(containsBulletPoint(line, bulletPointStyle)) return bulletPointStyle;
+        }
         return null;
     }
 
-    private boolean containsDotBulletPoint(String theString) {
-        if (theString.contains("• ")) return true;
-        return false;
-    }
-
-    private boolean containsDashBulletPoint(String theString){
-        if (theString.length() > 2) {
-            if (theString.substring(0, 2).contains("– ")) return true;
+    private boolean containsBulletPoint(String inputText, String bulletPointBeingSearchedFor){
+        String inputTextWithoutStartWhitespace = inputText.replaceFirst("^\\s*", "");
+        int numCharactersToSearchFromStart = Math.max(2, bulletPointBeingSearchedFor.length());
+        if (inputTextWithoutStartWhitespace.length() > numCharactersToSearchFromStart) {
+            //if the bullet point is at the start of the text
+            if (inputTextWithoutStartWhitespace.substring(0, numCharactersToSearchFromStart).contains(bulletPointBeingSearchedFor)) return true;
         }
         return false;
     }
