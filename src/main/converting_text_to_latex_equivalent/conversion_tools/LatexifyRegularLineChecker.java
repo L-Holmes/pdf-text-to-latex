@@ -5,8 +5,11 @@ public class LatexifyRegularLineChecker {
     private short linesToRemoveCount = 0;//used to keep-track of how many of the following lines of text must be ignored/removed
     private short numStartLinesToRemoveForEachPage = 0;// the number of lines to remove/ignore, when processing the text for each page of the pdf text input
 
-    LatexifyNewPageAdjustor newPageAdjustor = new LatexifyNewPageAdjustor();
-    LatexifyDocumentLineGetter documentLineGetter = new LatexifyDocumentLineGetter();
+    LatexifyBulletPointHandler bulletPointHandler = new LatexifyBulletPointHandler();
+
+
+    LatexifyNewPageAdjustor newPageAdjustor = new LatexifyNewPageAdjustor(bulletPointHandler);
+    LatexifyDocumentLineGetter documentLineGetter = new LatexifyDocumentLineGetter(bulletPointHandler);
 
     /**
      * performs:

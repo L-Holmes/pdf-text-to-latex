@@ -24,11 +24,11 @@ Housekeeping...\\
   \item Our lab stream starts this week
   \item Lab work is based on Java, using RMI as an example middleware
   \item We've posted an "RMI primer", for you to start this week, and will 
-\end{itemize}
+\end{itemize}(2)
 shortly post the first two coursework stages\\
 \begin{itemize}
   \item We have a practice marking session for stage 1 in week 4, with a real 
-\end{itemize}
+\end{itemize}(2)
 marking session for stage 1 + stage 2 in week 7\\
 \clearpage
 (Q)
@@ -39,14 +39,14 @@ Describe: SCC 311 | Dr. Barry Porter
 Overview\\
 \begin{itemize}
   \item Remote invocation in the general sense is just accessing any remote 
-\end{itemize}
+\end{itemize}(2)
 resource, using a particular protocol\\
 \begin{itemize}
   \item We'll look at general protocol variations, then focus on:
   \item RPC as a particular protocol
   \item Java RMI as one possible implementation of RPC
   \item REST as a different remote invocation protocol
-\end{itemize}
+\end{itemize}(3)
 \clearpage
 (Q)
 Describe: SCC 311 | Dr. Barry Porter
@@ -54,13 +54,14 @@ Describe: SCC 311 | Dr. Barry Porter
 \section{SCC 311 | Dr. Barry Porter}
 \\
 Remote Invocation\\
-\end{itemize}
+\begin{itemize}
   \item This is the act of accessing a remote "thing" (procedure / object)
   \item Achieved through the use of message passing over a network
   \item Message exchange is handled through an agreed protocol
   \item The semantics of this protocol depend on the context of your application
   \item Different protocols will offer different reliability, scalability, and performance
   \item The implementation of this protocol, and associated tools, is a 
+\end{itemize}(2)
 communication middleware\\
 \clearpage
 (Q)
@@ -71,15 +72,15 @@ Describe: SCC 311 | Dr. Barry Porter
 Protocol styles\\
 \begin{itemize}
   \item R: no value needs to be returned from the server / no confirmation is 
-\end{itemize}
+\end{itemize}(2)
 needed; client can "fire and forget" in a non-blocking way\\
 \begin{itemize}
   \item RR: typical "request-reply" protocol: if reply from server is lost in 
-\end{itemize}
+\end{itemize}(2)
 transit, request may be repeated by client\\
 \begin{itemize}
   \item RRA: server needs to know the client got its reply, e.g. to allow 
-\end{itemize}
+\end{itemize}(2)
 resources to be released or coordinate with other communications\\
 Style Messages sent by\\
 Client Server Client\\
@@ -148,7 +149,7 @@ client\\
 \begin{itemize}
   \item Build from the top down, not bottom-up
   \item Directly call a remote procedure, rather
-\end{itemize}
+\end{itemize}(2)
 than handing all of the piping yourself\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page8-image-1.png}
@@ -168,7 +169,7 @@ What is RPC?\\
   \item In essence, the idea is:
   \item it's nice that we can define and call functions for local programs
   \item why not extend this to a distributed system, so that we can call an apparently 
-\end{itemize}
+\end{itemize}(2)
 local function and that function call actually happens on a remote computer?\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page9-image-1.png}
@@ -185,7 +186,7 @@ What is RPC?\\
   \item One of the simplest forms of communication middleware
   \item Provides a high-level request-response mechanism to build distributed apps
   \item Usually synchronous, meaning that the client blocks while waiting for 
-\end{itemize}
+\end{itemize}(2)
 the procedure (cf. function) call to complete\\
 \begin{figure}[H]
 \includegraphics[width=0.5\linewidth]{page10-image-1.png}
@@ -200,7 +201,7 @@ RPC and Middleware\\
 \begin{itemize}
   \item Examples: XML-RPC, JSON-RPC, SOAP
   \item Interaction between processes is done using defined interfaces
-\end{itemize}
+\end{itemize}(2)
 Application\\
 RMI, RPC and indirect comm.\\
 Request reply protocol\\
@@ -218,16 +219,16 @@ Programming with Interfaces\\
 \begin{itemize}
   \item Separation of interface and implementation
   \item IDL (Interface Definition Language): programming language-independent 
-\end{itemize}
+\end{itemize}(2)
 notation of parameters and types\\
 \begin{itemize}
   \item Client software does not need to know the details of the implementation, 
-\end{itemize}
+\end{itemize}(2)
 cf. abstraction\\
 \begin{itemize}
   \item Important for platform and language independence
   \item Also important to support the evolution of software
-\end{itemize}
+\end{itemize}(2)
 myObject:myClass\\
 myInterface\\
 \clearpage
@@ -263,12 +264,12 @@ Key components: client side\\
   \item May perform other actions (see smart proxies)
   \item Client stub
   \item Carries out marshalling (flattening) of a call into a request message sent to 
-\end{itemize}
+\end{itemize}(2)
 remote end\\
 \begin{itemize}
   \item Also unmarshalls returning replies
   \item One stub per interface procedure
-\end{itemize}
+\end{itemize}(3)
 \clearpage
 (Q)
 Describe: SCC 311 | Dr. Barry Porter
@@ -276,13 +277,13 @@ Describe: SCC 311 | Dr. Barry Porter
 \section{SCC 311 | Dr. Barry Porter}
 \\
 Key components: server side\\
-\end{itemize}
+\begin{itemize}
   \item Dispatchers
   \item Receive incoming messages and direct them to an appropriate server stub
   \item Server stubs (skeletons)
   \item Unmarshalls message and then invokes appropriate code body
   \item Also marshals reply values and initiates transmission back to the client
-\end{itemize}
+\end{itemize}(3)
 \clearpage
 (Q)
 Describe: SCC 311 | Dr. Barry Porter
@@ -303,13 +304,13 @@ Describe: SCC 311 | Dr. Barry Porter
 ...but there might be a dragon or two...\\
 \begin{itemize}
   \item A lot of our current understanding on the theory of RPC comes from 
-\end{itemize}
+\end{itemize}(2)
 the original researchers and designers of the Java language1\\
 \begin{itemize}
   \item Remote calls have different latency to local calls
   \item Memory access models are different if we pass references around
   \item Partial failures are possible
-\end{itemize}
+\end{itemize}(2)
 [1] J. Waldo, G. Wyant, A. Wollrath, and S. Kendall. A note on distributed computing. Technical report, 1994\\
 \clearpage
 (Q)
@@ -324,7 +325,7 @@ Protocol guarantees\\
   \item Local procedure calls = ‘exactly once’ guarantee
   \item But for RPC?
   \item Different guarantee types are possible depending on the protocol implementation
-\end{itemize}
+\end{itemize}(3)
 \clearpage
 (Q)
 Describe: SCC 311 | Dr. Barry Porter
@@ -332,8 +333,9 @@ Describe: SCC 311 | Dr. Barry Porter
 \section{SCC 311 | Dr. Barry Porter}
 \\
 Focus on the underlying protocol\\
-\end{itemize}
+\begin{itemize}
   \item Let's focus on the communications module for RPC which will provide 
+\end{itemize}(2)
 a protocol that mimics the semantics of a local call\\
 \begin{itemize}
   \item For the sake of this discussion let's assume the underlying protocol is UDP
@@ -343,7 +345,7 @@ a protocol that mimics the semantics of a local call\\
   \item Reply message may get lost
   \item Client may crash
   \item Server may crash
-\end{itemize}
+\end{itemize}(3)
 \clearpage
 (Q)
 Describe: SCC 311 | Dr. Barry Porter
@@ -351,17 +353,18 @@ Describe: SCC 311 | Dr. Barry Porter
 \section{SCC 311 | Dr. Barry Porter}
 \\
 Lightweight protocol semantics\\
-\end{itemize}
+\begin{itemize}
   \item Maybe semantics
   \item Send request to server; which sends back a reply
   \item No guarantees at all if anything goes wrong
   \item At least once semantics
   \item Sends message and if reply not received after a given time, the message is re-sent (failure 
+\end{itemize}(2)
 assumed after n re-sends)\\
 \begin{itemize}
   \item Will guarantee the call is made “at least once”, but possibly multiple times
   \item Ideal for idempotent operations (i.e. same effect)
-\end{itemize}
+\end{itemize}(3)
 \clearpage
 (Q)
 Describe: SCC 311 | Dr. Barry Porter
@@ -369,8 +372,9 @@ Describe: SCC 311 | Dr. Barry Porter
 \section{SCC 311 | Dr. Barry Porter}
 \\
 Lightweight protocol semantics\\
-\end{itemize}
+\begin{itemize}
   \item At most once semantics Client Server
+\end{itemize}(2)
 Call\\
 Re-send\\
 Log \\
@@ -392,7 +396,7 @@ Lightweight protocol semantics\\
 \begin{itemize}
   \item Local procedure calls have an even stronger exactly once semantic
   \item So far, for RPC, we have:
-\end{itemize}
+\end{itemize}(2)
 Semantics Fault tolerance measures\\
 Retransmit request Duplicate filtering Re-execute procedure or \\
 retransmit reply\\
@@ -409,15 +413,15 @@ RPC protocol semantics\\
 \begin{itemize}
   \item Exactly once semantics
   \item In this case the procedure will be carried out once (completely) or not at all 
-\end{itemize}
+\end{itemize}(2)
 (operation aborted)\\
 \begin{itemize}
   \item This builds on the "at most once" protocol, but also adds support for 
-\end{itemize}
+\end{itemize}(2)
 atomicity\\
 \begin{itemize}
   \item We'll cover this topic in our lectures on fault tolerance and 
-\end{itemize}
+\end{itemize}(2)
 dependability\\
 \clearpage
 (Q)
@@ -428,17 +432,17 @@ Describe: SCC 311 | Dr. Barry Porter
 From RPC to RMI\\
 \begin{itemize}
   \item Remote Method Invocation (RMI) is the Java-specific built-in 
-\end{itemize}
+\end{itemize}(2)
 middleware technology which implements the RPC concept, \\
 integrating it seamlessly with the Java language\\
 \begin{itemize}
   \item RMI implements remote objects in an almost transparent way: you 
-\end{itemize}
+\end{itemize}(2)
 can pass object references into remote function calls to create \\
 complex object reference graphs which span continents\\
 \begin{itemize}
   \item The "almost" part is that RMI chooses to expose a new class of exceptions on 
-\end{itemize}
+\end{itemize}(2)
 all remote calls, via RemoteException, which must be caught in the caller\\
 \clearpage
 (Q)
@@ -466,11 +470,11 @@ Describe: SCC 311 | Dr. Barry Porter
 RMI Basics\\
 \begin{itemize}
   \item RMI allows one Java object to call methods on another Java object in 
-\end{itemize}
+\end{itemize}(2)
 a different JVM\\
 \begin{itemize}
   \item The intention is to make distributed programming as easy as standard 
-\end{itemize}
+\end{itemize}(2)
 Java programming\\
 Local \\
 Object\\
@@ -495,16 +499,16 @@ Describe: SCC 311 | Dr. Barry Porter
 RMI Basics\\
 \begin{itemize}
   \item RMI uses interfaces to specify a remote object: we define an interface 
-\end{itemize}
+\end{itemize}(2)
 which extends from java.rmi.Remote\\
 \begin{itemize}
   \item We define a class which implements this interface; we can then 
-\end{itemize}
+\end{itemize}(2)
 instantiate an object from this class which can be advertised for \\
 remote access\\
 \begin{itemize}
   \item A client program only needs access to the interface type (not the 
-\end{itemize}
+\end{itemize}(2)
 class), and can then acquire a reference to the remote object of this \\
 type via the RMI middleware service\\
 \clearpage
@@ -516,17 +520,17 @@ Describe: SCC 311 | Dr. Barry Porter
 RMI Basics\\
 \begin{itemize}
   \item The advertisement (at the server) and lookup (at the client) of remote 
-\end{itemize}
+\end{itemize}(2)
 objects is done through a special service called the RMI registry\\
 \begin{itemize}
   \item We execute the registry at the command line using the command rmiregistry
   \item This service associates names with object references
   \item The registry often runs on the same host as a server system, but 
-\end{itemize}
+\end{itemize}(2)
 does not need to\\
 \begin{itemize}
   \item A server and client both need to talk to the same registry service, 
-\end{itemize}
+\end{itemize}(2)
 on the same host, to advertise and look up a named object\\
 \clearpage
 (Q)
@@ -557,7 +561,7 @@ REST\\
   \item ...and now for something different!
   \item So far we've covered remote procedure call and RMI
   \item These are not the only forms of remote invocation
-\end{itemize}
+\end{itemize}(3)
 \clearpage
 (Q)
 Describe: SCC 311 | Dr. Barry Porter
@@ -565,8 +569,9 @@ Describe: SCC 311 | Dr. Barry Porter
 \section{SCC 311 | Dr. Barry Porter}
 \\
 REST\\
-\end{itemize}
+\begin{itemize}
   \item Representational State Transfer (REST) is a set of resource-oriented
+\end{itemize}(2)
 architectural principles\\
 \begin{itemize}
   \item RPC/RMI are operation-/transaction-oriented
@@ -578,7 +583,7 @@ architectural principles\\
   \item HTTP-based: basic HTTP verbs and status codes (universal interface)
   \item Self-descriptive: responses include description and next step(s) links
   \item Stateless: data required to transition between states is in request
-\end{itemize}
+\end{itemize}(3)
 \clearpage
 (Q)
 Describe: SCC 311 | Dr. Barry Porter
@@ -601,24 +606,25 @@ Describe: SCC 311 | Dr. Barry Porter
 \section{SCC 311 | Dr. Barry Porter}
 \\
 HTTP Methods (verbs)\\
-\end{itemize}
+\begin{itemize}
   \item Read specific student
+\end{itemize}(2)
 GET /students/1234\\
 \begin{itemize}
   \item Read all students
-\end{itemize}
+\end{itemize}(2)
 GET /students\\
 \begin{itemize}
   \item Create a student
-\end{itemize}
+\end{itemize}(2)
 POST /students\\
 \begin{itemize}
   \item Update specific student
-\end{itemize}
+\end{itemize}(2)
 PUT /students/1234\\
 \begin{itemize}
   \item Delete specific student
-\end{itemize}
+\end{itemize}(2)
 DELETE /students/1234\\
 \clearpage
 (Q)
@@ -629,15 +635,15 @@ Describe: SCC 311 | Dr. Barry Porter
 HTTP Methods (verbs)\\
 \begin{itemize}
   \item Read specific student email address(es)
-\end{itemize}
+\end{itemize}(2)
 GET /students/1234/email\\
 \begin{itemize}
   \item Update specific student email address
-\end{itemize}
+\end{itemize}(2)
 PUT /students/1234/email/1\\
 \begin{itemize}
   \item Delete specific student email address
-\end{itemize}
+\end{itemize}(2)
 DELETE /students/1234/email/2\\
 \clearpage
 (Q)
@@ -648,19 +654,19 @@ Describe: SCC 311 | Dr. Barry Porter
 HTTP Content Types\\
 \begin{itemize}
   \item The content type used by each verb, in both the request and 
-\end{itemize}
+\end{itemize}(2)
 the response message, is configurable\\
 \begin{itemize}
   \item This is done using headers which can be included in the 
-\end{itemize}
+\end{itemize}(2)
 request and response\\
 \begin{itemize}
   \item Common content types are text/html, text/xml, text/json, 
-\end{itemize}
+\end{itemize}(2)
 image/jpeg, etc. \\
 \begin{itemize}
   \item The sender of a request can also specify the content types that it is 
-\end{itemize}
+\end{itemize}(2)
 expecting and can process, as part of its request message\\
 \clearpage
 (Q)
@@ -682,7 +688,7 @@ HTTP Status Codes\\
 5xx Server Error\\
 \begin{itemize}
   \item https://www.restapitutorial.com/httpstatuscodes.html
-\end{itemize}
+\end{itemize}(3)
 \clearpage
 (Q)
 Describe: SCC 311 | Dr. Barry Porter
@@ -690,16 +696,17 @@ Describe: SCC 311 | Dr. Barry Porter
 \section{SCC 311 | Dr. Barry Porter}
 \\
 HTTP Semantics\\
-\end{itemize}
+\begin{itemize}
   \item The most obvious feature of REST is that servers do not hold any per-
+\end{itemize}(2)
 client state\\
 \begin{itemize}
   \item Instead, the client sends the current state with every request (this is
-\end{itemize}
+\end{itemize}(2)
 what cookies are)\\
 \begin{itemize}
   \item This allows servers to consume fewer memory resources, and also 
-\end{itemize}
+\end{itemize}(2)
 allows a client request to hit any server, because the request carries \\
 all of the state\\
 \clearpage
@@ -711,7 +718,7 @@ Describe: SCC 311 | Dr. Barry Porter
 HTTP Semantics\\
 \begin{itemize}
   \item REST also has a general assumption of idempotence, meaning that an 
-\end{itemize}
+\end{itemize}(2)
 operation will only ever have a single effect (repeating the same \\
 operation, with the same state, has no effect)\\
 \begin{itemize}
@@ -719,7 +726,7 @@ operation, with the same state, has no effect)\\
   \item Very useful in distributed environments
   \item Multiple ‘servers’
   \item Unreliable network
-\end{itemize}
+\end{itemize}(3)
 \clearpage
 (Q)
 Describe: SCC 311 | Dr. Barry Porter
@@ -727,16 +734,17 @@ Describe: SCC 311 | Dr. Barry Porter
 \section{SCC 311 | Dr. Barry Porter}
 \\
 HTTP Summary\\
-\end{itemize}
+\begin{itemize}
   \item Because it is a text-based format, is very simple, and is not language-
+\end{itemize}(2)
 specific, HTTP has become a kind of general interoperability protocol\\
 \begin{itemize}
   \item A wide range of other protocols have been designed which can 
-\end{itemize}
+\end{itemize}(2)
 operate on top of HTTP, taking advantage of this common carrier\\
 \begin{itemize}
   \item Linking back to RPC, the Web Services framework is a language-
-\end{itemize}
+\end{itemize}(2)
 independent RPC solution which is built on top of HTTP\\
 \clearpage
 (Q)
@@ -750,7 +758,7 @@ Further reading\\
   \item also optionally ch 4 for background
   \item TvS, pp. 145-158, 68-98, 99-134
   \item REST API Tutorial: https://www.restapitutorial.com/
-\end{itemize}
+\end{itemize}(3)
 \clearpage
 (Q)
 Describe: ...

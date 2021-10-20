@@ -49,6 +49,11 @@ public class LatexifyBulletPointHandler {
             nestedBulletPointStyleStack.push(bulletPointStyle);
         }
         else{
+            /*
+            either the nested bullet point style stack is not empty
+            or the style stack does not contain the bullet point style
+             */
+
             //only end the bullet points, if unindenting the bullet points
             line = "\\end{itemize}\n".concat(line);
             nestedBulletPointStyleStack.pop();

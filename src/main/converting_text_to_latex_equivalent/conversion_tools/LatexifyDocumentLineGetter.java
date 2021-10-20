@@ -4,8 +4,14 @@ import main.converting_text_to_latex_equivalent.Latexify;
 import main.util.Bullet_point_hub;
 
 public class LatexifyDocumentLineGetter {
+    LatexifyBulletPointHandler bulletPointHandler;
     //
     private final String TEXT_TO_ADD_NEW_PAGE_IN_LATEX = "\\clearpage\n";//the text that LaTeX will interpret as a 'new page prompt'
+
+
+    public LatexifyDocumentLineGetter(LatexifyBulletPointHandler bulletPointHandler){
+        this.bulletPointHandler = bulletPointHandler;
+    }
 
     /**
      * This function converts the common aspects of the pdf into latex indlucing:
@@ -36,8 +42,6 @@ public class LatexifyDocumentLineGetter {
         boolean addNewline = true;
 
         //converting bullet points into latex bullet points
-        LatexifyBulletPointHandler bulletPointHandler = new LatexifyBulletPointHandler();
-        //TODO: DOES THIS NEED TO BE EXTERNAL (ABOVE), TO KEEP TRACK OF THE NESTED BULLET POINTS PROPERLY?
 
         String bulletPointTypeUsed = getTheBulletPointTypeUsed(line);
         if(bulletPointTypeUsed != null){

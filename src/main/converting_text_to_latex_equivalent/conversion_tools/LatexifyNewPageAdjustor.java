@@ -5,12 +5,18 @@ import main.converting_text_to_latex_equivalent.Latexify;
 import java.util.regex.Pattern;
 
 public class LatexifyNewPageAdjustor {
+    LatexifyBulletPointHandler bulletPointHandler;
     //optional arguments
     private  int currentPage = 0; //the page number (of the input pdf), whose contents are currently being processed
     private short numStartLinesToRemoveForEachPage = 0;// the number of lines to remove/ignore, when processing the text for each page of the pdf text input
 
     //
     private final String TEXT_TO_ADD_NEW_PAGE_IN_LATEX = "\\clearpage\n";//the text that LaTeX will interpret as a 'new page prompt'
+
+    public LatexifyNewPageAdjustor(LatexifyBulletPointHandler bulletPointHandler)
+    {
+        this.bulletPointHandler = bulletPointHandler;
+    }
 
 
     /**
@@ -45,7 +51,10 @@ public class LatexifyNewPageAdjustor {
 
         //end any bullet points
         if (previousBulletStyle != ""){
-            textBuilder.append("\\end{itemize}\n");
+            while (bulletPointHandler.hasNestedBulletsThatHaveNotBeenEnded()) {
+                bulletPointHandler.removeTopNestedBulletPoint();
+                textBuilder.append("\\end{itemize}\n");
+            }
             previousBulletStyle = "";
         }
 

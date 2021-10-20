@@ -16,17 +16,15 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 /*
 TODO:
 
--test for different pdfs
 -test the paragraph and line search thing
 
 
-311 wk2 l1:
--overview (pg3 & 14 ish & 20) bullet points don't appear to be ended correctly (causing next page to not have bullet points)
-    -specifically with indented bullet points- don't know if this affects it
 -indents not being deteced- is this possible? java can indents be detected by pdf text extraction?
 -issue having bottom text as the title for each page.
     -in this case, could just remove the bottom text for each page.
 -double empty describe at end
+
+
 
  */
 class Main
